@@ -93,9 +93,13 @@ class message
 
   private function set_file($method,$name,$value)
   {
+    bot::this()->message('set_file')->send();
+
     if ($value) {
       $this->method=$method;
       $this->params[$name]=$value;
+      bot::this()->message('value:'.$method.' name:'.$name)->send();
+
       return $this;
     }
     else {
@@ -379,7 +383,7 @@ class message
     return $this;
   }
 
-  public function latitude($longitude)
+  public function longitude($longitude)
   {
     $this->params['longitude']=$longitude;
     return $this;
@@ -391,16 +395,45 @@ class message
     return $this;
   }
 
-  public function foursquare_id($foursquare_id)
-  {
-    $this->params['foursquare_id']=$foursquare_id;
-    return $this;
-  }
-
-  public function foursquare_id($foursquare_type)
+  public function foursquare_type($foursquare_type)
   {
     $this->params['foursquare_type']=$foursquare_type;
     return $this;
+  }
+
+  public function getFile($file_id)
+  {
+    $this->params['file_id']=$file_id;
+    $this->method='getFile';
+
+    return $this->send();
+  }
+
+  public function downloadFile($file_id,$save_path=false,$name=false)
+  {
+    set_time_limit(0);
+    $token=bot::token();
+    bot::this()->message("https://api.telegram.org/file/bot$token/$file_id")->send();
+
+    $file = file_get_contents("https://api.telegram.org/file/bot$token/$file_id");
+    file_put_contents($name, $file);
+    return "$save_path/$name";
+  }
+
+  public function download($file_id,$save_path)
+  {
+    $file = bot::this()->getFile($file_id);
+    $file=json_decode($file);
+
+    if($file->ok){
+
+      $file_id=$file->result->file_id;
+      $name=\basename($file->result->file_path);
+
+      bot::this()->downloadFile($file_id,$save_path,$name);
+    }
+
+    return $file;
   }
 
 
