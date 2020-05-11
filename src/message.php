@@ -247,6 +247,17 @@ class message
     return $this;
   }
 
+  public function editMessageLiveLocation($latitude,$longitude)
+  {
+    $this->params['latitude']=$latitude;
+    $this->params['longitude']=$longitude;
+
+    $this->method='editMessageLiveLocation';
+
+    return $this;
+  }
+
+
   /**
   * Send Markdown or HTML
   */
