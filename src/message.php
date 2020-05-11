@@ -373,6 +373,37 @@ class message
     return $this;
   }
 
+  public function latitude($latitude)
+  {
+    $this->params['latitude']=$latitude;
+    return $this;
+  }
+
+  public function latitude($longitude)
+  {
+    $this->params['longitude']=$longitude;
+    return $this;
+  }
+
+  public function foursquare_id($foursquare_id)
+  {
+    $this->params['foursquare_id']=$foursquare_id;
+    return $this;
+  }
+
+  public function foursquare_id($foursquare_id)
+  {
+    $this->params['foursquare_id']=$foursquare_id;
+    return $this;
+  }
+
+  public function foursquare_id($foursquare_type)
+  {
+    $this->params['foursquare_type']=$foursquare_type;
+    return $this;
+  }
+
+
   /**
   * Additional interface options. A JSON-serialized
   * object for an inline keyboard,custom reply keyboard,
