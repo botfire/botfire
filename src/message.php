@@ -263,7 +263,11 @@ class message
     return $this;
   }
 
-
+  public function venue()
+  {
+    $this->method='sendVenue';
+    return $this;
+  }
 
   /**
   * Send Markdown or HTML
