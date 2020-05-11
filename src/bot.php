@@ -51,6 +51,26 @@ class bot
     return $msg->setMethod('getMe')->send();
   }
 
+  public static function getUserProfilePhotos($user_id,$offset=null,$limit=null)
+  {
+    $msg = new \parsgit\botpackage\message;
+
+    $msg->addParam('user_id',$user_id);
+
+    if ($offset !=null){
+      $msg->addParam('offset',$offset);
+
+    }
+
+    if ($limit !=null){
+      $msg->addParam('limit',$limit);
+    }
+
+
+
+    return $msg->setMethod('getUserProfilePhotos')->send();
+  }
+
   public static function getMessage()
   {
     if (self::$isCallback || self::getCallback()) {
