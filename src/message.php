@@ -257,6 +257,13 @@ class message
     return $this;
   }
 
+  public function stopMessageLiveLocation()
+  {
+    $this->method='stopMessageLiveLocation';
+    return $this;
+  }
+
+
 
   /**
   * Send Markdown or HTML
