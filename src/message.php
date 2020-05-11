@@ -222,6 +222,20 @@ class message
     return $this;
   }
 
+  public function restrictChatMember($user_id,$permissions,$until_date=null)
+  {
+    $this->params['user_id']=$user_id;
+    $this->params['permissions']=$permissions;
+
+    if ($until_date!=null) {
+      $this->params['until_date']=$until_date;
+    }
+
+    $this->method='restrictChatMember';
+
+    return $this;
+  }
+
   /**
   * Use this method when you need to tell the user that something is happening on the bot's side
   * @param $action String ['typing','upload_photo','record_video','upload_video','record_audio','upload_audio','upload_document','find_location','record_video_note','upload_video_note']
