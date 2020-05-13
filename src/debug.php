@@ -39,7 +39,7 @@ class debug
     );
   }
 
-  private static function send($text)
+  public static function send($text)
   {
     foreach (self::$ids as $key => $id) {
       bot::id($id)->message($text)->send();
