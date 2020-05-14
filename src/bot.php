@@ -73,12 +73,20 @@ class bot
 
   public static function getMessage()
   {
-    if (self::$isCallback || self::getCallback()) {
-      return self::json()->callback_query->message ?? false;
+    if (self::json()->message ?? false) {
+      return self::json()->message;
     }
-    else {
-      return self::json()->message ?? false;
+    else if (self::getCallback()) {
+      return self::getCallback()->message ?? false;
     }
+    else if (self::getChannelPost()) {
+      return self::getChannelPost();
+    }
+  }
+
+  public static function getChannelPost()
+  {
+    return self::json()->channel_post ?? false;
   }
 
   public static function getCallback()
@@ -130,6 +138,41 @@ class bot
     return $msg;
   }
 
+  public static function isGroup($only_supergroup=true)
+  {
+    $type = self::chat()->type;
+
+    if ($only_supergroup && $type=='supergroup') {
+      return true;
+    }
+    else if (! $only_supergroup && ($type=='supergroup' || $type=='group') ) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  public static function isUser()
+  {
+    if ( self::chat()->type == 'private' ) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  public static function isChannel()
+  {
+    if ( self::chat()->type == 'channel' ) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
   public static function keyboard()
   {
     return new \parsgit\botpackage\keyboard;
@@ -150,7 +193,6 @@ class bot
     return curl_file_create($path);
   }
 
-  //
   public static function autoInput()
   {
     self::json(self::input());
@@ -162,111 +204,6 @@ class bot
       self::$isCallback=true;
     }
 
-    // if (self::getMessage()) {
-    //
-    //   self::$isCallback=false;
-    //
-    //   self::$text       = self::getMessage()->text ?? false;
-    //   self::$caption    = self::getMessage()->caption ?? false;
-    //   self::$message_id = self::getMessage()->message_id ?? false;
-    //
-    //   // if (isset(self::getMessage()->chat)) {
-    //   //
-    //   // }
-    //
-    // }
   }
-
-  // //
-  // public static function initClientInfo()
-  // {
-  //   if (isset(self::$json->message)) {
-  //
-  //     self::$isCallback=false;
-  //
-  //     $message=self::$json->message;
-  //
-  //     self::$get['text']=self::checkIsset('text',$message);
-  //     self::$get['caption']=self::checkIsset('caption',$message);
-  //     self::$get['message_id']=$message->message_id;
-  //
-  //     if (isset($message->chat)) {
-  //       $chat=$message->chat;
-  //       self::initChatUserInfo($chat);
-  //     }
-  //
-  //     if ($message->from) {
-  //       self::$get['user']=$message->from;
-  //     }
-  //   }
-  //   else if( isset(self::$json->callback_query) ) {
-  //     self::$isCallback=true;
-  //     $query=self::$json->callback_query;
-  //
-  //     self::$get['text']=self::checkIsset('text',$query->message);
-  //     self::$get['caption']=self::checkIsset('caption',$query->message);
-  //     self::$get['data']=$query->data;
-  //     self::$get['callback_id']=$query->id;
-  //     self::$get['message_id']=$query->message->message_id;
-  //
-  //     if (isset($query->message->chat)) {
-  //       $chat=$query->message->chat;
-  //       self::initChatUserInfo($chat);
-  //     }
-  //     if ($query->from) {
-  //       self::$get['user']=$query->from;
-  //     }
-  //   }
-  // }
-  //
-  // private static function initChatUserInfo($ob)
-  // {
-  //   self::$chat_id=self::checkIsset('id',$ob);
-  //
-  //   self::$username=self::checkIsset('username',$ob);
-  //   self::$user_type=self::checkIsset('type',$ob);
-  //   self::$first_name=self::checkIsset('first_name',$ob);
-  //   self::$last_name=self::checkIsset('last_name',$ob);
-  //   self::$full_name=self::$first_name.' '.self::$last_name;
-  //
-  //   self::$title=self::checkIsset('title',$ob);
-  //
-  // }
-  //
-  // public static function getMessageType(){
-  //   if (isset(self::$json->message->text)) {
-  //     return ['type'=>'text','data'=>self::$json->message->text];
-  //   }
-  //   elseif (isset(self::$json->message->photo)) {
-  //     return ['type'=>'photo','data'=>self::$json->message->photo];
-  //   }
-  //   elseif (isset(self::$json->message->video)) {
-  //     return ['type'=>'video','data'=>self::$json->message->video];
-  //   }
-  //   elseif (isset(self::$json->message->video_note)) {
-  //     return ['type'=>'video_note','data'=>self::$json->message->video_note];
-  //   }
-  //   elseif (isset(self::$json->message->voice)) {
-  //     return ['type'=>'voice','data'=>self::$json->message->voice];
-  //   }
-  //   elseif (isset(self::$json->message->audio)) {
-  //     return ['type'=>'audio','data'=>self::$json->message->audio];
-  //   }
-  //   elseif (isset(self::$json->message->animation)) {
-  //     return ['type'=>'animation','data'=>self::$json->message->animation];
-  //   }
-  //   elseif (isset(self::$json->message->document)) {
-  //     return ['type'=>'document','data'=>self::$json->message->document];
-  //   }
-  //   elseif (isset(self::$json->message->contact)) {
-  //     return ['type'=>'contact','data'=>self::$json->message->contact];
-  //   }
-  //   elseif (isset(self::$json->message->location)) {
-  //     return ['type'=>'location','data'=>self::$json->message->location];
-  //   }
-  //   else {
-  //     return ['type'=>false,'data'=>self::$json];
-  //   }
-  // }
 
 }
