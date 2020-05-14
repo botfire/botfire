@@ -1,10 +1,10 @@
 <?php
 
-namespace parsgit\botpackage;
+namespace botfire\botfire;
 
-use parsgit\botpackage\api;
-use parsgit\botpackage\bot;
-use parsgit\botpackage\restrictChatMember;
+use botfire\botfire\api;
+use botfire\botfire\bot;
+use botfire\botfire\restrictChatMember;
 
 class message
 {
@@ -87,7 +87,7 @@ class message
   public function mediaGroup()
   {
     $this->method='sendMediaGroup';
-    $class=new \parsgit\botpackage\mediaGroup($this);
+    $class=new \botfire\botfire\mediaGroup($this);
     return $class;
   }
 

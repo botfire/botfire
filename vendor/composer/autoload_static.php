@@ -4,17 +4,17 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitaf47d40ba84d7cc58379f74cdf62c712
+class ComposerStaticInita816b4b2e2f39bf010093a68027cddf6
 {
     public static $prefixLengthsPsr4 = array (
-        'p' => 
+        'b' => 
         array (
-            'parsgit\\botpackage\\' => 19,
+            'botfire\\botfire\\' => 16,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'parsgit\\botpackage\\' => 
+        'botfire\\botfire\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
@@ -23,8 +23,8 @@ class ComposerStaticInitaf47d40ba84d7cc58379f74cdf62c712
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitaf47d40ba84d7cc58379f74cdf62c712::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitaf47d40ba84d7cc58379f74cdf62c712::$prefixDirsPsr4;
+            $loader->prefixLengthsPsr4 = ComposerStaticInita816b4b2e2f39bf010093a68027cddf6::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInita816b4b2e2f39bf010093a68027cddf6::$prefixDirsPsr4;
 
         }, null, ClassLoader::class);
     }

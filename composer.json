@@ -1,6 +1,6 @@
 {
   "name": "botfire/botfire",
-  "description": "Telegram Robot Package",
+  "description": "Telegram Robot Library",
   "type": "library",
   "require": {
     "php": ">=7.0.0"
@@ -15,7 +15,7 @@
   "minimum-stability": "dev",
   "autoload": {
     "psr-4": {
-      "parsgit\\botpackage\\": "src/"
+      "botfire\\botfire\\": "src/"
     }
   }
 }

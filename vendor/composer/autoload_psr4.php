@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'parsgit\\botpackage\\' => array($baseDir . '/src'),
+    'botfire\\botfire\\' => array($baseDir . '/src'),
 );

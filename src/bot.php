@@ -1,6 +1,6 @@
 <?php
 
-namespace parsgit\botpackage;
+namespace botfire\botfire;
 
 
 class bot
@@ -15,6 +15,10 @@ class bot
   public static $chat_id,$username,$first_name,$last_name,$full_name,$user_type,$title,$isCallback=false;
 
 
+  public static function test()
+  {
+    echo "string";
+  }
 
   public static function token($token=false)
   {
@@ -47,13 +51,13 @@ class bot
 
   public static function getMe()
   {
-    $msg = new \parsgit\botpackage\message;
+    $msg = new \botfire\botfire\message;
     return $msg->setMethod('getMe')->send();
   }
 
   public static function getUserProfilePhotos($user_id,$offset=null,$limit=null)
   {
-    $msg = new \parsgit\botpackage\message;
+    $msg = new \botfire\botfire\message;
 
     $msg->addParam('user_id',$user_id);
 
@@ -126,14 +130,14 @@ class bot
 
   public static function this()
   {
-    $msg = new \parsgit\botpackage\message;
+    $msg = new \botfire\botfire\message;
     $msg->id(self::chat()->id);
     return $msg;
   }
 
   public static function id($id)
   {
-    $msg = new \parsgit\botpackage\message;
+    $msg = new \botfire\botfire\message;
     $msg->id($id);
     return $msg;
   }
@@ -175,17 +179,17 @@ class bot
 
   public static function keyboard()
   {
-    return new \parsgit\botpackage\keyboard;
+    return new \botfire\botfire\keyboard;
   }
 
   public static function message()
   {
-    return new \parsgit\botpackage\message;
+    return new \botfire\botfire\message;
   }
 
   public static function webhook()
   {
-    return new \parsgit\botpackage\webhook;
+    return new \botfire\botfire\webhook;
   }
 
   public static function loadFile($path)

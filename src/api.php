@@ -1,8 +1,8 @@
 <?php
 
-namespace parsgit\botpackage;
+namespace botfire\botfire;
 
-use parsgit\botpackage\bot;
+use botfire\botfire\bot;
 
 class api
 {

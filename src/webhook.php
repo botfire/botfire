@@ -1,8 +1,8 @@
 <?php
 
-namespace parsgit\botpackage;
+namespace botfire\botfire;
 
-use parsgit\botpackage\api;
+use botfire\botfire\api;
 
 
 class webhook

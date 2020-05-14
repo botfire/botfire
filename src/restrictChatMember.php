@@ -1,5 +1,5 @@
 <?php
-namespace parsgit\botpackage;
+namespace botfire\botfire;
 
 class restrictChatMember
 {
