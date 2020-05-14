@@ -14,13 +14,17 @@ use botfire\botfire\bot;
 Set Token
 ```PHP
 bot::token('your-bot-token');
+bot::autoInput();
 ```
-<hr>
+<br>
+
+## Webhook
 
 Set Webhook
 ```PHP
 $result = bot::webhook()->url( $url )->set();
 ```
+
 
 Get Webhook
 ```PHP
@@ -28,7 +32,9 @@ $get = bot::webhook()->getInfo();
 
 echo $get;
 ```
-<hr>
+<br>
+
+## Message
 
 Send Message
 ```PHP
@@ -75,22 +81,22 @@ Send Document
 bot::id($chat->id)->document($file_id)->send();
 ```
 
-<hr>
+<br>
 
 ## Edit
 
-Edit Message
+Edit message
 ```PHP
 bot::id($chat->id)->editMessage('new text')->message_id($msg_id)->send();
 ```
 
 
-Edit Caption
+Edit caption
 ```
 bot::id($chat->id)->editCaption('caption text')->message_id($msg_id)->send();
 ```
 
-Edit Reply Markup
+Edit reply markup
 ```
 $k = bot::keyboard();
 $k->btn('hello inline button','callback data')->row();
@@ -98,7 +104,24 @@ $k->btn('hello inline button','callback data')->row();
 bot::id($chat->id)->editMessage('new text')->keyboard( $k )->send();
 ```
 
-Delete Message
+Delete message
 ```
 bot::id($chat->id)->deleteMessage()->message_id($msg_id)->send();
+```
+
+## Receive user messages via webhook
+
+Get message text
+```php
+$text = bot::text();
+```
+
+get message caption
+```php
+$caption = bot::caption();
+```
+
+Get callback data
+```
+$data = bot::data();
 ```
