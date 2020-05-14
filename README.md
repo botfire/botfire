@@ -38,12 +38,39 @@ bot::id($chat_id)->message('...')->send();
 bot::this()->message('...')->send();
 ```
 
-
+Send Photo
 ```PHP
+bot::id($chat->id)->photo($file_id)->send();
+```
 
-$chat = bot::chat();
-$text = bot::text();
+Send Audio
+```PHP
+bot::id($chat->id)->audio($file_id)->send();
+```
 
 
-bot::id($chat->id)->message("Receive : $text ")->send();
+Send Voice
+```PHP
+bot::id($chat->id)->voice($file_id)->send();
+```
+
+Send Video Note
+```PHP
+bot::id($chat->id)->videoNote($file_id)->send();
+```
+
+
+Send Video
+```PHP
+bot::id($chat->id)->video($file_id)->send();
+```
+
+Send Animation
+```PHP
+bot::id($chat->id)->animation($file_id)->send();
+```
+
+Send Document
+```PHP
+bot::id($chat->id)->document($file_id)->send();
 ```
