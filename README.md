@@ -125,3 +125,30 @@ Get callback data
 ```
 $data = bot::data();
 ```
+
+## User Type
+
+```
+if( bot::isUser() ){
+  // Receive private messages
+}
+else if( bot::isGroup() ){
+  // Receive from group
+}
+else if( bot::isChannel() ){
+  // Receive channel post
+}
+
+<br>
+
+## Sender
+
+Get chat info
+```php
+$chat = bot::chat();
+```
+
+Get From
+```php
+$from = bot::from();
+```
