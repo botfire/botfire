@@ -74,3 +74,31 @@ Send Document
 ```PHP
 bot::id($chat->id)->document($file_id)->send();
 ```
+
+<hr>
+
+## Edit
+
+Edit Message
+```PHP
+bot::id($chat->id)->editMessage('new text')->message_id($msg_id)->send();
+```
+
+
+Edit Caption
+```
+bot::id($chat->id)->editCaption('caption text')->message_id($msg_id)->send();
+```
+
+Edit Reply Markup
+```
+$k = bot::keyboard();
+$k->btn('hello inline button','callback data')->row();
+
+bot::id($chat->id)->editMessage('new text')->keyboard( $k )->send();
+```
+
+Delete Message
+```
+bot::id($chat->id)->deleteMessage()->message_id($msg_id)->send();
+```
