@@ -1,4 +1,4 @@
-# Telegram Robot Library
+# Telegram Robot Library   ![PHP Composer](https://github.com/botfire/botfire/workflows/PHP%20Composer/badge.svg?branch=master)
 
 Install
 
