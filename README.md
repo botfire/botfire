@@ -138,6 +138,7 @@ else if( bot::isGroup() ){
 else if( bot::isChannel() ){
   // Receive channel post
 }
+```
 
 <br>
 
@@ -151,4 +152,35 @@ $chat = bot::chat();
 Get From
 ```php
 $from = bot::from();
+```
+
+## Keyboard
+
+inline keyboard
+
+```
+$k = bot::keyboard();
+
+$k
+->btn('btn name 1','data callback 1')
+->btn('btn name 2','data callback 2')
+->row()
+->btnUrl('btn name 3','https://github.com')
+->row();
+
+bot::id(bot::chat()->id)->message('...')->keyboard($k)->send();
+```
+
+markup keyboard
+``
+markup($resize_keyboard,$one_time_keyboard,$selective)
+``
+example
+```
+$k = bot::keyboard();
+
+$k->markup(true)->btn('button name')->row();
+
+bot::id(bot::chat()->id)->message('...')->keyboard($k)->send();
+
 ```
