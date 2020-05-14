@@ -15,11 +15,20 @@ Set Token
 ```PHP
 bot::token('your-bot-token');
 ```
+<hr>
 
 Set Webhook
 ```PHP
 $result = bot::webhook()->url( $url )->set();
 ```
+
+Get Webhook
+```PHP
+$get = bot::webhook()->getInfo();
+
+echo $get;
+```
+<hr>
 
 Send Message
 ```PHP
