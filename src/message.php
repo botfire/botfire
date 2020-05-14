@@ -4,7 +4,7 @@ namespace parsgit\botpackage;
 
 use parsgit\botpackage\api;
 use parsgit\botpackage\bot;
-
+use parsgit\botpackage\restrictChatMember;
 
 class message
 {
@@ -219,13 +219,12 @@ class message
     $this->params['user_id']=$user_id;
     $this->method='unbanChatMember';
 
-    return $this;
+    return $this->send();
   }
 
-  public function restrictChatMember($user_id,$permissions,$until_date=null)
+  public function restrictChatMember($user_id,$until_date=null)
   {
     $this->params['user_id']=$user_id;
-    $this->params['permissions']=$permissions;
 
     if ($until_date!=null) {
       $this->params['until_date']=$until_date;
@@ -233,8 +232,37 @@ class message
 
     $this->method='restrictChatMember';
 
-    return $this;
+    return new restrictChatMember($this);
   }
+
+
+  public function promoteChatMember($user_id,$can_change_info,$can_post_messages,$can_edit_messages,$can_delete_messages,$can_invite_users,$can_restrict_members,$can_pin_messages,$can_promote_members)
+  {
+
+    $this->params['user_id']=$user_id;
+
+    $this->params['can_change_info']=$can_change_info;
+
+    $this->params['can_post_messages']=$can_post_messages;
+
+    $this->params['can_edit_messages']=$can_edit_messages;
+
+    $this->params['can_delete_messages']=$can_delete_messages;
+
+    $this->params['can_invite_users']=$can_invite_users;
+
+    $this->params['can_restrict_members']=$can_restrict_members;
+
+    $this->params['can_pin_messages']=$can_pin_messages;
+
+    $this->params['can_promote_members']=$can_promote_members;
+
+    $this->method='promoteChatMember';
+
+    return $this->send();
+  }
+
+
 
   /**
   * Use this method when you need to tell the user that something is happening on the bot's side
@@ -503,6 +531,10 @@ class message
 
   public function send()
   {
+    if (isset($this->params['permissions'])) {
+      $this->params['permissions']=json_encode($this->params['permissions']);
+    }
+
     return api::send($this->method,$this->params);
   }
 
