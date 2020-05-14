@@ -7,25 +7,34 @@ composer require botfire/botfire
 ```
 
 use
-```php
+```PHP
 use botfire\botfire\bot;
 ```
 
 Set Token
-```php
+```PHP
 bot::token('your-bot-token');
 ```
 
 Set Webhook
-```php
+```PHP
 $result = bot::webhook()->url( $url )->set();
 ```
 
 Send Message
-```php
+```PHP
 bot::id($chat_id)->message('...')->send();
 
 // auto set chat_id
 bot::this()->message('...')->send();
 ```
 
+
+```PHP
+
+$chat = bot::chat();
+$text = bot::text();
+
+
+bot::id($chat->id)->message("Receive : $text ")->send();
+```
