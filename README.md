@@ -110,6 +110,8 @@ Delete message
 bot::id($chat->id)->deleteMessage()->message_id($msg_id)->send();
 ```
 
+<br>
+
 ## Receive user messages via webhook
 
 Get message text
@@ -143,6 +145,9 @@ $get = bot::json(); // object
 
 $get = bot::input(); // text
 ```
+
+<br>
+
 ## User Type
 
 ```
@@ -194,6 +199,8 @@ Get From
 $from = bot::from();
 ```
 
+<br>
+
 ## Keyboard
 
 inline keyboard
@@ -233,6 +240,9 @@ $info = bot::getMe();
 
 bot::id($chat_id)->message($info)->send();
 ```
+
+<br>
+
 
 ## User Profile
 ``
