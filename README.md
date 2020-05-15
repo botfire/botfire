@@ -146,6 +146,10 @@ $get = bot::json(); // object
 $get = bot::input(); // text
 ```
 
+
+see [Receive and validate messages](https://github.com/botfire/botfire/wiki/Receive-and-validate-messages)
+
+
 <br>
 
 ## User Type
