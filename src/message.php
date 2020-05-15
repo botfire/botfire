@@ -64,12 +64,12 @@ class message
     return self::set_file('sendVoice','voice',$file);
   }
 
-  public function videoNote($file=false)
+  public function video($file=false)
   {
     return self::set_file('sendVideo','video',$file);
   }
 
-  public function video($file=false)
+  public function videoNote($file=false)
   {
     return self::set_file('sendVideoNote','video_note',$file);
   }
