@@ -150,7 +150,10 @@ if( bot::isUser() ){
   // Receive private messages
 }
 else if( bot::isGroup() ){
-  // Receive from group
+  // Receive from super group
+}
+else if( ! bot::isGroup() && bot::isGroup(true)  ){
+  // Receive from normal group
 }
 else if( bot::isChannel() ){
   // Receive channel post
