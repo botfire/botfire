@@ -93,8 +93,6 @@ class message
 
   private function set_file($method,$name,$value)
   {
-    bot::this()->message('set_file')->send();
-
     if ($value) {
       $this->method=$method;
       $this->params[$name]=$value;
@@ -107,10 +105,11 @@ class message
     }
   }
 
-  public function editReplyMarkup($message_id=null)
+  public function editReplyMarkup()
   {
-    $this->message_id($message_id??bot::message_id());
+    $this->message_id(bot::message_id());
     $this->method='editMessageReplyMarkup';
+
     return $this;
   }
 
