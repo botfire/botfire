@@ -15,11 +15,6 @@ class bot
   public static $chat_id,$username,$first_name,$last_name,$full_name,$user_type,$title,$isCallback=false;
 
 
-  public static function test()
-  {
-    echo "string";
-  }
-
   public static function token($token=false)
   {
     if ($token) {
@@ -69,9 +64,7 @@ class bot
     if ($limit !=null){
       $msg->addParam('limit',$limit);
     }
-
-
-
+    
     return $msg->setMethod('getUserProfilePhotos')->send();
   }
 
