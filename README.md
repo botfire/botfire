@@ -34,6 +34,7 @@ echo $get;
 ```
 <br>
 
+
 ## Message
 
 Send Message
@@ -219,4 +220,22 @@ $k->markup(true)->btn('button name')->row();
 
 bot::id(bot::chat()->id)->message('...')->keyboard($k)->send();
 
+```
+
+<br>
+
+## Bot Info
+```
+$info = bot::getMe();
+
+bot::id($chat_id)->message($info)->send();
+```
+
+## User Profile
+``
+method : getUserProfilePhotos($user_id,$offset=null,$limit=null)
+``
+sample
+```
+$profile = bot::getUserProfilePhotos(bot::chat()->id);
 ```
