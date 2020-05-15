@@ -126,6 +126,22 @@ Get callback data
 $data = bot::data();
 ```
 
+Get message id
+```
+$msg_id = bot::message_id();
+```
+
+Get all message Object
+```php
+$msg = bot::getMessage();
+```
+
+Get All receive Object
+```php
+$get = bot::json(); // object
+
+$get = bot::input(); // text
+```
 ## User Type
 
 ```
@@ -141,6 +157,26 @@ else if( bot::isChannel() ){
 ```
 
 <br>
+
+## Request Type
+
+```
+if( bot::getCallback() ){
+  // When I click on the inline button
+  
+  $data = bot::data();
+  
+  //...
+}
+else {
+  // When I send normal text
+  // ...
+}
+
+```
+
+<br>
+
 
 ## Sender
 
