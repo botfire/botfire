@@ -84,6 +84,11 @@ class message
     return self::set_file('sendDocument','document',$file);
   }
 
+  public function sticker($file=false)
+  {
+    return self::set_file('sendSticker','sticker',$file);
+  }
+
   public function mediaGroup()
   {
     $this->method='sendMediaGroup';
