@@ -209,6 +209,7 @@ Answer and send alert
 bot::this()->answerCallback(true)->text('hello')->send();
 ```
 
+<br>
 
 ## Sender
 
