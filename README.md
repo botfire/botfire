@@ -256,3 +256,39 @@ sample
 ```
 $profile = bot::getUserProfilePhotos(bot::chat()->id);
 ```
+
+
+<br>
+
+### Available message method
+
+usage
+
+``
+bot::this()->photo($file_id)->caption($text)->send();
+``
+
+| method | *** |
+| ------ | ------ |
+| caption($text) | media message caption |
+| message_id($msg_id) |  |
+| inline_message_id($inline_msg_id) |  |
+|  callback_query_id($query_id) |   |
+| parse_mode($type) | Send Markdown or HTML |
+|  vcard($vcard) |  |
+| disable_web_page_preview($bool) |  |
+|  disable_notification($bool) |  |
+|  live_period($int) | should be between 60 and 86400 |
+|   reply_to($message_id)    | |
+|  duration($duration)  |   |
+|  performer($performer)  | | 
+|  title($title)  |  |
+| width($int)   |  |
+| height($int)  |  |
+| supports_streaming($bool) | |
+| thumb($thumb) | |
+| length($int) | |
+| latitude($latitude) | |
+| longitude($longitude) | |
+| foursquare_id($foursquare_id) | |
+| foursquare_type($foursquare_type) | |
