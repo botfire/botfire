@@ -82,6 +82,13 @@ Send Document
 bot::id($chat->id)->document($file_id)->send();
 ```
 
+Send chat action
+
+```PHP
+bot::id($chat->id)->chatAction($action)->send();
+```
+> 'typing','upload_photo','record_video','upload_video','record_audio','upload_audio','upload_document','find_location','record_video_note','upload_video_note'
+
 <br>
 
 ## Edit
@@ -189,6 +196,18 @@ else {
 ```
 
 <br>
+
+## Answer Callback
+
+Answer
+```PHP
+bot::this()->answerCallback()->send();
+```
+
+Answer and send alert
+```PHP
+bot::this()->answerCallback(true)->text('hello')->send();
+```
 
 
 ## Sender
