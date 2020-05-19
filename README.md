@@ -264,9 +264,8 @@ bot::id(bot::chat()->id)->message('...')->keyboard($k)->send();
 
 send user contatc
 ```
-$k = bot::keyboard();
+$k = bot::keyboard()->markup(true)->contact('Send Phone')->row();
 
-$k->markup(true)->contatc('Send Phone')->row();
 bot::id(bot::chat()->id)->message('Click Send Phone Button')->keyboard($k)->send();
 
 ```
