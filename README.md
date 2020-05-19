@@ -82,12 +82,18 @@ Send Document
 bot::id($chat->id)->document($file_id)->send();
 ```
 
+Send Contact
+```PHP
+bot::id($chat->id)->contact($phone_number,$first_name,$last_name)->send();
+```
+
 Send chat action
 
 ```PHP
 bot::id($chat->id)->chatAction($action)->send();
 ```
 > 'typing','upload_photo','record_video','upload_video','record_audio','upload_audio','upload_document','find_location','record_video_note','upload_video_note'
+
 
 <br>
 
@@ -253,6 +259,15 @@ $k = bot::keyboard();
 $k->markup(true)->btn('button name')->row();
 
 bot::id(bot::chat()->id)->message('...')->keyboard($k)->send();
+
+```
+
+send user contatc
+```
+$k = bot::keyboard();
+
+$k->markup(true)->contatc('Send Phone')->row();
+bot::id(bot::chat()->id)->message('Click Send Phone Button')->keyboard($k)->send();
 
 ```
 
