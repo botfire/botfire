@@ -174,24 +174,25 @@ class message
     return $this;
   }
 
-  /**
-  * Use this method to send phone contacts.
-  * @param $phone_number string Required
-  * @param $first_name   string Required
-  * @param $last_name   string Optional
-  */
-  public function contact($phone_number,$first_name,$last_name=null)
+
+  public function contact($phone_number=false,$first_name=false,$last_name=false)
   {
-    $this->params['phone_number']=$phone_number;
-    $this->params['first_name']=$first_name;
 
-    if ($last_name!=null) {
-      $this->params['last_name']=$last_name;
+    if ( ! $phone_number && ! $first_name) {
+      return bot::getMessage()->contact ?? false;
     }
+    else {
 
-    $this->method='sendContact';
+      $this->params['phone_number']=$phone_number;
+      $this->params['first_name']=$first_name;
 
-    return $this;
+      if ( $last_name != false ) {
+        $this->params['last_name']=$last_name;
+      }
+
+      $this->method='sendContact';
+      return $this;
+    }
   }
 
   /**
