@@ -101,7 +101,6 @@ class message
     if ($value) {
       $this->method=$method;
       $this->params[$name]=$value;
-      bot::this()->message('value:'.$method.' name:'.$name)->send();
 
       return $this;
     }
