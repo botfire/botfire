@@ -326,3 +326,26 @@ bot::this()->photo($file_id)->caption($text)->send();
 | longitude($longitude) | |
 | foursquare_id($foursquare_id) | |
 | foursquare_type($foursquare_type) | |
+
+## easy debug
+
+use
+```PHP
+use botfire\botfire\debug;
+```
+
+
+> The error text is sent to the ideas entered in the ids section
+
+```
+debug::ids(['your_chat_id']);
+debug::run(function(){
+  // your code ..
+  // ..
+});
+```
+
+send custom message to ids
+```
+debug::send($text);
+```
