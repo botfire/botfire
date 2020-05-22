@@ -115,7 +115,7 @@ Edit reply markup
 $k = bot::keyboard();
 $k->btn('hello inline button','callback data')->row();
 
-bot::id($chat->id)->editMessage('new text')->keyboard( $k )->send();
+bot::id($chat->id)->editReplyMarkup()->keyboard( $k )->send();
 ```
 
 Delete message
