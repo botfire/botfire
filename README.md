@@ -106,12 +106,12 @@ bot::id($chat->id)->editMessage('new text')->message_id($msg_id)->send();
 
 
 Edit caption
-```
+```PHP
 bot::id($chat->id)->editCaption('caption text')->message_id($msg_id)->send();
 ```
 
 Edit reply markup
-```
+```PHP
 $k = bot::keyboard();
 $k->btn('hello inline button','callback data')->row();
 
@@ -119,7 +119,7 @@ bot::id($chat->id)->editReplyMarkup()->keyboard( $k )->send();
 ```
 
 Delete message
-```
+```PHP
 bot::id($chat->id)->deleteMessage()->message_id($msg_id)->send();
 ```
 
@@ -138,17 +138,17 @@ $caption = bot::caption();
 ```
 
 Get callback data
-```
+```PHP
 $data = bot::data();
 ```
 
 Get message id
-```
+```PHP
 $msg_id = bot::message_id();
 ```
 
 Get all message Object
-```php
+```PHP
 $msg = bot::getMessage();
 ```
 
@@ -167,7 +167,7 @@ see [Receive and validate messages](https://github.com/botfire/botfire/wiki/Rece
 
 ## User Type
 
-```
+```PHP
 if( bot::isUser() ){
   // Receive private messages
 }
@@ -186,7 +186,7 @@ else if( bot::isChannel() ){
 
 ## Request Type
 
-```
+```PHP
 if( bot::getCallback() ){
   // When I click on the inline button
   
@@ -235,7 +235,7 @@ $from = bot::from();
 
 inline keyboard
 
-```
+```PHP
 $k = bot::keyboard();
 
 $k
@@ -249,11 +249,11 @@ bot::id(bot::chat()->id)->message('...')->keyboard($k)->send();
 ```
 
 markup keyboard
-``
+```PHP
 markup($resize_keyboard,$one_time_keyboard,$selective)
-``
-example
 ```
+example
+```PHP
 $k = bot::keyboard();
 
 $k->markup(true)->btn('button name')->row();
@@ -263,7 +263,7 @@ bot::id(bot::chat()->id)->message('...')->keyboard($k)->send();
 ```
 
 send user contatc
-```
+```PHP
 $k = bot::keyboard()->markup(true)->contact('Send Phone')->row();
 
 bot::id(bot::chat()->id)->message('Click Send Phone Button')->keyboard($k)->send();
@@ -273,7 +273,7 @@ bot::id(bot::chat()->id)->message('Click Send Phone Button')->keyboard($k)->send
 <br>
 
 ## Bot Info
-```
+```PHP
 $info = bot::getMe();
 
 bot::id($chat_id)->message($info)->send();
@@ -283,11 +283,11 @@ bot::id($chat_id)->message($info)->send();
 
 
 ## User Profile
-``
+```PHP
 method : getUserProfilePhotos($user_id,$offset=null,$limit=null)
-``
-sample
 ```
+sample
+```PHP
 $profile = bot::getUserProfilePhotos(bot::chat()->id);
 ```
 
@@ -298,9 +298,9 @@ $profile = bot::getUserProfilePhotos(bot::chat()->id);
 
 usage
 
-``
+```PHP
 bot::this()->photo($file_id)->caption($text)->send();
-``
+```
 
 | method | *** |
 | ------ | ------ |
@@ -337,7 +337,7 @@ use botfire\botfire\debug;
 
 > The error text is sent to the ideas entered in the ids section
 
-```
+```PHP
 debug::ids(['your_chat_id']);
 debug::run(function(){
   // your code ..
@@ -346,6 +346,6 @@ debug::run(function(){
 ```
 
 send custom message to ids
-```
+```PHP
 debug::send($text);
 ```
