@@ -64,7 +64,7 @@ class bot
     if ($limit !=null){
       $msg->addParam('limit',$limit);
     }
-    
+
     return $msg->setMethod('getUserProfilePhotos')->send();
   }
 
@@ -96,17 +96,17 @@ class bot
     return self::getCallback()->data ?? false;
   }
 
-  public function text()
+  public static function text()
   {
     return self::getMessage()->text ?? false ;
   }
 
-  public function caption()
+  public static function caption()
   {
     return self::getMessage()->caption ?? false ;
   }
 
-  public function message_id()
+  public static function message_id()
   {
     return self::getMessage()->message_id ?? false ;
   }
