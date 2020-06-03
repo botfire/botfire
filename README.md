@@ -205,6 +205,20 @@ else {
 
 ```
 
+Receive edited message
+
+```php
+
+if (bot::getEditedMessage()) {
+  // ...
+}
+
+// for channel
+if(bot::getEditedChannelPost()){
+  // ...
+}
+```
+
 <br>
 
 ## Answer Callback
