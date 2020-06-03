@@ -73,17 +73,36 @@ class bot
     if (self::json()->message ?? false) {
       return self::json()->message;
     }
+    else if (self::getEditedMessage()) {
+      return self::getEditedMessage();
+    }
     else if (self::getCallback()) {
       return self::getCallback()->message ?? false;
     }
     else if (self::getChannelPost()) {
       return self::getChannelPost();
     }
+    else if (self::getEditedChannelPost()) {
+      return self::getEditedChannelPost();
+    }
+    else {
+      return false;
+    }
   }
 
   public static function getChannelPost()
   {
     return self::json()->channel_post ?? false;
+  }
+
+  public static function getEditedChannelPost()
+  {
+    return self::json()->edited_channel_post ?? false;
+  }
+
+  public static function getEditedMessage()
+  {
+    return self::json()->edited_message ?? false;
   }
 
   public static function getCallback()
