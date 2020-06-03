@@ -95,6 +95,7 @@ bot::id($chat->id)->chatAction($action)->send();
 > 'typing','upload_photo','record_video','upload_video','record_audio','upload_audio','upload_document','find_location','record_video_note','upload_video_note'
 
 <br>
+
 Send MediaGroup [docs](https://github.com/botfire/botfire/wiki/sendMediaGroup-Method)
 
 
