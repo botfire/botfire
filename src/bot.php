@@ -137,12 +137,11 @@ class bot
 
   public static function isGroup($only_supergroup=true)
   {
-    $type = self::chat()->type;
 
-    if ($only_supergroup && $type=='supergroup') {
+    if (self::chat() && $only_supergroup && self::chat()->type=='supergroup') {
       return true;
     }
-    else if (! $only_supergroup && ($type=='supergroup' || $type=='group') ) {
+    else if (self::chat() && ! $only_supergroup && (self::chat()->type=='supergroup' || self::chat()->type=='group') ) {
       return true;
     }
     else {
@@ -152,7 +151,7 @@ class bot
 
   public static function isUser()
   {
-    if ( self::chat()->type == 'private' ) {
+    if (self::chat() && self::chat()->type == 'private' ) {
       return true;
     }
     else {
@@ -162,7 +161,7 @@ class bot
 
   public static function isChannel()
   {
-    if ( self::chat()->type == 'channel' ) {
+    if (self::chat() && self::chat()->type == 'channel' ) {
       return true;
     }
     else {
