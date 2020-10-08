@@ -280,6 +280,29 @@ bot::id(bot::chat()->id)->message('...')->keyboard($k)->send();
 
 ```
 
+can use autoRow method
+```PHP
+$k = bot::keyboard();
+
+foreach($list as $item){
+  $k->btn($item->name,$item->value);
+}
+
+// Creates two buttons in each row
+$k->autoRow(2);
+
+bot::this()->message(...)->keyboard($k)->send();
+
+
+/*
+out:
+______________
+| btn1 | btn2 |
+_______________
+| btn3 | btn4 |
+*/
+```
+
 send user contatc
 ```PHP
 $k = bot::keyboard()->markup(true)->contact('Send Phone')->row();
