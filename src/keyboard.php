@@ -94,5 +94,30 @@ class keyboard
     return $this->type;
   }
 
+  public function autoRow($number=2)
+  {
+    $temp = $this->btns;
+    $this->btns=[];
+
+    $index = 0;
+
+    foreach ($temp as $btn) {
+      $index++;
+
+      $this->btns[]=$btn;
+
+      if($index==$number){
+        $this->row();
+        $index=0;
+      }
+
+    }
+
+    if ($index>0) {
+      $this->row();
+    }
+
+    return $this;
+  }
 
 }
