@@ -379,7 +379,7 @@ use botfire\botfire\debug;
 > The error text is sent to the ideas entered in the ids section
 
 ```PHP
-debug::ids(['your_chat_id']);
+debug::setIds(['your_chat_id']);
 debug::run(function(){
   // your code ..
   // ..
