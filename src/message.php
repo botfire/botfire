@@ -89,6 +89,121 @@ class message
     return self::set_file('sendSticker','sticker',$file);
   }
 
+  /**
+   * Use this method to send a native poll. On success, the sent Message is returned.
+   * @param  string $type     Poll type, “quiz” or “regular”, defaults to “regular”
+   */
+  public function poll($type=false)
+  {
+    if ($type) {
+      $this->params['type']=$type;
+    }
+
+    $this->method='sendPoll';
+    return $this;
+  }
+
+  /**
+   * Poll question, 1-255 characters
+   * @param  string $text
+   */
+  public function question($text)
+  {
+    $this->params['question']=$text;
+    return $this;
+  }
+
+  /**
+   * A JSON-serialized list of answer options, 2-10 strings 1-100 characters each
+   * @param  array $arrayOfString
+   */
+  public function options($arrayOfString)
+  {
+    $this->params['options']=json_encode($arrayOfString);
+    return $this;
+  }
+
+
+  /**
+   * True, if the poll needs to be anonymous, defaults to True
+   * @param  bool  $status
+   */
+  public function is_anonymous($status)
+  {
+    $this->params['is_anonymous']=$status;
+    return $this;
+  }
+
+  /**
+   * 0-based identifier of the correct answer option, required for polls in quiz mode
+   * @param  int $id
+   */
+  public function correct_option_id($id)
+  {
+    $this->params['correct_option_id']=$id;
+    return $this;
+  }
+
+  /**
+   * True, if the poll allows multiple answers, ignored for polls in quiz mode, defaults to False
+   * @param  bool $status
+   */
+  public function allows_multiple_answers($status)
+  {
+    $this->params['allows_multiple_answers']=$status;
+    return $this;
+  }
+
+  /**
+   * 	Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters with at most 2 line feeds after entities parsing
+   * @param  string $text
+   */
+  public function explanation($text)
+  {
+    $this->params['explanation']=$text;
+    return $this;
+  }
+
+  /**
+   * Mode for parsing entities in the explanation. See formatting options for more details.
+   * @param  string $mode
+   */
+  public function explanation_parse_mode($mode)
+  {
+    $this->params['explanation_parse_mode']=$mode;
+    return $this;
+  }
+
+  /**
+   * Amount of time in seconds the poll will be active after creation, 5-600. Can't be used together with close_date.
+   * @param  int $number second
+   */
+  public function open_period($number)
+  {
+    $this->params['open_period']=$number;
+    return $this;
+  }
+
+  /**
+   * Point in time (Unix timestamp) when the poll will be automatically closed. Must be at least 5 and no more than 600 seconds in the future. Can't be used together with open_period.
+   * @param  int $number second
+   */
+  public function close_date($number)
+  {
+    $this->params['close_date']=$number;
+    return $this;
+  }
+
+  /**
+   * Pass True, if the poll needs to be immediately closed. This can be useful for poll preview.
+   * @param  bool  $status
+   */
+  public function is_closed($status)
+  {
+    $this->params['is_closed']=$number;
+    return $this;
+  }
+
   public function mediaGroup()
   {
     $this->method='sendMediaGroup';
