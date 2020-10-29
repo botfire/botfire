@@ -85,11 +85,18 @@ class bot
     else if (self::getEditedChannelPost()) {
       return self::getEditedChannelPost();
     }
+    else if (self::getPollAnswer()) {
+      return self::getPollAnswer();
+    }
     else {
       return false;
     }
   }
 
+  public static function getPollAnswer()
+  {
+    return self::json()->poll_answer ?? false;
+  }
   public static function getChannelPost()
   {
     return self::json()->channel_post ?? false;
@@ -143,7 +150,9 @@ class bot
   public static function this()
   {
     $msg = new \botfire\botfire\message;
-    $msg->id(self::chat()->id);
+    if (isset(self::chat()->id)) {
+      $msg->id(self::chat()->id);
+    }
     return $msg;
   }
 
@@ -171,6 +180,16 @@ class bot
   public static function isUser()
   {
     if (self::chat() && self::chat()->type == 'private' ) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  public static function isPoll()
+  {
+    if (self::getPollAnswer() ) {
       return true;
     }
     else {
