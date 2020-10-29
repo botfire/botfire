@@ -104,6 +104,19 @@ class message
   }
 
   /**
+   * Use this method to stop a poll which was sent by the bot. On success, the stopped Poll with the final results is returned.
+   */
+  public function stopPoll($message_id=false)
+  {
+    if ($message_id) {
+      $this->message_id($message_id);
+    }
+
+    $this->method='stopPoll';
+    return $this;
+  }
+
+  /**
    * Poll question, 1-255 characters
    * @param  string $text
    */
