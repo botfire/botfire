@@ -89,19 +89,6 @@ class message
     return self::set_file('sendSticker','sticker',$file);
   }
 
-  /**
-   * Use this method to send a native poll. On success, the sent Message is returned.
-   * @param  string $type     Poll type, “quiz” or “regular”, defaults to “regular”
-   */
-  public function poll($type=false)
-  {
-    if ($type) {
-      $this->params['type']=$type;
-    }
-
-    $this->method='sendPoll';
-    return $this;
-  }
 
   /**
    * Use this method to stop a poll which was sent by the bot. On success, the stopped Poll with the final results is returned.
@@ -113,6 +100,20 @@ class message
     }
 
     $this->method='stopPoll';
+    return $this;
+  }
+
+  /**
+   * Use this method to send a native poll. On success, the sent Message is returned.
+   * @param  string $type     Poll type, “quiz” or “regular”, defaults to “regular”
+   */
+  public function poll($type=false)
+  {
+    if ($type) {
+      $this->params['type']=$type;
+    }
+
+    $this->method='sendPoll';
     return $this;
   }
 
@@ -583,14 +584,13 @@ class message
     return $this->send();
   }
 
-  public function downloadFile($file_id,$save_path=false,$name=false)
+  public function downloadFile($file_path,$save_path=false,$name=false)
   {
     set_time_limit(0);
     $token=bot::token();
-    bot::this()->message("https://api.telegram.org/file/bot$token/$file_id")->send();
 
-    $file = file_get_contents("https://api.telegram.org/file/bot$token/$file_id");
-    file_put_contents($name, $file);
+    $file = file_get_contents("https://api.telegram.org/file/bot$token/$file_path");
+    file_put_contents("$save_path/$name", $file);
     return "$save_path/$name";
   }
 
@@ -601,13 +601,13 @@ class message
 
     if($file->ok){
 
-      $file_id=$file->result->file_id;
-      $name=\basename($file->result->file_path);
+      $file_path=$file->result->file_path;
+      $name=\basename($file_path);
 
-      bot::this()->downloadFile($file_id,$save_path,$name);
+      return bot::this()->downloadFile($file_path,$save_path,$name);
     }
 
-    return $file;
+    return false;
   }
 
 
