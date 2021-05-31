@@ -649,12 +649,12 @@ class message
     return $this->setMethod('getChatAdministrators')->send();
   }
 
-  public static function getChatMembersCount()
+  public function getChatMembersCount()
   {
     return $this->setMethod('getChatMembersCount')->send();
   }
 
-  public static function getChatMember($user_id)
+  public function getChatMember($user_id)
   {
     $this->params['user_id']=$user_id;
     return $this->setMethod('getChatMember')->send();
