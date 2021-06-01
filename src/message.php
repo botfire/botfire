@@ -367,6 +367,21 @@ class message
 
     return new restrictChatMember($this);
   }
+  
+    /**
+   * setChatPermissions
+   * Use this method to set default chat permissions for all members.
+   * The bot must be an administrator in the group or a supergroup for this to work and must have the can_restrict_members admin rights.
+   * Returns True on success.
+   *
+   */
+  public function setChatPermissions()
+  {
+
+    $this->method='setChatPermissions';
+
+    return new restrictChatMember($this);
+  }
 
 
   public function promoteChatMember($user_id,$can_change_info,$can_post_messages,$can_edit_messages,$can_delete_messages,$can_invite_users,$can_restrict_members,$can_pin_messages,$can_promote_members)
