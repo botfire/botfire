@@ -369,25 +369,50 @@ bot::this()->photo($file_id)->caption($text)->send();
 | foursquare_id($foursquare_id) | |
 | foursquare_type($foursquare_type) | |
 
-## easy debug
+## Permissions
 
-use
+### setChatPermissions
+Use this method to set default chat permissions for all members
+
 ```PHP
-use botfire\botfire\debug;
+bot::this()
+      ->setChatPermissions()
+      ->can_change_info(false)
+      ->send();
+/*
+| methods : 
+|
+| can_send_messages(true|false)
+| can_send_media_messages(true|false)
+| can_send_polls(true|false)
+| can_send_other_messages(true|false)
+| can_add_web_page_previews(true|false)
+| can_change_info(true|false)
+| can_invite_users(true|false)
+| can_pin_messages(true|false)
+|
+*/
 ```
 
-
-> The error text is sent to the ideas entered in the ids section
+### restrictChatMember($user_id,$until_date=null)
+Use this method to restrict a user in a supergroup
 
 ```PHP
-debug::setIds(['your_chat_id']);
-debug::run(function(){
-  // your code ..
-  // ..
-});
-```
-
-send custom message to ids
-```PHP
-debug::send($text);
+bot::this()
+    ->restrictChatMember(chat_id)
+    ->can_send_polls(false)
+    ->send();
+/*
+| methods : 
+|
+| can_send_messages(true|false)
+| can_send_media_messages(true|false)
+| can_send_polls(true|false)
+| can_send_other_messages(true|false)
+| can_add_web_page_previews(true|false)
+| can_change_info(true|false)
+| can_invite_users(true|false)
+| can_pin_messages(true|false)
+|
+*/
 ```
