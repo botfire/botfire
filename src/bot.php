@@ -14,6 +14,7 @@ class bot
 
   public static $chat_id,$username,$first_name,$last_name,$full_name,$user_type,$title,$isCallback=false;
 
+  public static $params=[];
 
   public static function token($token=false)
   {
@@ -238,6 +239,15 @@ class bot
       self::$isCallback=true;
     }
 
+  }
+
+  public static function param($name=false){
+    if (!$name) {
+      return self::$params;
+    }
+    else {
+      return self::$params[$name]??false;
+    }
   }
 
 }
