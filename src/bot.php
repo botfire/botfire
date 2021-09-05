@@ -241,7 +241,7 @@ class bot
 
   }
 
-  public static function param($name=false){
+  public static function get($name=false){
     if (!$name) {
       return self::$params;
     }
