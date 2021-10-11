@@ -107,7 +107,7 @@ Send MediaGroup [docs](https://github.com/botfire/botfire/wiki/sendMediaGroup-Me
 
 <br>
 
-## Edit
+## Edit Message
 
 Edit message
 ```PHP
