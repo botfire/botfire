@@ -11,8 +11,7 @@ class Route {
   public static function text($path, $controllerString){
     if (!bot::getCallback() && $path == bot::text()) {
       self::$find = true;
-      IRoute::call($controllerString);
-      die();
+      self::run($controllerString);
     }
   }
 
@@ -22,14 +21,25 @@ class Route {
 
     if (bot::getCallback() && $data['is']) {
       self::$find = true;
-      IRoute::call($controllerString);
-      die();
+      self::run($controllerString);
     }
   }
+
 
   public static function run($controllerString){
     IRoute::call($controllerString);
     die();
+  }
+
+  public static function notFound($file=false)
+  {
+    if (!self::$find) {
+
+      if ( $file) {
+        self::run($file);
+      }
+
+    }
   }
 
   public static function findVar($string,$path){
@@ -62,16 +72,7 @@ class Route {
     }
 
 
-    public static function notFound($file=false)
-    {
-      if (!self::$find) {
-        if ( $file) {
-          IRoute::call($file);
-        }
 
-        die;
-      }
 
-    }
 
   }
