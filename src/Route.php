@@ -12,6 +12,7 @@ class Route {
     if (!bot::getCallback() && $path == bot::text()) {
       self::$find = true;
       IRoute::call($controllerString);
+      die();
     }
   }
 
@@ -22,7 +23,13 @@ class Route {
     if (bot::getCallback() && $data['is']) {
       self::$find = true;
       IRoute::call($controllerString);
+      die();
     }
+  }
+
+  public static function run($controllerString){
+    IRoute::call($controllerString);
+    die();
   }
 
   public static function findVar($string,$path){
