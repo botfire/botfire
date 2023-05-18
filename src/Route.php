@@ -2,7 +2,7 @@
 namespace botfire\botfire;
 
 use botfire\botfire\bot;
-use webrium\core\Route as IRoute;
+use Webrium\Route as IRoute;
 
 class Route {
 
