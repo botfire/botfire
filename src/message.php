@@ -214,7 +214,7 @@ class message
    */
   public function is_closed($status)
   {
-    $this->params['is_closed']=$number;
+    $this->params['is_closed']=$status;
     return $this;
   }
 
@@ -545,7 +545,7 @@ class message
 
   public function height($height)
   {
-    $this->params['height']=$width;
+    $this->params['height']=$height;
     return $this;
   }
 

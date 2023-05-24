@@ -6,7 +6,7 @@ class keyboard
 {
 
   private $params=[];
-  private $btns=[],$type='inline_keyboard',$resize_keyboard,$one_time_keyboard;
+  private $btns=[],$type='inline_keyboard',$resize_keyboard,$one_time_keyboard,$selective;
 
   public function inline()
   {
