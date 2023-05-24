@@ -170,7 +170,7 @@ $get = bot::input(); // text
 ```
 
 
-see [Receive and validate messages](https://github.com/botfire/botfire/wiki/Receive-and-validate-messages)
+see [Receive messages and files and how to validate](https://github.com/botfire/botfire/wiki/Receive-messages-and-files-and-how-to-validate)
 
 
 <br>
