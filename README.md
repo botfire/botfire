@@ -1,9 +1,6 @@
 # Telegram Robot Library   ![PHP Composer](https://github.com/botfire/botfire/workflows/PHP%20Composer/badge.svg?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/botfire/botfire/v)](//packagist.org/packages/botfire/botfire)  [![Total Downloads](https://poser.pugx.org/botfire/botfire/downloads)](//packagist.org/packages/botfire/botfire)
 
-> Use the link below to get started and view the documentation
-> ### [Quick Start Docs](https://botfire.github.io/)
-
 <br>
 
 ### Install Botfire Library
