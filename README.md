@@ -43,6 +43,8 @@ echo $get;
 
 ## Message
 
+ - [Receive messages and files and how to validate](https://github.com/botfire/botfire/wiki/Receive-messages-and-files-and-how-to-validate)
+
 Send Message
 ```PHP
 bot::id($chat_id)->message('...')->send();
@@ -170,7 +172,6 @@ $get = bot::input(); // text
 ```
 
 
-see [Receive messages and files and how to validate](https://github.com/botfire/botfire/wiki/Receive-messages-and-files-and-how-to-validate)
 
 
 <br>
