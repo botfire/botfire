@@ -3,6 +3,10 @@
 
 <br>
 
+Botfire is a modern library that is used to build different types of Telegram bot projects. Likewise, a dedicated framework has been created for this purpose, which doubles the simplicity of construction and development
+
+<br>
+
 ### Install Botfire Library
 
 ```
