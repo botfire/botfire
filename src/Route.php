@@ -27,7 +27,7 @@ class Route {
 
 
   public static function run($controllerString){
-    IRoute::call($controllerString);
+    IRoute::executeControllerMethod($controllerString);
     die();
   }
 
