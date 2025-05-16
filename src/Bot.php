@@ -6,12 +6,17 @@ class Bot {
     private static $token = '';
     private $message = null;
 
-    private function __construct() {}
 
     public function __call($method, $arguments) {
         $params = $arguments[0] ?? [];
         return $this->request($method, $params);
     }
+
+    public static function setWebhook($url = null) {
+        $bot = self::getInstance();
+        return $bot->request('setWebhook', ['url' => $url]);
+    }
+
 
 
     public static function getInstance() {
