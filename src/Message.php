@@ -20,6 +20,22 @@ class Message {
         return null;
     }
 
+     private function makeMethodName($type){
+        $method = 'send';
+
+        $type = ucfirst($this->type() ?: 'Message');
+
+        if($type == 'Text'){
+            $method .= 'Message';
+        }
+
+        else{
+            $method .=$type;
+        }
+        
+        return $method;
+    }
+
     public function messageId() {
         return $this->data['message']['message_id'] ?? null;
     }
@@ -47,7 +63,7 @@ class Message {
     public function send($chat_id = null) {
         $params = $this->newMessage ?: $this->data['message'];
         $params['chat_id'] = $chat_id ?? $this->chat()->id();
-        return Bot::getInstance()->request('send' . ucfirst($this->type() ?: 'Message'), $params);
+        return Bot::getInstance()->request($this->makeMethodName($this->type()), $params);
     }
 
     public function edit($message_id = null) {
