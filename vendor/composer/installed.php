@@ -3,7 +3,7 @@
         'name' => 'botfire/botfire',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'ad9a410e27cc1e9adb54f65f273e96d14b4309b0',
+        'reference' => '185c7950104b8df5f40099e9d47a5d8c4c05923e',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'botfire/botfire' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'ad9a410e27cc1e9adb54f65f273e96d14b4309b0',
+            'reference' => '185c7950104b8df5f40099e9d47a5d8c4c05923e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

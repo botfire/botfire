@@ -9,11 +9,16 @@ class ComposerStaticInita816b4b2e2f39bf010093a68027cddf6
     public static $prefixLengthsPsr4 = array (
         'B' => 
         array (
+            'Botfire\\Models\\' => 15,
             'Botfire\\' => 8,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Botfire\\Models\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Models',
+        ),
         'Botfire\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',

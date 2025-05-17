@@ -6,5 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Botfire\\Models\\' => array($baseDir . '/src/Models'),
     'Botfire\\' => array($baseDir . '/src'),
 );
