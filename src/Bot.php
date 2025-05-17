@@ -5,6 +5,7 @@ class Bot {
     private static $instance = null;
     private static $token = '';
     private $message = null;
+    private $callback = null;
 
 
     public function __call($method, $arguments) {
@@ -35,19 +36,60 @@ class Bot {
         return self::$token;
     }
 
-    public static function message() {
+    public static function getInput(){
+        return json_decode(file_get_contents('php://input'), true);
+    }
+
+    public static function isCallbackQuery($input = null){ 
+        $bot = self::initInputMessage();
+        return $bot->callback===null?false:true;
+    }
+
+    private static function initInputMessage(){
         $bot = self::getInstance();
+
         if ($bot->message === null) {
-            $bot->message = new Message(json_decode(file_get_contents('php://input'), true));
+
+            $input = self::getInput();
+
+            if(isset($input[Message::TYPE_CALLBACK_QUERY])){
+                $message = ['message' => $input[Message::TYPE_CALLBACK_QUERY]['message']];
+                unset($input[Message::TYPE_CALLBACK_QUERY]['message']);
+                $callback = $input[Message::TYPE_CALLBACK_QUERY];
+
+                $bot->message = new Message($message);
+                $bot->callback = new Callback($callback);
+            }
+            else{
+                $bot->message = new Message($input);
+                $bot->callback = null;
+            }
+
         }
+
+        return $bot;
+    }
+
+    public static function message() {
+        $bot = self::initInputMessage();
         return $bot->message;
     }
 
     public static function new() {
-        return new Message([]);
+        $bot = new self();
+        $bot->message =  new Message(self::getInput());
+        $chat = $bot->message()->chat()->asArray();
+        return new Message(['message' => ['chat' => $chat]]);
+    }
+
+
+    public static function callback(){
+        $bot = self::getInstance();
+        return $bot->callback;
     }
 
     public function request($method, $params = []) {
+        file_put_contents(__DIR__.'/request.log', "method:$method");
         return TelegramApi::request(self::$token, $method, $params);
     }
 }
