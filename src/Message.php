@@ -1,13 +1,39 @@
 <?php
 namespace Botfire;
 
+use Botfire\Models\User;
+use Botfire\Models\Chat;
+use Botfire\Models\PhotoArray;
+
+
+
 class Message {
     private $data;
-    private $newMessage = [];
+
+    private $sendMethod = '';
+
+    private $sendParams = [];
+
 
     public function __construct($data) {
         $this->data = $data;
     }
+
+
+    const TYPE_TEXT = 'text';
+    const TYPE_PHOTO = 'photo';
+    const TYPE_VIDEO = 'video';
+    const TYPE_AUDIO = 'audio';
+    const TYPE_DOCUMENT = 'document';
+    const TYPE_STICKER = 'sticker';
+    const TYPE_ANIMATION = 'animation';
+    const TYPE_LOCATION = 'location';
+    const TYPE_CONTACT = 'contact';
+    const TYPE_POLL = 'poll';
+    const TYPE_CALLBACK_QUERY = 'callback_query';
+    const TYPE_MESSAGE = 'message';
+
+    
 
     public function type() {
         if (isset($this->data['message'])) {
@@ -17,13 +43,16 @@ class Message {
                 }
             }
         }
+        else if(isset($this->data['callback_query'])){
+            return 'callback_query';
+        }
         return null;
     }
 
-     private function makeMethodName($type){
-        $method = 'send';
+     private function makeMethodName($type, $prefix = 'send'){
+        $method = $prefix;
 
-        $type = ucfirst($this->type() ?: 'Message');
+        $type = ucfirst($type);
 
         if($type == 'Text'){
             $method .= 'Message';
@@ -50,24 +79,33 @@ class Message {
 
     public function text($text = null) {
         if ($text !== null) {
-            $this->newMessage['text'] = $text;
+            $this->sendParams['text'] = $text;
+            $this->sendMethod = 'message';
             return $this;
         }
         return $this->data['message']['text'] ?? null;
     }
 
-    public function photo() {
-        return new PhotoArray($this->data['message']['photo'] ?? []);
+    public function photo($photo = null) {
+        if ($photo !== null) {
+            $this->sendParams['photo'] = $photo;
+            $this->sendMethod = 'photo';
+            return $this;
+        }
+
+        $photoOb = new PhotoArray($this->data['message']['photo'] ?? []);
+        $this->sendParams['photo'] = $photoOb->first()->fileId();
+        return $photoOb;
     }
 
     public function send($chat_id = null) {
-        $params = $this->newMessage ?: $this->data['message'];
-        $params['chat_id'] = $chat_id ?? $this->chat()->id();
-        return Bot::getInstance()->request($this->makeMethodName($this->type()), $params);
+        $this->sendParams['chat_id'] = $chat_id ?? $this->chat()->id();
+        file_put_contents(__DIR__.'/send.log', "sendMethod : ".$this->sendMethod."  make:".$this->makeMethodName($this->sendMethod));
+        return Bot::getInstance()->request($this->makeMethodName($this->sendMethod) , $this->sendParams);
     }
 
     public function edit($message_id = null) {
-        $params = $this->newMessage;
+        $params = $this->sendParams;
         $params['chat_id'] = $this->chat()->id();
         $params['message_id'] = $message_id ?? $this->messageId();
         return Bot::getInstance()->request('editMessageText', $params);
@@ -82,83 +120,8 @@ class Message {
     }
 
     public function replyMarkup($keyboard) {
-        $this->newMessage['reply_markup'] = $keyboard->toArray();
+        $this->sendParams['reply_markup'] = $keyboard->toArray();
         return $this;
     }
 }
 
-class User {
-    private $data;
-
-    public function __construct($data) {
-        $this->data = $data;
-    }
-
-    public function id() {
-        return $this->data['id'] ?? null;
-    }
-
-    public function isBot() {
-        return $this->data['is_bot'] ?? false;
-    }
-
-    public function username() {
-        return $this->data['username'] ?? null;
-    }
-}
-
-class Chat {
-    private $data;
-
-    public function __construct($data) {
-        $this->data = $data;
-    }
-
-    public function id() {
-        return $this->data['id'] ?? null;
-    }
-
-    public function type() {
-        return $this->data['type'] ?? null;
-    }
-}
-
-class PhotoArray {
-    private $data;
-
-    public function __construct($data) {
-        $this->data = $data;
-    }
-
-    public function first() {
-        return new Photo($this->data[0] ?? []);
-    }
-
-    public function latest() {
-        return new Photo(end($this->data) ?: []);
-    }
-
-    public function indexOf($index) {
-        return new Photo($this->data[$index] ?? []);
-    }
-
-    public function count() {
-        return count($this->data);
-    }
-
-    public function asArray() {
-        return $this->data;
-    }
-}
-
-class Photo {
-    private $data;
-
-    public function __construct($data) {
-        $this->data = $data;
-    }
-
-    public function fileId() {
-        return $this->data['file_id'] ?? null;
-    }
-}
