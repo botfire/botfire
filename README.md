@@ -1,5 +1,11 @@
 # Botfire Library Documentation
 
+<br>
+
+### ⚠️ The new version (2) is under development and is not yet available for use.
+
+<br>
+
 ## Installation
 
 Install the Botfire library using Composer:
