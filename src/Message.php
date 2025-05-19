@@ -98,6 +98,17 @@ class Message {
         return $photoOb;
     }
 
+
+    public function caption($caption = null) {
+        if ($caption !== null) {
+            $this->sendParams['caption'] = $caption;
+            return $this;
+        }
+        return $this->data['message']['caption'] ?? null;
+    }
+
+    
+
     public function send($chat_id = null) {
         $this->sendParams['chat_id'] = $chat_id ?? $this->chat()->id();
         file_put_contents(__DIR__.'/send.log', "sendMethod : ".$this->sendMethod."  make:".$this->makeMethodName($this->sendMethod));
