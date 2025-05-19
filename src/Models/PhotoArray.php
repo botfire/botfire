@@ -14,7 +14,7 @@ class PhotoArray {
         return new Photo($this->data[0] ?? []);
     }
 
-    public function latest() {
+    public function last() {
         return new Photo(end($this->data) ?: []);
     }
 
