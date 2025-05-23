@@ -101,10 +101,13 @@ class Bot
 
     public function request($method, $params = [])
     {
-        file_put_contents(__DIR__ . '/request.log', "method:$method");
         return TelegramApi::request(self::$token, $method, $params);
     }
 
+    public function requestFile($file_path)
+    {
+        return TelegramApi::requestFile(self::$token, $file_path);
+    }
 
     public static function inputFile($path)
     {

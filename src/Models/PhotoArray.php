@@ -29,4 +29,10 @@ class PhotoArray {
     public function asArray() {
         return $this->data;
     }
+
+    public function forEach($callback){
+        for($i=0; $i<$this->count();$i++){
+            $callback($this->indexOf($i));
+        }
+    }
 }

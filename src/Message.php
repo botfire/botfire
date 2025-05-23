@@ -94,7 +94,7 @@ class Message {
         }
 
         $photoOb = new PhotoArray($this->data['message']['photo'] ?? []);
-        $this->sendParams['photo'] = $photoOb->first()->fileId();
+        $this->sendParams['photo'] = $photoOb->last()->getFileId();
         return $photoOb;
     }
 
