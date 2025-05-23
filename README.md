@@ -11,7 +11,7 @@
 Install the Botfire library using Composer:
 
 ```bash
-composer require botfire/botfire:2.0.0.beta1 
+composer require botfire/botfire:2.0.0.beta2
 ```
 
 Import the library in your PHP code:
