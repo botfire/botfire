@@ -1,15 +1,22 @@
 <?php
 namespace Botfire\Models;
+use Botfire\Models\File;
 
-
-class Photo {
-    private $data;
+class Photo extends File{
+    protected $data;
 
     public function __construct($data) {
         $this->data = $data;
     }
 
-    public function fileId() {
-        return $this->data['file_id'] ?? null;
+
+    public function getWidth(){
+        return $this->data['width'] ?? null;
     }
+
+    public function getHeight(){
+        return $this->data['height'] ?? null;
+    }
+
+
 }
