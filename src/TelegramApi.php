@@ -13,4 +13,8 @@ class TelegramApi {
         curl_close($ch);
         return json_decode($response, true);
     }
+
+    public static function requestFile($token, $file_path) {
+        return file_get_contents("https://api.telegram.org/file/bot$token/$file_path");
+    }
 }
