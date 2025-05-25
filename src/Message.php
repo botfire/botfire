@@ -4,6 +4,7 @@ namespace Botfire;
 use Botfire\Models\User;
 use Botfire\Models\Chat;
 use Botfire\Models\PhotoArray;
+use Botfire\Models\Video;
 use Botfire\Models\Voice;
 
 
@@ -39,7 +40,7 @@ class Message {
 
     public function type() {
         if (isset($this->data['message'])) {
-            foreach (['text', 'photo', 'video', 'audio','voice', 'document', 'sticker', 'animation', 'location', 'contact', 'poll'] as $type) {
+            foreach (['text', 'photo', 'video', 'audio','voice', 'sticker', 'animation', 'location', 'contact', 'poll', 'document'] as $type) {
                 if (isset($this->data['message'][$type])) {
                     return $type;
                 }
@@ -111,12 +112,30 @@ class Message {
     }
 
 
+    public function video(string|null $video = null) {
+        if ($video !== null) {
+            $this->sendParams['video'] = $video;
+            $this->sendMethod = 'video';
+            return $this;
+        }
+
+        $video = new Video($this->data['message']['video'] ?? []);
+        return $video;
+    }
+
+
     public function caption($caption = null) {
         if ($caption !== null) {
             $this->sendParams['caption'] = $caption;
             return $this;
         }
         return $this->data['message']['caption'] ?? null;
+    }
+
+
+    public function thumbnail($thumbnail){
+        $this->sendParams['thumbnail'] = $thumbnail;
+        return $this;
     }
 
     
