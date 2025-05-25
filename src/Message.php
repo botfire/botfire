@@ -29,6 +29,7 @@ class Message {
     const TYPE_ANIMATION = 'animation';
     const TYPE_LOCATION = 'location';
     const TYPE_CONTACT = 'contact';
+    const TYPE_VOICE = 'voice';
     const TYPE_POLL = 'poll';
     const TYPE_CALLBACK_QUERY = 'callback_query';
     const TYPE_MESSAGE = 'message';
@@ -37,7 +38,7 @@ class Message {
 
     public function type() {
         if (isset($this->data['message'])) {
-            foreach (['text', 'photo', 'video', 'audio', 'document', 'sticker', 'animation', 'location', 'contact', 'poll'] as $type) {
+            foreach (['text', 'photo', 'video', 'audio','voice', 'document', 'sticker', 'animation', 'location', 'contact', 'poll'] as $type) {
                 if (isset($this->data['message'][$type])) {
                     return $type;
                 }
