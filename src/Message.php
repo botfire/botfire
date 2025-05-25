@@ -4,6 +4,7 @@ namespace Botfire;
 use Botfire\Models\User;
 use Botfire\Models\Chat;
 use Botfire\Models\PhotoArray;
+use Botfire\Models\Voice;
 
 
 
@@ -97,6 +98,18 @@ class Message {
         $photoOb = new PhotoArray($this->data['message']['photo'] ?? []);
         $this->sendParams['photo'] = $photoOb->last()->getFileId();
         return $photoOb;
+    }
+
+    public function voice($voice = null) {
+        if ($voice !== null) {
+            $this->sendParams['voice'] = $voice;
+            $this->sendMethod = 'voice';
+            return $this;
+        }
+
+        $voice = new Voice($this->data['message']['voice'] ?? []);
+        $this->sendParams['photo'] = $voice->getFileId();
+        return $voice;
     }
 
 
