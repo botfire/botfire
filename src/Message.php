@@ -100,7 +100,7 @@ class Message {
         return $photoOb;
     }
 
-    public function voice($voice = null) {
+    public function voice(string|null $voice = null) {
         if ($voice !== null) {
             $this->sendParams['voice'] = $voice;
             $this->sendMethod = 'voice';
@@ -108,7 +108,7 @@ class Message {
         }
 
         $voice = new Voice($this->data['message']['voice'] ?? []);
-        $this->sendParams['photo'] = $voice->getFileId();
+        $this->sendParams['voice'] = $voice->getFileId();
         return $voice;
     }
 
