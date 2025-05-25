@@ -95,9 +95,8 @@ class Message {
             return $this;
         }
 
-        $photoOb = new PhotoArray($this->data['message']['photo'] ?? []);
-        $this->sendParams['photo'] = $photoOb->last()->getFileId();
-        return $photoOb;
+        $photoArray = new PhotoArray($this->data['message']['photo'] ?? []);
+        return $photoArray;
     }
 
     public function voice(string|null $voice = null) {
@@ -108,7 +107,6 @@ class Message {
         }
 
         $voice = new Voice($this->data['message']['voice'] ?? []);
-        $this->sendParams['voice'] = $voice->getFileId();
         return $voice;
     }
 
