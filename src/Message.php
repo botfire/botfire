@@ -4,6 +4,7 @@ namespace Botfire;
 use Botfire\Models\User;
 use Botfire\Models\Chat;
 use Botfire\Models\PhotoArray;
+use Botfire\Models\Voice;
 
 
 
@@ -29,6 +30,7 @@ class Message {
     const TYPE_ANIMATION = 'animation';
     const TYPE_LOCATION = 'location';
     const TYPE_CONTACT = 'contact';
+    const TYPE_VOICE = 'voice';
     const TYPE_POLL = 'poll';
     const TYPE_CALLBACK_QUERY = 'callback_query';
     const TYPE_MESSAGE = 'message';
@@ -37,7 +39,7 @@ class Message {
 
     public function type() {
         if (isset($this->data['message'])) {
-            foreach (['text', 'photo', 'video', 'audio', 'document', 'sticker', 'animation', 'location', 'contact', 'poll'] as $type) {
+            foreach (['text', 'photo', 'video', 'audio','voice', 'document', 'sticker', 'animation', 'location', 'contact', 'poll'] as $type) {
                 if (isset($this->data['message'][$type])) {
                     return $type;
                 }
@@ -93,9 +95,19 @@ class Message {
             return $this;
         }
 
-        $photoOb = new PhotoArray($this->data['message']['photo'] ?? []);
-        $this->sendParams['photo'] = $photoOb->last()->getFileId();
-        return $photoOb;
+        $photoArray = new PhotoArray($this->data['message']['photo'] ?? []);
+        return $photoArray;
+    }
+
+    public function voice(string|null $voice = null) {
+        if ($voice !== null) {
+            $this->sendParams['voice'] = $voice;
+            $this->sendMethod = 'voice';
+            return $this;
+        }
+
+        $voice = new Voice($this->data['message']['voice'] ?? []);
+        return $voice;
     }
 
 
