@@ -1,10 +1,8 @@
 <?php
 namespace Botfire\Models;
-use Botfire\Models\OptionCaption;
+use Botfire\Models\File;
 
-class Video extends Option{
-
-    use OptionCaption;
+class Animation extends Option{
 
     protected $data = [];
 
@@ -14,32 +12,10 @@ class Video extends Option{
      * @param mixed $audio
      */
     public function __construct($audio){
-        $this->data['video'] = $audio;
+        $this->data['animation'] = $audio;
     }
 
 
-
-
-    /**
-     * Start timestamp for the video in the message
-     * @param int $start_timestamp
-     * @return static
-     */
-    public function startTimestamp(int $start_timestamp){
-        $this->data['start_timestamp'] = $start_timestamp;
-        return $this;
-    }
-
-
-    /**
-     * Cover for the video in the message. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name.
-     * @param mixed $cover
-     * @return static
-     */
-    public function cover($cover){
-        $this->data['cover'] = $cover;
-        return $this;
-    }
 
     /**
      * Animation width
