@@ -13,7 +13,7 @@ use Botfire\Models\Voice;
 
 
 
-class Message
+class GetMessage
 {
     private $data;
 
@@ -46,32 +46,23 @@ class Message
 
     public function type()
     {
-        if (isset($this->data['message'])) {
+        $parse = Bot::getInstance();
+
+        if ($parse->hasMessage()) {
             foreach (['text', 'photo', 'video', 'audio', 'voice', 'sticker', 'animation', 'location', 'contact', 'poll', 'document'] as $type) {
-                if (isset($this->data['message'][$type])) {
+                if (isset($parse->getMessageBody()['message'][$type])) {
                     return $type;
                 }
             }
-        } else if (isset($this->data['callback_query'])) {
+        } else if ($parse->hasCallback()) {
             return 'callback_query';
         }
         return null;
     }
 
-    private function makeMethodName($type, $prefix = 'send')
-    {
-        $method = $prefix;
 
-        $type = ucfirst($type);
 
-        if ($type == 'Text') {
-            $method .= 'Message';
-        } else {
-            $method .= $type;
-        }
 
-        return $method;
-    }
 
     public function messageId()
     {
@@ -88,15 +79,12 @@ class Message
         return new Chat($this->data['message']['chat'] ?? []);
     }
 
-    public function text($text = null)
+    public function text(): string|null
     {
-        if ($text !== null) {
-            $this->sendParams['text'] = $text;
-            $this->sendMethod = 'message';
-            return $this;
-        }
+
         return $this->data['message']['text'] ?? null;
     }
+    
 
     public function photo($photo = null)
     {
@@ -112,28 +100,6 @@ class Message
 
 
 
-    /**
-     * Use this method to send audio files, 
-     * if you want Telegram clients to display the file as a playable voice message.
-     * For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format (other formats may be sent as Audio or Document).
-     * On success, the sent Message is returned.
-     * Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
-     * 
-     * @param \Botfire\Models\Voice|string $voice
-     * @return Message|Voice
-     */
-    public function voice(Voice|string $voice)
-    {
-        if ($voice instanceof Voice) {
-            $voice->appendToSendParams($this->sendParams);
-        } else {
-            $this->sendParams['voice'] = $voice;
-        }
-
-        $this->sendMethod = 'voice';
-
-        return $this;
-    }
 
 
     /**
