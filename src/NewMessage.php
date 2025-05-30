@@ -5,15 +5,18 @@ use Botfire\Models\Audio;
 use Botfire\Models\AudioOption;
 use Botfire\Models\AudioResult;
 use Botfire\Models\Document;
+use Botfire\Models\Message;
+use Botfire\Models\Photo;
 use Botfire\Models\User;
 use Botfire\Models\Chat;
 use Botfire\Models\PhotoArray;
 use Botfire\Models\Video;
+use Botfire\Models\VideoNote;
 use Botfire\Models\Voice;
 
 
 
-class Message
+class NewMessage
 {
     private $data;
 
@@ -88,26 +91,43 @@ class Message
         return new Chat($this->data['message']['chat'] ?? []);
     }
 
-    public function text($text = null)
+
+    /**
+     * Use this method to send text messages.
+     * @param mixed $text
+     */
+    public function text(Message|string $text)
     {
-        if ($text !== null) {
+        if ($text instanceof Message) {
+            $text->appendToSendParams($this->sendParams);
+        } else {
             $this->sendParams['text'] = $text;
-            $this->sendMethod = 'message';
-            return $this;
         }
-        return $this->data['message']['text'] ?? null;
+
+        $this->sendMethod = 'message';
+
+        return $this;
+
     }
 
+
+    /**
+     * Use this method to send photos.
+     * On success, the sent Message is returned.
+     * @param mixed $photo
+     * @return NewMessage|PhotoArray
+     */
     public function photo($photo = null)
     {
-        if ($photo !== null) {
-            $this->sendParams['photo'] = $photo;
-            $this->sendMethod = 'photo';
-            return $this;
+        if ($photo instanceof Photo) {
+            $photo->appendToSendParams($this->sendParams);
+        } else {
+            $this->sendParams['voice'] = $photo;
         }
 
-        $photoArray = new PhotoArray($this->data['message']['photo'] ?? []);
-        return $photoArray;
+        $this->sendMethod = 'voice';
+
+        return $this;
     }
 
 
@@ -120,7 +140,7 @@ class Message
      * Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
      * 
      * @param \Botfire\Models\Voice|string $voice
-     * @return Message|Voice
+     * @return static
      */
     public function voice(Voice|string $voice)
     {
@@ -184,40 +204,44 @@ class Message
     }
 
 
-    public function video(Video|string $video = null)
+    /**
+     * Use this method to send video files,
+     * Telegram clients support MPEG4 videos (other formats may be sent as Document).
+     * On success, the sent Message is returned.
+     * Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
+     * @param \Botfire\Models\Video|string $video
+     * @return static
+     */
+    public function video(Video|string $video)
     {
         if ($video instanceof Video) {
             $video->appendToSendParams($this->sendParams);
         } else {
-            $this->sendParams['document'] = $video;
+            $this->sendParams['video'] = $video;
         }
 
-        $this->sendMethod = 'document';
+        $this->sendMethod = 'video';
 
         return $this;
     }
 
-
-    public function caption($caption = null)
+    public function videoNote(VideoNote|string $video)
     {
-        if ($caption !== null) {
-            $this->sendParams['caption'] = $caption;
-            return $this;
+        if ($video instanceof VideoNote) {
+            $video->appendToSendParams($this->sendParams);
+        } else {
+            $this->sendParams['video_note'] = $video;
         }
-        return $this->data['message']['caption'] ?? null;
-    }
 
+        $this->sendMethod = 'videoNote';
 
-    public function thumbnail($thumbnail)
-    {
-        $this->sendParams['thumbnail'] = $thumbnail;
         return $this;
     }
+
 
 
 
     /**
-     * Send Message Or Action
      * @param string|int $chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      */
     public function send(string|int $chat_id = null)
@@ -227,6 +251,7 @@ class Message
         file_put_contents(__DIR__ . '/send.log', "sendMethod : " . $this->sendMethod . "  make:" . $this->makeMethodName($this->sendMethod));
         return Bot::getInstance()->request($this->makeMethodName($this->sendMethod), $this->sendParams);
     }
+
 
     public function edit($message_id = null)
     {
@@ -245,10 +270,10 @@ class Message
         return Bot::getInstance()->request('deleteMessage', $params);
     }
 
-    public function replyMarkup($keyboard)
-    {
-        $this->sendParams['reply_markup'] = $keyboard->toArray();
-        return $this;
-    }
+    // public function replyMarkup($keyboard)
+    // {
+    //     $this->sendParams['reply_markup'] = $keyboard->toArray();
+    //     return $this;
+    // }
 }
 
