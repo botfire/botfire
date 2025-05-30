@@ -15,7 +15,8 @@
   "minimum-stability": "dev",
   "autoload": {
     "psr-4": {
-      "botfire\\botfire\\": "src/"
+      "Botfire\\": "src/",
+      "Botfire\\Models\\": "src/Models/"
     }
   }
 }
