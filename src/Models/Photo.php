@@ -1,21 +1,25 @@
 <?php
 namespace Botfire\Models;
-use Botfire\Models\File;
+use Botfire\Models\OptionCaption;
 
-class Photo extends File{
-    protected $data;
+class Photo extends Option{
 
-    public function __construct($data) {
-        $this->data = $data;
-    }
+    use OptionCaption;
+
+    protected $data = [];
 
 
-    public function getWidth(){
-        return $this->data['width'] ?? null;
-    }
-
-    public function getHeight(){
-        return $this->data['height'] ?? null;
+    /**
+     * Photo to send.
+     * Pass a file_id as String to send a photo that exists on the Telegram servers (recommended),
+     * pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data.
+     * The photo must be at most 10 MB in size.
+     * The photo's width and height must not exceed 10000 in total.
+     * Width and height ratio must be at most 20
+     * @param mixed $photo
+     */
+    public function __construct($photo){
+        $this->data['photo'] = $photo;
     }
 
 
