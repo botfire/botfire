@@ -1,11 +1,17 @@
 # Botfire Library Documentation
 
+<br>
+
+### ⚠️ The new version (2) is under development and is not yet available for use.
+
+<br>
+
 ## Installation
 
 Install the Botfire library using Composer:
 
 ```bash
-composer require botfire/botfire
+composer require botfire/botfire:2.0.0.beta2
 ```
 
 Import the library in your PHP code:
