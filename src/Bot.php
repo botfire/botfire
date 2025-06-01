@@ -68,32 +68,6 @@ class Bot
         return $bot->hasCallback();
     }
 
-    // private static function initInputMessage()
-    // {
-    //     $bot = self::getInstance();
-
-    //     // if ($bot->message === null) {
-
-    //     //     $input = self::getInput();
-
-    //     //     if (isset($input[GetMessage::TYPE_CALLBACK_QUERY])) {
-    //     //         $message = ['message' => $input[GetMessage::TYPE_CALLBACK_QUERY]['message']];
-    //     //         unset($input[GetMessage::TYPE_CALLBACK_QUERY]['message']);
-    //     //         $callback = $input[GetMessage::TYPE_CALLBACK_QUERY];
-
-    //     //         $bot->message = new GetMessage($message);
-    //     //         $bot->callback = new Callback($callback);
-    //     //     } else {
-    //     //         $bot->message = new GetMessage($input);
-    //     //         $bot->callback = null;
-    //     //     }
-
-    //     // }
-
-    //     return $bot;
-    // }
-
-
 
     public static function getMessage()
     {
