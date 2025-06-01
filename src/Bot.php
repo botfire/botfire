@@ -44,21 +44,6 @@ class Bot
         }
 
         return self::$parser;
-
-        // if (self::$instance === null) {
-        //     self::$instance = new self();
-        //     self::$instance->message = self::$parser->parse();
-        //     // $input = self::getInput();
-        //     // if (isset($input[GetMessage::TYPE_CALLBACK_QUERY])) {
-        //     //     $callback = $input[GetMessage::TYPE_CALLBACK_QUERY];
-        //     //     unset($input[GetMessage::TYPE_CALLBACK_QUERY]);
-        //     //     self::$instance->callback = new Callback($callback);
-        //     // } else {
-        //     //     self::$instance->callback = null;
-        //     // }
-        // }
-
-        // return self::$instance;
     }
 
     public static function setToken($token)
