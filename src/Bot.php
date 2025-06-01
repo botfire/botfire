@@ -2,6 +2,8 @@
 namespace Botfire;
 
 use Botfire\Models\Audio;
+use Botfire\Models\CopyMessage;
+use Botfire\Models\CopyMessages;
 use Botfire\Models\Document;
 use Botfire\Models\Message;
 use Botfire\Models\Photo;
@@ -175,6 +177,36 @@ class Bot
         return $bot->text($text)->send();
     }
 
+
+
+    /**
+     * Use this method to copy messages of any kind.
+     * Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied
+     * A quiz poll can be copied only if the value of the field correct_option_id is known to the bot.
+     * The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message.
+     * Returns the MessageId of the sent message on success.
+     * @param CopyMessage $copy_message
+     */
+    public static function copyMessage(CopyMessage $copy_message){
+        $bot = self::new();
+        return $bot->copyMessage($copy_message)->send();
+    }
+
+
+    /**
+     * Use this method to copy messages of any kind.
+     * If some of the specified messages can't be found or copied, they are skipped.
+     * Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied
+     * A quiz poll can be copied only if the value of the field correct_option_id is known to the bot.
+     * The method is analogous to the method forwardMessages, but the copied messages don't have a link to the original message.
+     * Album grouping is kept for copied messages.
+     * On success, an array of MessageId of the sent messages is returned.
+     * @param CopyMessages $copy_messages
+     */
+    public static function copyMessages(CopyMessages $copy_messages){
+        $bot = self::new();
+        return $bot->copyMessages($copy_messages)->send();
+    }
 
     public static function getCallback():GetCallback
     {
