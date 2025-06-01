@@ -22,6 +22,8 @@ use Botfire\Bot;
 
 ## Configuration
 
+Befor doing anything, the bot token must be set first
+
 Set your bot token:
 
 ```php
@@ -49,7 +51,8 @@ Bot::new()->message('Your message here')->send();
 Send a message to a specific `chat_id`:
 
 ```php
-Bot::new()->message('Your message here')->send($chat_id);
+$message = new Message('Your message here');
+Bot::sendMessage($message);
 ```
 
 ### Send a Photo
