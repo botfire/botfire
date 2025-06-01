@@ -17,10 +17,6 @@ class GetMessage
 {
     private $data;
 
-    private $sendMethod = '';
-
-    private $sendParams = [];
-
 
     public function __construct($data)
     {
