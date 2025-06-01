@@ -2,6 +2,7 @@
 namespace Botfire;
 
 use Botfire\Models\From;
+use Botfire\Models\User;
 
 class GetCallback {
     private $data;
@@ -15,7 +16,7 @@ class GetCallback {
     }
 
     public function from(){
-        return new From($this->data['from'] ?? []);
+        return new User($this->data['from'] ?? []);
     }
 
     public function chatInstance(){
