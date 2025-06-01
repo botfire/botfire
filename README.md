@@ -11,7 +11,7 @@
 Install the Botfire library using Composer:
 
 ```bash
-composer require botfire/botfire:2.0.0.beta2
+composer require botfire/botfire:@dev
 ```
 
 Import the library in your PHP code:
@@ -51,8 +51,8 @@ Bot::new()->text('Your message here')->send();
 Send a message to a specific `chat_id`:
 
 ```php
-$message = new Message('Your message here');
-Bot::sendMessage($message);
+Bot::new()->text('Your message here')->send($chat_id);
+
 ```
 
 ### Send a Photo
