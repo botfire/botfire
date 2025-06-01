@@ -46,7 +46,7 @@ class GetMessage
 
     public function type()
     {
-        $parse = Bot::getInstance();
+        $parse = Bot::getParser();
 
         if ($parse->hasMessage()) {
             foreach (['text', 'photo', 'video', 'audio', 'voice', 'sticker', 'animation', 'location', 'contact', 'poll', 'document'] as $type) {
@@ -191,7 +191,7 @@ class GetMessage
 
         $this->sendParams['chat_id'] = $chat_id ?? $this->chat()->id();
         file_put_contents(__DIR__ . '/send.log', "sendMethod : " . $this->sendMethod . "  make:" . $this->makeMethodName($this->sendMethod));
-        return Bot::getInstance()->request($this->makeMethodName($this->sendMethod), $this->sendParams);
+        return Bot::getParser()->request($this->makeMethodName($this->sendMethod), $this->sendParams);
     }
 
     public function edit($message_id = null)
@@ -199,7 +199,7 @@ class GetMessage
         $params = $this->sendParams;
         $params['chat_id'] = $this->chat()->id();
         $params['message_id'] = $message_id ?? $this->messageId();
-        return Bot::getInstance()->request('editMessageText', $params);
+        return Bot::getParser()->request('editMessageText', $params);
     }
 
     public function delete($message_id = null)
@@ -208,7 +208,7 @@ class GetMessage
             'chat_id' => $this->chat()->id(),
             'message_id' => $message_id ?? $this->messageId()
         ];
-        return Bot::getInstance()->request('deleteMessage', $params);
+        return Bot::getParser()->request('deleteMessage', $params);
     }
 
     public function replyMarkup($keyboard)
