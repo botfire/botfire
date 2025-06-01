@@ -4,6 +4,8 @@ namespace Botfire;
 use Botfire\Models\Audio;
 use Botfire\Models\AudioOption;
 use Botfire\Models\AudioResult;
+use Botfire\Models\CopyMessage;
+use Botfire\Models\CopyMessages;
 use Botfire\Models\Document;
 use Botfire\Models\Message;
 use Botfire\Models\Photo;
@@ -34,17 +36,22 @@ class NewMessage
 
     private function makeMethodName($type, $prefix = 'send')
     {
-        $method = $prefix;
-
-        $type = ucfirst($type);
-
-        if ($type == 'Text') {
-            $method .= 'Message';
-        } else {
-            $method .= $type;
+        if(str_starts_with($type, '@')){
+            return $type;
         }
-
-        return $method;
+        else{
+            $method = $prefix;
+    
+            $type = ucfirst($type);
+    
+            if ($type == 'Text') {
+                $method .= 'Message';
+            } else {
+                $method .= $type;
+            }
+    
+            return $method;
+        }
     }
 
     // public function messageId()
@@ -202,6 +209,21 @@ class NewMessage
 
         $this->sendMethod = 'videoNote';
 
+        return $this;
+    }
+
+
+    public function copyMessage(CopyMessage $copy_message)
+    {
+        $copy_message->appendToSendParams($this->sendParams);
+        $this->sendMethod = '@copyMessage';
+        return $this;
+    }
+
+    public function copyMessages(CopyMessages $copy_messages)
+    {
+        $copy_messages->appendToSendParams($this->sendParams);
+        $this->sendMethod = '@copyMessage';
         return $this;
     }
 
