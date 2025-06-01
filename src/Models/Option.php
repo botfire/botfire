@@ -1,5 +1,7 @@
 <?php
 namespace Botfire\Models;
+use Botfire\InlineKeyboard;
+use Botfire\MarkupKeyboard;
 use Botfire\Models\File;
 
 class Option
@@ -165,9 +167,9 @@ class Option
      * @param mixed $reply_markup
      * @return static
      */
-    public function replyMarkup($reply_markup)
+    public function replyMarkup(InlineKeyboard|MarkupKeyboard $reply_markup)
     {
-        $this->data['reply_markup'] = $reply_markup;
+        $this->data['reply_markup'] = $reply_markup->toJson();
         return $this;
     }
     
@@ -177,5 +179,10 @@ class Option
         foreach ($this->data as $key => $value) {
             $data[$key] = $value;
         }
+    }
+
+
+    public function toArray(){
+        return $this->data;
     }
 }
