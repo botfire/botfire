@@ -23,7 +23,7 @@ class File
 
     public function getFile(): GetFile
     {
-        $file = Bot::getInstance()->request('getFile', [
+        $file = Bot::getParser()->request('getFile', [
             'file_id' => $this->getFileId()
         ]);
 
@@ -41,7 +41,7 @@ class File
 
         $file_name = $file->getFileName();
         $file_path = $file->getFilePath();
-        $content = Bot::getInstance()->requestFile($file_path);
+        $content = Bot::getParser()->requestFile($file_path);
 
         if ($custom_file_name != false) {
             $file_name = $custom_file_name;
