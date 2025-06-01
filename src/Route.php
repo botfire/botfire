@@ -41,7 +41,7 @@ class Route
 
     public static function run($controllerString)
     {
-        IRoute::executeControllerMethod($controllerString);
+        IRoute::executeControllerMethod($controllerString, self::getRouteParams());
         die();
     }
 
