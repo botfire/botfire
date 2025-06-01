@@ -3,7 +3,7 @@ namespace Botfire;
 
 use Botfire\Models\From;
 
-class Callback {
+class GetCallback {
     private $data;
 
     public function __construct($data) {
