@@ -1,6 +1,5 @@
 <?php
-
-namespace Botfire;
+namespace Botfire\Keyboard;
 
 class ReplyKeyboardRemove{
 

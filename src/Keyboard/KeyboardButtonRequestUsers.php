@@ -1,5 +1,5 @@
 <?php
-namespace Botfire;
+namespace Botfire\Keyboard;
 
 /**
  * Represents the criteria used to request suitable users.

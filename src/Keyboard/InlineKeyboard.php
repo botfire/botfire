@@ -1,7 +1,8 @@
 <?php
-namespace Botfire;
+namespace Botfire\Keyboard;
 
-use Botfire\Models\KeybardOption;
+
+use Botfire\Keyboard\InlineButton;
 
 class InlineKeyboard
 {
@@ -21,7 +22,7 @@ class InlineKeyboard
     {
         if (!empty($buttons)) {
             $this->buttons[] = array_map(function ($button) {
-                if ($button instanceof InlineKeyboardButton) {
+                if ($button instanceof InlineButton) {
                     return $button->toArray();
                 }
             }, $buttons);

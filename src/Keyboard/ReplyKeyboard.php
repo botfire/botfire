@@ -1,7 +1,7 @@
 <?php
-namespace Botfire;
+namespace Botfire\Keyboard;
 
-use Botfire\Models\KeybardOption;
+use Botfire\Keyboard\Button;
 
 class ReplyKeyboard
 {
@@ -87,7 +87,7 @@ class ReplyKeyboard
     {
         if (!empty($buttons)) {
             $this->buttons[] = array_map(function ($button) {
-                if ($button instanceof KeyboardButton) {
+                if ($button instanceof Button) {
                     return $button->toArray();
                 }
                 return ['text' => $button];
