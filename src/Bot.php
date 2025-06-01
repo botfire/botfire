@@ -10,6 +10,7 @@ use Botfire\Models\VideoNote;
 use Botfire\Models\Voice;
 use Botfire\MessageParser;
 use Botfire\GetMessage;
+use Botfire\GetCallback;
 
 class Bot
 {
@@ -30,13 +31,13 @@ class Bot
 
     public static function setWebhook($url = null)
     {
-        $bot = self::getInstance();
+        $bot = self::getParser();
         return $bot->request('setWebhook', ['url' => $url]);
     }
 
 
 
-    public static function getInstance()
+    public static function getParser()
     {
         if (self::$parser === null) {
             self::$parser = new MessageParser(self::getInput());
@@ -49,7 +50,7 @@ class Bot
     public static function setToken($token)
     {
         self::$token = $token;
-        return self::getInstance();
+        return self::getParser();
     }
 
     public static function getToken()
@@ -64,21 +65,21 @@ class Bot
 
     public static function isCallbackQuery()
     {
-        $bot = self::getInstance();
+        $bot = self::getParser();
         return $bot->hasCallback();
     }
 
 
     public static function getMessage()
     {
-        $bot = self::getInstance();
+        $bot = self::getParser();
         return new GetMessage($bot->getMessageBody());
     }
 
 
     public static function new()
     {
-        $parse = self::getInstance();
+        $parse = self::getParser();
         $message = $parse->getMessageBody();
         $chat = $message['message']['chat'] ?? [];
         return new NewMessage(['message' => ['chat' => $chat]]);
@@ -178,8 +179,8 @@ class Bot
 
     public static function getCallback():GetCallback
     {
-        $bot = self::getInstance();
-        return new GetCallback($bot->getCallbackBody());
+        $parser = self::getParser();
+        return new GetCallback($parser->getCallbackBody());
     }
 
     public static function request($method, $params = [])
