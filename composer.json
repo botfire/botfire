@@ -16,7 +16,8 @@
   "autoload": {
     "psr-4": {
       "Botfire\\": "src/",
-      "Botfire\\Models\\": "src/Models/"
+      "Botfire\\Models\\": "src/Models/",
+      "Botfire\\Keyboard\\": "src/Keyboard/"
     }
   }
 }

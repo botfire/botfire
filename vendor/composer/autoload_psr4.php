@@ -7,5 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Botfire\\Models\\' => array($baseDir . '/src/Models'),
+    'Botfire\\Keyboard\\' => array($baseDir . '/src/Keyboard'),
     'Botfire\\' => array($baseDir . '/src'),
 );
