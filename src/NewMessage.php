@@ -214,11 +214,13 @@ class NewMessage
     public function send(string|int $chat_id = null)
     {
 
-        if(empty($this->sendParams['chat_id'])){
+
+        if (empty($this->sendParams['chat_id'])) {
             $this->sendParams['chat_id'] = $chat_id ?? $this->chat()->id();
         }
-         
-        file_put_contents(__DIR__ . '/send.log', "sendMethod : " . $this->sendMethod . "  make:" . $this->makeMethodName($this->sendMethod));
+
+        file_put_contents(__DIR__ . '/send.log', "sendMethod : " . $this->sendMethod . "\n\n  make:" . $this->makeMethodName($this->sendMethod));
+        file_put_contents(__DIR__ . '/params.log', "\n\n".json_encode($this->sendParams, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), FILE_APPEND);
         return Bot::request($this->makeMethodName($this->sendMethod), $this->sendParams);
     }
 
@@ -228,7 +230,7 @@ class NewMessage
     //     $params = $this->sendParams;
     //     $params['chat_id'] = $this->chat()->id();
     //     $params['message_id'] = $message_id ?? $this->messageId();
-    //     return Bot::getInstance()->request('editMessageText', $params);
+    //     return Bot::getParser()->request('editMessageText', $params);
     // }
 
     // public function delete($message_id = null)
@@ -237,7 +239,7 @@ class NewMessage
     //         'chat_id' => $this->chat()->id(),
     //         'message_id' => $message_id ?? $this->messageId()
     //     ];
-    //     return Bot::getInstance()->request('deleteMessage', $params);
+    //     return Bot::getParser()->request('deleteMessage', $params);
     // }
 
     // public function replyMarkup($keyboard)
