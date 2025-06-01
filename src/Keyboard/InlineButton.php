@@ -1,7 +1,7 @@
 <?php
-namespace Botfire;
+namespace Botfire\Keyboard;
 
-class InlineKeyboardButton
+class InlineButton
 {
     protected string $text;
     protected ?string $url = null;
