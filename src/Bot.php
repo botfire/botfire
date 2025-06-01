@@ -8,9 +8,8 @@ use Botfire\Models\Photo;
 use Botfire\Models\Video;
 use Botfire\Models\VideoNote;
 use Botfire\Models\Voice;
-use Botfire\GetMessage;
-
 use Botfire\MessageParser;
+use Botfire\GetMessage;
 
 class Bot
 {
@@ -218,14 +217,10 @@ class Bot
     }
 
 
-
-
-
-
-    public static function callback()
+    public static function getCallback():GetCallback
     {
         $bot = self::getInstance();
-        return $bot->callback;
+        return new GetCallback($bot->getCallbackBody());
     }
 
     public static function request($method, $params = [])
