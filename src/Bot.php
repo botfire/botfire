@@ -38,7 +38,7 @@ class Bot
 
     public static function getParser()
     {
-        if (self::$parser === null) {
+        if (self::$parser === null && self::getInput() != null) {
             self::$parser = new MessageParser(self::getInput());
 
         }
