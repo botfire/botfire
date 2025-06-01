@@ -2,7 +2,7 @@
 namespace Botfire\Models;
 use Botfire\Models\File;
 
-class Video extends File{
+class VideoResult extends File{
     protected $data;
 
     public function __construct($data) {
