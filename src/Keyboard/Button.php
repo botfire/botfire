@@ -1,7 +1,7 @@
 <?php
-namespace Botfire;
+namespace Botfire\Keyboard;
 
-class KeyboardButton {
+class Button {
     protected string $text;
     protected ?KeyboardButtonRequestUsers $request_users = null;
     protected ?KeyboardButtonRequestChat $request_chat = null;
