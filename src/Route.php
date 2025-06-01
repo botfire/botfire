@@ -41,10 +41,7 @@ class Route
 
     public static function run($controllerString)
     {
-        file_put_contents(__DIR__.'route.log', 'Route: ' . $controllerString . PHP_EOL, FILE_APPEND);
-        // Here you can implement your logic to execute the controller method.
-        // For example, you might use a method like this:
-        // IRoute::executeControllerMethod($controllerString);
+        IRoute::executeControllerMethod($controllerString);
         die();
     }
 
