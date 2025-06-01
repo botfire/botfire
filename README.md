@@ -45,7 +45,7 @@ $result = Bot::setWebhook($url);
 Send a message with auto-detected `chat_id`:
 
 ```php
-Bot::new()->message('Your message here')->send();
+Bot::new()->text('Your message here')->send();
 ```
 
 Send a message to a specific `chat_id`:
