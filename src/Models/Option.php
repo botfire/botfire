@@ -3,12 +3,14 @@ namespace Botfire\Models;
 
 use Botfire\Keyboard\InlineKeyboard;
 use Botfire\Keyboard\ReplyKeyboard;
-
+use Botfire\Models\OptionAppendToParams;
 
 
 class Option
 {
 
+    use OptionAppendToParams;
+    
     protected $data = [];
 
 
@@ -150,13 +152,6 @@ class Option
         return $this;
     }
     
-
-    public function appendToSendParams(&$data)
-    {
-        foreach ($this->data as $key => $value) {
-            $data[$key] = $value;
-        }
-    }
 
 
     public function toArray(){
