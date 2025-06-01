@@ -3,7 +3,7 @@ namespace Botfire;
 
 use Botfire\Models\KeybardOption;
 
-class MarkupKeyboard
+class ReplyKeyboard
 {
 
 
