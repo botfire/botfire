@@ -31,8 +31,7 @@ class Bot
 
     public static function setWebhook($url = null)
     {
-        $bot = self::getParser();
-        return $bot->request('setWebhook', ['url' => $url]);
+        return Bot::request('setWebhook', ['url' => $url]);
     }
 
 
