@@ -238,7 +238,7 @@ class NewMessage
 
 
         if (empty($this->sendParams['chat_id'])) {
-            $this->sendParams['chat_id'] = $chat_id ?? $this->chat()->id();
+            $this->sendParams['chat_id'] = $chat_id ?? $this->chat()->getId();
         }
 
         file_put_contents(__DIR__ . '/send.log', "sendMethod : " . $this->sendMethod . "\n\n  make:" . $this->makeMethodName($this->sendMethod));
