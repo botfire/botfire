@@ -11,6 +11,12 @@ class InlineKeyboard
     protected $currentRow = 0;
 
 
+
+    /**
+     * 
+     * @param array $buttons
+     * @return static
+     */
     public function row(array $buttons = [])
     {
         if (!empty($buttons)) {
@@ -18,7 +24,6 @@ class InlineKeyboard
                 if ($button instanceof InlineKeyboardButton) {
                     return $button->toArray();
                 }
-                return ['text' => $button];
             }, $buttons);
             $this->currentRow++;
             return $this;
