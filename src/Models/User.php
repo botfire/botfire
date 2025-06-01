@@ -166,5 +166,10 @@ class User
         return $this->data['has_main_web_app'] ?? null;
     }
 
+    public function toArray(): array
+    {
+        return $this->data;
+    }
+
 
 }
