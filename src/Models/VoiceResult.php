@@ -2,7 +2,7 @@
 namespace Botfire\Models;
 use Botfire\Models\File;
 
-class Voice extends File{
+class VoiceResult extends File{
     protected $data;
 
     public function __construct($data) {
