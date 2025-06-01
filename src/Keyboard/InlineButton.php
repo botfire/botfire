@@ -1,6 +1,11 @@
 <?php
 namespace Botfire\Keyboard;
 
+use Botfire\Models\CopyTextButton;
+use Botfire\Models\LoginUrl;
+use Botfire\Models\SwitchInlineQueryChosenChat;
+use Botfire\Models\WebAppInfo;
+
 class InlineButton
 {
     protected string $text;
@@ -12,7 +17,7 @@ class InlineButton
     protected ?string $switch_inline_query_current_chat = null;
     protected ?SwitchInlineQueryChosenChat $switch_inline_query_chosen_chat = null;
     protected ?CopyTextButton $copy_text = null;
-    protected ?CallbackGame $callback_game = null;
+    protected $callback_game = null;
     protected ?bool $pay = null;
 
 
@@ -67,7 +72,7 @@ class InlineButton
         return $this;
     }
 
-    public function callbackGame(?CallbackGame $callback_game): static
+    public function callbackGame($callback_game): static
     {
         $this->callback_game = $callback_game;
         return $this;
