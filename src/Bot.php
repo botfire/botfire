@@ -129,7 +129,7 @@ class Bot
      * On success, the sent Message is returned.
      * Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
      *
-     * @param \Botfire\Models\Voice|string $voice
+     * @param Voice|string $voice
      */
     public static function sendVoice(Voice|string $voice)
     {
@@ -144,7 +144,7 @@ class Bot
      * Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned.
      * Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * 
-     * @param \Botfire\Models\Audio|string $audio
+     * @param Audio|string $audio
      */
     public static function sendAudio(Audio|string $audio)
     {
@@ -158,7 +158,7 @@ class Bot
      * On success, the sent Message is returned.
      * Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
      * 
-     * @param \Botfire\Models\Document|string $document
+     * @param Document|string $document
      */
     public static function sendDocument(Document|string $document)
     {
@@ -169,7 +169,7 @@ class Bot
 
     /**
      * Use this method to send text messages.
-     * @param \Botfire\Models\Message|string $text
+     * @param Message|string $text
      */
     public static function sendMessage(Message|string $text)
     {
@@ -187,7 +187,8 @@ class Bot
      * Returns the MessageId of the sent message on success.
      * @param CopyMessage $copy_message
      */
-    public static function copyMessage(CopyMessage $copy_message){
+    public static function copyMessage(CopyMessage $copy_message)
+    {
         $bot = self::new();
         return $bot->copyMessage($copy_message)->send();
     }
@@ -203,12 +204,58 @@ class Bot
      * On success, an array of MessageId of the sent messages is returned.
      * @param CopyMessages $copy_messages
      */
-    public static function copyMessages(CopyMessages $copy_messages){
+    public static function copyMessages(CopyMessages $copy_messages)
+    {
         $bot = self::new();
         return $bot->copyMessages($copy_messages)->send();
     }
 
-    public static function getCallback():GetCallback
+
+    /**
+     * Use this method to delete a message, including service messages, with the following limitations:
+     * - A message can only be deleted if it was sent less than 48 hours ago.
+     * - Service messages about a supergroup, channel, or forum topic creation can't be deleted.
+     * - A dice message in a private chat can only be deleted if it was sent more than 24 hours ago.
+     * - Bots can delete outgoing messages in private chats, groups, and supergroups.
+     * - Bots can delete incoming messages in private chats.
+     * - Bots granted can_post_messages permissions can delete outgoing messages in channels.
+     * - If the bot is an administrator of a group, it can delete any message there.
+     * - If the bot has can_delete_messages permission in a supergroup or a channel, it can delete any message there.
+     * Returns True on success.
+     * @param int $message_id
+     * @param string|int $chat_id
+     */
+    public static function deleteMessage(int $message_id, string|int $chat_id)
+    {
+
+        $params = [
+            'chat_id' => $chat_id,
+            'message_id' => $message_id
+        ];
+
+        return Bot::request('deleteMessage', $params);
+    }
+
+
+    /**
+     * A JSON-serialized list of 1-100 identifiers of messages to delete.
+     * See deleteMessage for limitations on which messages can be deleted
+     * @param array $message_ids
+     * @param string|int $chat_id
+     */
+    public static function deleteMessages(array $message_ids, string|int $chat_id)
+    {
+        $params = [
+            'chat_id' => $chat_id,
+            'message_ids' => json_encode($message_ids,JSON_UNESCAPED_UNICODE | JSON_NUMERIC_CHECK)
+        ];
+
+        return Bot::request('deleteMessages', $params);
+    }
+
+
+
+    public static function getCallback(): GetCallback
     {
         $parser = self::getParser();
         return new GetCallback($parser->getCallbackBody());
