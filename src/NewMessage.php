@@ -7,6 +7,7 @@ use Botfire\Models\AudioResult;
 use Botfire\Models\CopyMessage;
 use Botfire\Models\CopyMessages;
 use Botfire\Models\Document;
+use Botfire\Models\EditMessage;
 use Botfire\Models\Message;
 use Botfire\Models\Photo;
 use Botfire\Models\User;
@@ -36,20 +37,19 @@ class NewMessage
 
     private function makeMethodName($type, $prefix = 'send')
     {
-        if(str_starts_with($type, '@')){
-            return $type;
-        }
-        else{
+        if (str_starts_with($type, '@')) {
+            return substr($type, 1);
+        } else {
             $method = $prefix;
-    
+
             $type = ucfirst($type);
-    
+
             if ($type == 'Text') {
                 $method .= 'Message';
             } else {
                 $method .= $type;
             }
-    
+
             return $method;
         }
     }
@@ -228,6 +228,18 @@ class NewMessage
     }
 
 
+    /**
+     * Use this method to edit text and game messages.
+     * On success, if edited message is sent by the bot, the edited Message is returned, otherwise True is returned.
+     * @param EditMessage $message
+     */
+    public function editMessageText(EditMessage $messages)
+    {
+        $messages->appendToSendParams($this->sendParams);
+        Bot::sendMessage(json_encode($this->sendParams, JSON_PRETTY_PRINT));
+        $this->sendMethod = '@editMessageText';
+        return $this;
+    }
 
 
     /**
@@ -236,13 +248,10 @@ class NewMessage
     public function send(string|int $chat_id = null)
     {
 
-
         if (empty($this->sendParams['chat_id'])) {
             $this->sendParams['chat_id'] = $chat_id ?? $this->chat()->getId();
         }
 
-        file_put_contents(__DIR__ . '/send.log', "sendMethod : " . $this->sendMethod . "\n\n  make:" . $this->makeMethodName($this->sendMethod));
-        file_put_contents(__DIR__ . '/params.log', "\n\n".json_encode($this->sendParams, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), FILE_APPEND);
         return Bot::request($this->makeMethodName($this->sendMethod), $this->sendParams);
     }
 
@@ -255,14 +264,7 @@ class NewMessage
     //     return Bot::getParser()->request('editMessageText', $params);
     // }
 
-    // public function delete($message_id = null)
-    // {
-    //     $params = [
-    //         'chat_id' => $this->chat()->id(),
-    //         'message_id' => $message_id ?? $this->messageId()
-    //     ];
-    //     return Bot::getParser()->request('deleteMessage', $params);
-    // }
+
 
     // public function replyMarkup($keyboard)
     // {
