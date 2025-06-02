@@ -10,7 +10,7 @@ class EditMessage extends Option{
 
 
     /**
-     * Text of the message to be sent, 1-4096 characters after entities parsing
+     * New text of the message, 1-4096 characters after entities parsing
      * @param mixed $text
      */
     public function __construct($text){
