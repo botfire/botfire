@@ -93,5 +93,12 @@ class GetMessage
     }
 
 
+    public function deleteThisMessage(){
+        $message_id = $this->messageId();
+        $chat_id = $this->chat()->getId();
+        return Bot::deleteMessage($message_id, $chat_id);
+    }
+
+
 }
 
