@@ -151,6 +151,13 @@ class Option
         $this->data['reply_markup'] = $reply_markup->toJson();
         return $this;
     }
+
+
+    public function chatId(int|string $chat_id)
+    {
+        $this->data['chat_id'] = $chat_id;
+        return $this;
+    }
     
 
 
