@@ -5,6 +5,7 @@ use Botfire\Models\Audio;
 use Botfire\Models\CopyMessage;
 use Botfire\Models\CopyMessages;
 use Botfire\Models\Document;
+use Botfire\Models\EditMessage;
 use Botfire\Models\Message;
 use Botfire\Models\Photo;
 use Botfire\Models\Video;
@@ -236,6 +237,15 @@ class Bot
         return Bot::request('deleteMessage', $params);
     }
 
+    /**
+     * Use this method to edit text and game messages.
+     * On success, if edited message is sent by the bot, the edited Message is returned, otherwise True is returned.
+     * @param EditMessage $message
+     */
+    public static function editMessageText(EditMessage $message){
+        $bot = self::new();
+        return $bot->editMessageText($message)->send();
+    }
 
     /**
      * A JSON-serialized list of 1-100 identifiers of messages to delete.
@@ -263,6 +273,7 @@ class Bot
 
     public static function request($method, $params = [])
     {
+        
         return TelegramApi::request(self::$token, $method, $params);
     }
 
