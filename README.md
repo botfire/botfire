@@ -66,7 +66,14 @@ Bot::sendMessage($msg);
 Send a photo using its file ID:
 
 ```php
-Bot::sendPhoto($file_id);
+use Botfire\Models\Photo;
+use Botfire\Bot;
+
+$photo = new Photo('https://www.example.com/image.jpg');
+$photo->chatId($chat_id);
+$photo->caption('This is a test photo message with caption.');
+ 
+Bot::sendPhoto($photo);
 ```
 
 ## Keyboards
