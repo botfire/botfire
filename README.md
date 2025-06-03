@@ -45,13 +45,19 @@ $result = Bot::setWebhook($url);
 Send a message with auto-detected `chat_id`:
 
 ```php
-Bot::new()->text('Your message here')->send();
+Bot::sendMessage('Your message here');
 ```
 
 Send a message to a specific `chat_id`:
 
 ```php
-Bot::new()->text('Your message here')->send($chat_id);
+use Botfire\Models\Message;
+use Botfire\Bot;
+
+$msg = new Message('Your message here');
+$msg->chatId($chat_id);
+
+Bot::sendMessage($msg);
 
 ```
 
