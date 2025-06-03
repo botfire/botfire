@@ -13,7 +13,7 @@ trait ReplyMarkupTrait
      */
     public function replyMarkup(InlineKeyboard|ReplyKeyboard $reply_markup)
     {
-        $this->data['reply_markup'] = $reply_markup;
+        $this->data['reply_markup'] = $reply_markup->toJson();
         return $this;
     }
 }
