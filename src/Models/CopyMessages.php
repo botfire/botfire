@@ -1,13 +1,15 @@
 <?php
 namespace Botfire\Models;
 
-use Botfire\Models\OptionAppendToParams;
+use Botfire\TraitMethods\DisableNotificationTrait;
+use Botfire\TraitMethods\MessageThreadIdTrait;
+use Botfire\TraitMethods\ProtectContentTrait;
+
 
 class CopyMessages
 {
 
-    use OptionAppendToParams;
-
+    use MessageThreadIdTrait, DisableNotificationTrait, ProtectContentTrait;
 
     protected $data = [];
 
@@ -31,68 +33,6 @@ class CopyMessages
     }
 
 
-
-
-    /**
-     * New start timestamp for the copied video in the message
-     * @param int $video_start_timestamp
-     * @return static
-     */
-    public function videoStartTimestamp(int $video_start_timestamp)
-    {
-        $this->data['video_start_timestamp'] = $video_start_timestamp;
-        return $this;
-    }
-
-
-
-    /**
-     * Pass True, if the caption must be shown above the message media.
-     * Ignored if a new caption isn't specified.
-     * @param bool $show_caption_above_media
-     * @return static
-     */
-    public function showCaptionAboveMedia(bool $show_caption_above_media)
-    {
-        $this->data['show_caption_above_media'] = $show_caption_above_media;
-        return $this;
-    }
-
-        /**
-     * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
-     * @param int $message_thread_id
-     * @return static
-     */
-    public function messageThreadId(int $message_thread_id)
-    {
-        $this->data['message_thread_id'] = $message_thread_id;
-        return $this;
-    }
-
-
-    /**
-     * Sends the messages silently.
-     * Users will receive a notification with no sound.
-     * @param bool $disable_notification
-     * @return static
-     */
-    public function disableNotification(bool $disable_notification)
-    {
-        $this->data['disable_notification'] = $disable_notification;
-        return $this;
-    }
-
-
-    /**
-     * Protects the contents of the sent messages from forwarding and saving
-     * @param bool $protect_content
-     * @return static
-     */
-    public function protectContent(bool $protect_content)
-    {
-        $this->data['protect_content'] = $protect_content;
-        return $this;
-    }
 
     /**
      * Pass True to copy the messages without their captions
