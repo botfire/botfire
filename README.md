@@ -70,17 +70,14 @@ Bot::new()->photo($file_id)->send();
 Create an inline keyboard with buttons:
 
 ```php
-$keyboard = new Keyboard();
+$btn = InlineButton::btn('Test', 'test');
+$url = InlineButton::btnUrl('Test URL', 'https://example.com');
 
-$keyboard
-    ->btn('Button 1', 'Callback Data 1')
-    ->btn('Button 2', 'Callback Data 2')
-    ->row()
-    ->btnUrl('Button 3', 'https://github.com')
-    ->row();
+$keyboard = new InlineKeyboard();
+$keyboard->row([$btn, $url]);
 
-Bot::id(Bot::chat()->id)
-    ->message('Your message here')
-    ->replyMarkup($keyboard)
-    ->send();
+$msg = new Message('This is a test message with inline buttons.');
+$msg->replyMarkup($keyboard);
+
+Bot::sendMessage($msg);
 ```
