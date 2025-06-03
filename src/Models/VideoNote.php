@@ -1,8 +1,26 @@
 <?php
 namespace Botfire\Models;
-use Botfire\Models\File;
+
+use Botfire\TraitMethods\AllowPaidBroadcastTrait;
+use Botfire\TraitMethods\BusinessConnectionIdTrait;
+use Botfire\TraitMethods\DisableNotificationTrait;
+use Botfire\TraitMethods\DurationTrait;
+use Botfire\TraitMethods\LengthTrait;
+use Botfire\TraitMethods\MessageEffectIdTrait;
+use Botfire\TraitMethods\MessageThreadIdTrait;
+use Botfire\TraitMethods\ProtectContentTrait;
+use Botfire\TraitMethods\ReplyMarkupTrait;
+use Botfire\TraitMethods\ReplyParametersTrait;
+use Botfire\TraitMethods\ThumbnailTrait;
 
 class VideoNote extends Option{
+
+    use BusinessConnectionIdTrait, MessageThreadIdTrait, ThumbnailTrait;
+    use DisableNotificationTrait, ProtectContentTrait, AllowPaidBroadcastTrait;
+    use MessageEffectIdTrait, ReplyParametersTrait, ReplyMarkupTrait;
+    use DurationTrait, LengthTrait;
+    
+
 
     protected $data = [];
 
@@ -15,30 +33,5 @@ class VideoNote extends Option{
     public function __construct($video_note){
         $this->data['video_note'] = $video_note;
     }
-
-
-
-    /**
-     * Duration of the audio in seconds
-     * @param int $duration
-     * @return static
-     */
-    public function duration(int $duration) {
-        $this->data['duration'] = $duration;
-        return $this;
-    }
-
-
-    /**
-     * Video width and height, i.e. diameter of the video message
-     * @param int $length
-     * @return static
-     */
-    public function length(int $length) {
-        $this->data['length'] = $length;
-        return $this;
-    }
-
-    
 
 }

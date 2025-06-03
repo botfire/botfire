@@ -1,7 +1,27 @@
 <?php
 namespace Botfire\Models;
 
-class Message extends Option{
+use Botfire\TraitMethods\AllowPaidBroadcastTrait;
+use Botfire\TraitMethods\BusinessConnectionIdTrait;
+use Botfire\TraitMethods\DisableNotificationTrait;
+use Botfire\TraitMethods\EntitiesTrait;
+use Botfire\TraitMethods\LinkPreviewOptionsTrait;
+use Botfire\TraitMethods\MessageEffectIdTrait;
+use Botfire\TraitMethods\MessageThreadIdTrait;
+use Botfire\TraitMethods\ParseModeTrait;
+use Botfire\TraitMethods\ProtectContentTrait;
+use Botfire\TraitMethods\ReplyMarkupTrait;
+use Botfire\TraitMethods\ReplyParametersTrait;
+
+class Message extends Option
+{
+
+    use BusinessConnectionIdTrait, MessageThreadIdTrait, ParseModeTrait;
+    use EntitiesTrait, LinkPreviewOptionsTrait, DisableNotificationTrait;
+    use ProtectContentTrait, AllowPaidBroadcastTrait, MessageEffectIdTrait;
+    use ReplyParametersTrait, ReplyMarkupTrait;
+
+
 
     protected $data = [];
 
@@ -10,31 +30,9 @@ class Message extends Option{
      * Text of the message to be sent, 1-4096 characters after entities parsing
      * @param mixed $text
      */
-    public function __construct($text){
+    public function __construct($text)
+    {
         $this->data['text'] = $text;
-    }
-
-
-
-    /**
-     * A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse_mode
-     * @param mixed $entities
-     * @return static
-     */
-    public function entities($entities){
-        $this->data['entities'] = $entities;
-        return $this;
-    }
-
-
-    /**
-     * Link preview generation options for the message
-     * @param mixed $link_preview_options
-     * @return static
-     */
-    public function linkPreviewOptions($link_preview_options){
-        $this->data['link_preview_options'] = $link_preview_options;
-        return $this;
     }
 
 }

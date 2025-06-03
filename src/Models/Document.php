@@ -1,12 +1,27 @@
 <?php
 namespace Botfire\Models;
-use Botfire\Models\OptionCaption;
+
+use Botfire\TraitMethods\AllowPaidBroadcastTrait;
+use Botfire\TraitMethods\BusinessConnectionIdTrait;
+use Botfire\TraitMethods\CaptionEntitiesTrait;
+use Botfire\TraitMethods\CaptionTrait;
+use Botfire\TraitMethods\DisableNotificationTrait;
+use Botfire\TraitMethods\MessageEffectIdTrait;
+use Botfire\TraitMethods\MessageThreadIdTrait;
+use Botfire\TraitMethods\ParseModeTrait;
+use Botfire\TraitMethods\ProtectContentTrait;
+use Botfire\TraitMethods\ReplyMarkupTrait;
+use Botfire\TraitMethods\ReplyParametersTrait;
+use Botfire\TraitMethods\ThumbnailTrait;
 
 
 class Document extends Option
 {
 
-    use OptionCaption;
+    use BusinessConnectionIdTrait, MessageThreadIdTrait, ThumbnailTrait;
+    use CaptionTrait, ParseModeTrait, CaptionEntitiesTrait;
+    use DisableNotificationTrait, ProtectContentTrait, AllowPaidBroadcastTrait;
+    use MessageEffectIdTrait, ReplyParametersTrait, ReplyMarkupTrait;
 
 
     protected $data = [];

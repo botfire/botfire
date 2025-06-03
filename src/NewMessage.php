@@ -7,7 +7,10 @@ use Botfire\Models\AudioResult;
 use Botfire\Models\CopyMessage;
 use Botfire\Models\CopyMessages;
 use Botfire\Models\Document;
+use Botfire\Models\EditCaption;
 use Botfire\Models\EditMessage;
+use Botfire\Models\EditMessageCaption;
+use Botfire\Models\EditText;
 use Botfire\Models\Message;
 use Botfire\Models\Photo;
 use Botfire\Models\User;
@@ -231,13 +234,27 @@ class NewMessage
     /**
      * Use this method to edit text and game messages.
      * On success, if edited message is sent by the bot, the edited Message is returned, otherwise True is returned.
-     * @param EditMessage $message
+     * @param EditText $message
      */
-    public function editMessageText(EditMessage $messages)
+    public function editMessageText(EditText $messages)
     {
         $messages->appendToSendParams($this->sendParams);
         Bot::sendMessage(json_encode($this->sendParams, JSON_PRETTY_PRINT));
         $this->sendMethod = '@editMessageText';
+        return $this;
+    }
+
+
+    /**
+     * Use this method to edit only the reply markup of messages.
+     * On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param EditCaption $caption
+     */
+    public function editMessageCaption(EditCaption $caption)
+    {
+        $caption->appendToSendParams($this->sendParams);
+        Bot::sendMessage(json_encode($this->sendParams, JSON_PRETTY_PRINT));
+        $this->sendMethod = '@editMessageCaption';
         return $this;
     }
 

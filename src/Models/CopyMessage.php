@@ -1,12 +1,23 @@
 <?php
 namespace Botfire\Models;
 
-use Botfire\Models\OptionCaption;
+use Botfire\TraitMethods\AllowPaidBroadcastTrait;
+use Botfire\TraitMethods\CaptionEntitiesTrait;
+use Botfire\TraitMethods\DisableNotificationTrait;
+use Botfire\TraitMethods\MessageThreadIdTrait;
+use Botfire\TraitMethods\ParseModeTrait;
+use Botfire\TraitMethods\ProtectContentTrait;
+use Botfire\TraitMethods\ReplyMarkupTrait;
+use Botfire\TraitMethods\ReplyParametersTrait;
+use Botfire\TraitMethods\ShowCaptionAboveMediaTrait;
+use Botfire\TraitMethods\VideoStartTimestampTrait;
 
 class CopyMessage extends Option
 {
 
-    use OptionCaption;
+    use MessageThreadIdTrait, VideoStartTimestampTrait, OptionCaption, ParseModeTrait;
+    use CaptionEntitiesTrait, ShowCaptionAboveMediaTrait, DisableNotificationTrait;
+    use ProtectContentTrait, AllowPaidBroadcastTrait, ReplyMarkupTrait, ReplyParametersTrait;
 
     protected $data = [];
 
@@ -26,43 +37,5 @@ class CopyMessage extends Option
     }
 
 
-
-
-    /**
-     * New start timestamp for the copied video in the message
-     * @param int $video_start_timestamp
-     * @return static
-     */
-    public function videoStartTimestamp(int $video_start_timestamp)
-    {
-        $this->data['video_start_timestamp'] = $video_start_timestamp;
-        return $this;
-    }
-
-
-
-    /**
-     * Pass True, if the caption must be shown above the message media.
-     * Ignored if a new caption isn't specified.
-     * @param bool $show_caption_above_media
-     * @return static
-     */
-    public function showCaptionAboveMedia(bool $show_caption_above_media)
-    {
-        $this->data['show_caption_above_media'] = $show_caption_above_media;
-        return $this;
-    }
-
-
-    /**
-     * Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
-     * @param int $message_thread_id
-     * @return static
-     */
-    public function messageThreadId(int $message_thread_id)
-    {
-        $this->data['message_thread_id'] = $message_thread_id;
-        return $this;
-    }
 
 }
