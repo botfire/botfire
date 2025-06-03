@@ -5,7 +5,9 @@ use Botfire\Models\Audio;
 use Botfire\Models\CopyMessage;
 use Botfire\Models\CopyMessages;
 use Botfire\Models\Document;
+use Botfire\Models\EditCaption;
 use Botfire\Models\EditMessage;
+use Botfire\Models\EditText;
 use Botfire\Models\Message;
 use Botfire\Models\Photo;
 use Botfire\Models\Video;
@@ -238,16 +240,6 @@ class Bot
     }
 
     /**
-     * Use this method to edit text and game messages.
-     * On success, if edited message is sent by the bot, the edited Message is returned, otherwise True is returned.
-     * @param EditMessage $message
-     */
-    public static function editMessageText(EditMessage $message){
-        $bot = self::new();
-        return $bot->editMessageText($message)->send();
-    }
-
-    /**
      * A JSON-serialized list of 1-100 identifiers of messages to delete.
      * See deleteMessage for limitations on which messages can be deleted
      * @param array $message_ids
@@ -257,11 +249,36 @@ class Bot
     {
         $params = [
             'chat_id' => $chat_id,
-            'message_ids' => json_encode($message_ids,JSON_UNESCAPED_UNICODE | JSON_NUMERIC_CHECK)
+            'message_ids' => json_encode($message_ids, JSON_UNESCAPED_UNICODE | JSON_NUMERIC_CHECK)
         ];
 
         return Bot::request('deleteMessages', $params);
     }
+
+
+    /**
+     * Use this method to edit text and game messages.
+     * On success, if edited message is sent by the bot, the edited Message is returned, otherwise True is returned.
+     * @param EditText $message
+     */
+    public static function editMessageText(EditText $message)
+    {
+        $bot = self::new();
+        return $bot->editMessageText($message)->send();
+    }
+
+
+    /**
+     * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
+     * Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param EditCaption $caption
+     */
+    public static function editMessageCaption(EditCaption $caption)
+    {
+        $bot = self::new();
+        return $bot->editMessageCaption($caption)->send();
+    }
+
 
 
 
@@ -273,7 +290,7 @@ class Bot
 
     public static function request($method, $params = [])
     {
-        
+
         return TelegramApi::request(self::$token, $method, $params);
     }
 
