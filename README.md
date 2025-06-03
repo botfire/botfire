@@ -70,6 +70,12 @@ Bot::new()->photo($file_id)->send();
 Create an inline keyboard with buttons:
 
 ```php
+use Botfire\Bot;
+use Botfire\Models\Message;
+use Botfire\Keyboard\InlineKeyboard;
+use Botfire\Keyboard\InlineButton;
+
+
 $btn = InlineButton::btn('Test', 'test');
 $url = InlineButton::btnUrl('Test URL', 'https://example.com');
 
