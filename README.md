@@ -60,7 +60,7 @@ Bot::new()->text('Your message here')->send($chat_id);
 Send a photo using its file ID:
 
 ```php
-Bot::new()->photo($file_id)->send();
+Bot::sendPhoto($file_id);
 ```
 
 ## Keyboards
