@@ -63,7 +63,8 @@ Bot::sendMessage($msg);
 
 ### Send a Photo
 
-Send a photo using its file ID:
+Send a photo :
+
 
 ```php
 use Botfire\Models\Photo;
@@ -75,6 +76,7 @@ $photo->caption('This is a test photo message with caption.');
  
 Bot::sendPhoto($photo);
 ```
+You can use link or file_id.
 
 ## Keyboards
 
