@@ -9,5 +9,6 @@ return array(
     'Botfire\\TraitMethods\\' => array($baseDir . '/src/TraitMethods'),
     'Botfire\\Models\\' => array($baseDir . '/src/Models'),
     'Botfire\\Keyboard\\' => array($baseDir . '/src/Keyboard'),
+    'Botfire\\Helper\\' => array($baseDir . '/src/Helper'),
     'Botfire\\' => array($baseDir . '/src'),
 );

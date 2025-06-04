@@ -12,6 +12,7 @@ class ComposerStaticInita816b4b2e2f39bf010093a68027cddf6
             'Botfire\\TraitMethods\\' => 21,
             'Botfire\\Models\\' => 15,
             'Botfire\\Keyboard\\' => 17,
+            'Botfire\\Helper\\' => 15,
             'Botfire\\' => 8,
         ),
     );
@@ -28,6 +29,10 @@ class ComposerStaticInita816b4b2e2f39bf010093a68027cddf6
         'Botfire\\Keyboard\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/Keyboard',
+        ),
+        'Botfire\\Helper\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Helper',
         ),
         'Botfire\\' => 
         array (
