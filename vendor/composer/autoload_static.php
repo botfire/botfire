@@ -9,6 +9,7 @@ class ComposerStaticInita816b4b2e2f39bf010093a68027cddf6
     public static $prefixLengthsPsr4 = array (
         'B' => 
         array (
+            'Botfire\\TraitMethods\\' => 21,
             'Botfire\\Models\\' => 15,
             'Botfire\\Keyboard\\' => 17,
             'Botfire\\' => 8,
@@ -16,6 +17,10 @@ class ComposerStaticInita816b4b2e2f39bf010093a68027cddf6
     );
 
     public static $prefixDirsPsr4 = array (
+        'Botfire\\TraitMethods\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/TraitMethods',
+        ),
         'Botfire\\Models\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/Models',
