@@ -1,12 +1,9 @@
 <?php
 namespace Botfire\Models;
-use Botfire\Keyboard\InlineKeyboard;
-use Botfire\Keyboard\ReplyKeyboard;
 use Botfire\TraitMethods\BusinessConnectionIdTrait;
 use Botfire\TraitMethods\CaptionEntitiesTrait;
-use Botfire\TraitMethods\CaptionTrait;
+use Botfire\TraitMethods\CaptionAndParseModeTrait;
 use Botfire\TraitMethods\InlineMessageIdTrait;
-use Botfire\TraitMethods\ParseModeTrait;
 use Botfire\TraitMethods\ReplyMarkupTrait;
 use Botfire\TraitMethods\ShowCaptionAboveMediaTrait;
 
@@ -14,7 +11,7 @@ class EditCaption extends Option
 {
 
 
-    use BusinessConnectionIdTrait, CaptionTrait,ParseModeTrait, InlineMessageIdTrait;
+    use BusinessConnectionIdTrait, CaptionAndParseModeTrait, InlineMessageIdTrait;
     use CaptionEntitiesTrait,ShowCaptionAboveMediaTrait, ReplyMarkupTrait;
 
 

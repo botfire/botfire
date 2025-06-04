@@ -12,7 +12,7 @@ use Botfire\TraitMethods\ReplyMarkupTrait;
 class EditText extends Option
 {
 
-    use BusinessConnectionIdTrait, ParseModeTrait, InlineMessageIdTrait;
+    use BusinessConnectionIdTrait, InlineMessageIdTrait, ParseModeTrait;
     use ReplyMarkupTrait, LinkPreviewOptionsTrait, EntitiesTrait;
     use MessageIdTrait;
 

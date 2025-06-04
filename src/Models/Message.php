@@ -1,6 +1,8 @@
 <?php
 namespace Botfire\Models;
 
+use Botfire\Helper\MarkdownBuilder;
+use Botfire\Helper\ParseMode;
 use Botfire\TraitMethods\AllowPaidBroadcastTrait;
 use Botfire\TraitMethods\BusinessConnectionIdTrait;
 use Botfire\TraitMethods\DisableNotificationTrait;
@@ -30,8 +32,13 @@ class Message extends Option
      * Text of the message to be sent, 1-4096 characters after entities parsing
      * @param mixed $text
      */
-    public function __construct($text)
+    public function __construct(string|MarkdownBuilder $text)
     {
+        if($text instanceof MarkdownBuilder){
+            $text = $text->build();
+            $this->parseMode(ParseMode::MarkdownV2);
+        }
+        
         $this->data['text'] = $text;
     }
 
@@ -42,7 +49,7 @@ class Message extends Option
      * @param string $text The text of the message to be sent
      * @return Message
      */
-    public static function create(string $text)
+    public static function create(string|MarkdownBuilder $text)
     {
         return new self($text);
     }

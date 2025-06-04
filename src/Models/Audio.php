@@ -4,11 +4,10 @@ namespace Botfire\Models;
 use Botfire\TraitMethods\AllowPaidBroadcastTrait;
 use Botfire\TraitMethods\BusinessConnectionIdTrait;
 use Botfire\TraitMethods\CaptionEntitiesTrait;
-use Botfire\TraitMethods\CaptionTrait;
+use Botfire\TraitMethods\CaptionAndParseModeTrait;
 use Botfire\TraitMethods\DisableNotificationTrait;
 use Botfire\TraitMethods\DurationTrait;
 use Botfire\TraitMethods\MessageThreadIdTrait;
-use Botfire\TraitMethods\ParseModeTrait;
 use Botfire\TraitMethods\PerformerTrait;
 use Botfire\TraitMethods\ProtectContentTrait;
 use Botfire\TraitMethods\ThumbnailTrait;
@@ -18,8 +17,8 @@ class Audio extends Option
 {
 
     use BusinessConnectionIdTrait,MessageThreadIdTrait;
-    use ParseModeTrait,DurationTrait, PerformerTrait;
-    use CaptionTrait, CaptionEntitiesTrait, TitleTrait, DurationTrait, PerformerTrait;
+    use DurationTrait, PerformerTrait;
+    use CaptionAndParseModeTrait, CaptionEntitiesTrait, TitleTrait, DurationTrait, PerformerTrait;
     use DisableNotificationTrait, ProtectContentTrait,AllowPaidBroadcastTrait;
     use ThumbnailTrait;
     

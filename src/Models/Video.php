@@ -4,7 +4,7 @@ namespace Botfire\Models;
 use Botfire\TraitMethods\AllowPaidBroadcastTrait;
 use Botfire\TraitMethods\BusinessConnectionIdTrait;
 use Botfire\TraitMethods\CaptionEntitiesTrait;
-use Botfire\TraitMethods\CaptionTrait;
+use Botfire\TraitMethods\CaptionAndParseModeTrait;
 use Botfire\TraitMethods\CoverTrait;
 use Botfire\TraitMethods\DisableNotificationTrait;
 use Botfire\TraitMethods\DurationTrait;
@@ -12,7 +12,6 @@ use Botfire\TraitMethods\HasSpoilerTrait;
 use Botfire\TraitMethods\HeightTrait;
 use Botfire\TraitMethods\MessageEffectIdTrait;
 use Botfire\TraitMethods\MessageThreadIdTrait;
-use Botfire\TraitMethods\ParseModeTrait;
 use Botfire\TraitMethods\ProtectContentTrait;
 use Botfire\TraitMethods\ReplyMarkupTrait;
 use Botfire\TraitMethods\ReplyParametersTrait;
@@ -25,7 +24,7 @@ use Botfire\TraitMethods\WidthTrait;
 class Video extends Option{
 
     use BusinessConnectionIdTrait, MessageThreadIdTrait, ThumbnailTrait;
-    use CaptionTrait, ParseModeTrait, CaptionEntitiesTrait;
+    use CaptionAndParseModeTrait, CaptionEntitiesTrait;
     use DisableNotificationTrait, ProtectContentTrait, AllowPaidBroadcastTrait;
     use MessageEffectIdTrait, ReplyParametersTrait, ReplyMarkupTrait;
     use SupportsStreamingTrait, DurationTrait, StartTimestampTrait, CoverTrait, WidthTrait, HeightTrait, ShowCaptionAboveMediaTrait, HasSpoilerTrait;
