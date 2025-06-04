@@ -2,18 +2,14 @@
 namespace Botfire;
 
 use Botfire\Models\Audio;
-use Botfire\Models\AudioOption;
-use Botfire\Models\AudioResult;
 use Botfire\Models\CopyMessage;
 use Botfire\Models\CopyMessages;
 use Botfire\Models\Document;
 use Botfire\Models\EditCaption;
-use Botfire\Models\EditMessage;
-use Botfire\Models\EditMessageCaption;
+use Botfire\Models\EditReplyMarkup;
 use Botfire\Models\EditText;
 use Botfire\Models\Message;
 use Botfire\Models\Photo;
-use Botfire\Models\User;
 use Botfire\Models\Chat;
 use Botfire\Models\PhotoArray;
 use Botfire\Models\Video;
@@ -253,8 +249,22 @@ class NewMessage
     public function editMessageCaption(EditCaption $caption)
     {
         $caption->appendToSendParams($this->sendParams);
-        Bot::sendMessage(json_encode($this->sendParams, JSON_PRETTY_PRINT));
         $this->sendMethod = '@editMessageCaption';
+        return $this;
+    }
+
+
+    /**
+     * Use this method to edit only the reply markup of messages.
+     * On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
+     * Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param EditReplyMarkup $reply_markup
+     * @return static
+     */
+    public function editMessageReplyMarkup(EditReplyMarkup $reply_markup)
+    {
+        $reply_markup->appendToSendParams($this->sendParams);
+        $this->sendMethod = '@editMessageReplyMarkup';
         return $this;
     }
 
