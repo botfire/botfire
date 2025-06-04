@@ -198,9 +198,9 @@ class MarkdownBuilder
      *
      * @return self
      */
-    public function newLine(): self
+    public function newLine(int $repeat=1): self
     {
-        $this->markdown .= "\n";
+        $this->markdown .= str_repeat("\n", $repeat);
         return $this;
     }
 
