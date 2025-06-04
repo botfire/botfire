@@ -226,7 +226,7 @@ class MarkdownBuilder
     }
 
 
-    public
+    
 
     /**
      * Escape special Markdown characters to prevent formatting issues.
@@ -234,7 +234,7 @@ class MarkdownBuilder
      * @param string $text The text to escape
      * @return string
      */
-    private function escape(string $text): string
+    private function escape($text): string
     {
         $specialChars = ['*', '_', '~', '`', '|', '[', ']', '(', ')', '#', '+', '-', '.', '!'];
         return str_replace($specialChars, array_map(fn($char) => '\\' . $char, $specialChars), $text);
