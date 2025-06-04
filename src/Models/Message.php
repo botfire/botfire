@@ -35,4 +35,16 @@ class Message extends Option
         $this->data['text'] = $text;
     }
 
+
+    /**
+     * Create a new Message instance
+     *
+     * @param string $text The text of the message to be sent
+     * @return Message
+     */
+    public static function create(string $text)
+    {
+        return new self($text);
+    }
+
 }
