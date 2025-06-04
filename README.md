@@ -91,8 +91,8 @@ use Botfire\Keyboard\InlineKeyboard;
 use Botfire\Keyboard\InlineButton;
 
 
-$btn = InlineButton::btn('Test', 'test');
-$url = InlineButton::btnUrl('Test URL', 'https://example.com');
+$btn = InlineButton::button('Test', 'test');
+$url = InlineButton::link('Test URL', 'https://example.com');
 
 $keyboard = new InlineKeyboard();
 $keyboard->row([$btn, $url]);
