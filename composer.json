@@ -17,7 +17,8 @@
     "psr-4": {
       "Botfire\\": "src/",
       "Botfire\\Models\\": "src/Models/",
-      "Botfire\\Keyboard\\": "src/Keyboard/"
+      "Botfire\\Keyboard\\": "src/Keyboard/",
+      "Botfire\\TraitMethods\\": "src/TraitMethods/"
     }
   }
 }
