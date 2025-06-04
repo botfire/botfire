@@ -80,6 +80,27 @@ class GetMessage
         return new Chat($this->data['message']['chat'] ?? []);
     }
 
+
+
+
+    public function hasReplyMessage()
+    {
+        return isset($this->data['message']['reply_to_message']);
+    }
+
+
+    /**
+     * Returns the message that this message is replying to, if any.
+     * @return GetMessage|null
+     */
+    public function replyToMessage(): GetMessage|null
+    {
+        if ($this->hasReplyMessage()) {
+            return new GetMessage($this->data['message']['reply_to_message']);
+        }
+        return null;
+    }
+
     public function text(): string|null
     {
 
@@ -93,7 +114,8 @@ class GetMessage
     }
 
 
-    public function deleteThisMessage(){
+    public function deleteThisMessage()
+    {
         $message_id = $this->messageId();
         $chat_id = $this->chat()->getId();
         return Bot::deleteMessage($message_id, $chat_id);
