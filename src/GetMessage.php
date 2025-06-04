@@ -23,24 +23,32 @@ class GetMessage
         $this->data = $data;
     }
 
-
-    const TYPE_TEXT = 'text';
-    const TYPE_PHOTO = 'photo';
-    const TYPE_VIDEO = 'video';
-    const TYPE_AUDIO = 'audio';
-    const TYPE_DOCUMENT = 'document';
-    const TYPE_STICKER = 'sticker';
-    const TYPE_ANIMATION = 'animation';
-    const TYPE_LOCATION = 'location';
-    const TYPE_CONTACT = 'contact';
-    const TYPE_VOICE = 'voice';
-    const TYPE_POLL = 'poll';
-    const TYPE_CALLBACK_QUERY = 'callback_query';
     const TYPE_MESSAGE = 'message';
+    const TYPE_EDITED_MESSAGE = 'edited_message';
+    const TYPE_CHANNEL_POST = 'channel_post';
+    const TYPE_EDITED_CHANNEL_POST = 'edited_channel_post';
+    const TYPE_CALLBACK_QUERY = 'callback_query';
+    const TYPE_BUSINESS_MESSAGE = 'business_message';
+    const TYPE_EDITED_BUSINESS_MESSAGE = 'edited_business_message';
 
 
 
-    public function type()
+    const CONTENT_TEXT = 'text';
+    const CONTENT_PHOTO = 'photo';
+    const CONTENT_VIDEO = 'video';
+    const CONTENT_AUDIO = 'audio';
+    const CONTENT_DOCUMENT = 'document';
+    const CONTENT_STICKER = 'sticker';
+    const CONTENT_ANIMATION = 'animation';
+    const CONTENT_LOCATION = 'location';
+    const CONTENT_CONTACT = 'contact';
+    const CONTENT_VOICE = 'voice';
+    const CONTENT_POLL = 'poll';
+
+
+
+
+    public function contentType()
     {
         $parse = Bot::getParser();
 
@@ -50,8 +58,6 @@ class GetMessage
                     return $type;
                 }
             }
-        } else if ($parse->hasCallback()) {
-            return 'callback_query';
         }
         return null;
     }
@@ -97,7 +103,7 @@ class GetMessage
     public function replyToMessage(): GetMessage|null
     {
         if ($this->isReply()) {
-            return new GetMessage($this->data['message']['reply_to_message']);
+            return new GetMessage(['message'=>$this->data['message']['reply_to_message']]);
         }
         return null;
     }
