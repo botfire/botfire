@@ -83,7 +83,8 @@ class GetMessage
 
 
 
-    public function hasReplyMessage()
+
+    public function isReply(): bool
     {
         return isset($this->data['message']['reply_to_message']);
     }
@@ -95,7 +96,7 @@ class GetMessage
      */
     public function replyToMessage(): GetMessage|null
     {
-        if ($this->hasReplyMessage()) {
+        if ($this->isReply()) {
             return new GetMessage($this->data['message']['reply_to_message']);
         }
         return null;
