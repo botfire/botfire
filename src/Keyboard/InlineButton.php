@@ -10,7 +10,14 @@ class InlineButton
 {
     protected array $data = [];
 
-    public static function btnUrl(string $text, string $url): static
+
+    /**
+     * Create a new InlineButton instance with text and URL.
+     * @param string $text
+     * @param string $url
+     * @return InlineButton
+     */
+    public static function link(string $text, string $url): static
     {
         $btn = new static();
         $btn->text($text);
@@ -18,11 +25,30 @@ class InlineButton
         return $btn;
     }
 
-    public static function btn(string $text, string $callback_data): static
+
+    /**
+     * Create a new InlineButton instance with text and callback data.
+     * @param string $text
+     * @param string $callback_data
+     * @return InlineButton
+     */
+    public static function button(string $text, string $callback_data): static
     {
         $btn = new static();
         $btn->text($text);
         $btn->callbackData($callback_data);
+        return $btn;
+    }
+
+    /**
+     * Create a new InlineButton instance with text.
+     * @param string $text
+     * @return InlineButton
+     */
+    public static function create(string $text): static
+    {
+        $btn = new static();
+        $btn->text($text);
         return $btn;
     }
 
