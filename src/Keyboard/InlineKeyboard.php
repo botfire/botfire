@@ -1,15 +1,21 @@
 <?php
 namespace Botfire\Keyboard;
-
-
 use Botfire\Keyboard\InlineButton;
 
+
+
+/**
+ * Class InlineKeyboardMarkup
+ * Represents an inline keyboard markup for Telegram bots.
+ *
+ * @see https://core.telegram.org/bots/api#inlinekeyboardmarkup
+ */
 class InlineKeyboard
 {
 
 
-    protected $buttons = [];
-    protected $currentRow = 0;
+    private $buttons = [];
+    private int $currentRow = 0;
 
 
 
@@ -35,20 +41,31 @@ class InlineKeyboard
             $this->currentRow++;
         }
 
-        // $this->buttons[] = [];
         return $this;
     }
 
 
 
-    public function toArray()
+    /**
+     * Convert the inline keyboard to an array format suitable for Telegram API.
+     * @return array{inline_keyboard: array}
+     */
+    public function toArray(): array
     {
         return [
             'inline_keyboard' => array_filter($this->buttons)
         ];
     }
 
-    public function toJson(){
+
+    /**
+     * Convert the inline keyboard to JSON format.
+     * This method encodes the keyboard to JSON format, which is suitable for sending to the Telegram API.
+     * It uses the `toArray` method to get the array representation of the keyboard and then encodes it.
+     * @return bool|string
+     */
+    public function toJson(): bool|string
+    {
         return json_encode($this->toArray());
     }
 }
