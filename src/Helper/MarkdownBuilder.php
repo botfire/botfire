@@ -205,6 +205,30 @@ class MarkdownBuilder
     }
 
     /**
+     * Append a tab character.
+     * @return self
+     */
+    public function tab(): self
+    {
+        $this->markdown .= "    ";
+        return $this;
+    }
+
+    /**
+     * Append a space character.
+     *
+     * @return self
+     */
+    public function sp(): self
+    {
+        $this->markdown .= ' ';
+        return $this;
+    }
+
+
+    public
+
+    /**
      * Escape special Markdown characters to prevent formatting issues.
      *
      * @param string $text The text to escape
