@@ -271,7 +271,7 @@ class NewMessage
         if (empty($this->sendParams['chat_id'])) {
 
             if(Bot::getEvent()->hasFrom()){
-                $this->sendParams['chat_id'] = Bot::getEvent()->from()->getId();
+                $this->sendParams['chat_id'] = Bot::getEvent()->getFrom()->getId();
             }
         }
 
