@@ -92,7 +92,7 @@ class GetEvent
     }
 
 
-    public function name()
+    public function getName()
     {
         if (self::$support_type) {
             return self::$event_name;
@@ -105,9 +105,9 @@ class GetEvent
      * Just support message types for now.
      * @return string|null
      */
-    public function type()
+    public function getType()
     {
-        $event_name = $this->name();
+        $event_name = $this->getName();
         
         $message_events = [
             'message',
@@ -132,9 +132,9 @@ class GetEvent
      * If the event is a message, it returns an instance of GetMessage.
      * @return GetMessage|null
      */
-    public function eventBodyClass(){
-        if($this->type() === 'message') {
-            return new GetMessage($this->body());
+    public function getEventBodyClass(){
+        if($this->getType() === 'message') {
+            return new GetMessage($this->getBody());
         }
     }
 
@@ -144,7 +144,7 @@ class GetEvent
      * This is the raw data of the event.
      * @return array|null
      */
-    public function body(): ?array
+    public function getBody(): ?array
     {
         return self::$body;
     }
@@ -165,7 +165,7 @@ class GetEvent
      * This is useful for tracking updates and ensuring that you are processing the latest updates.
      * @return int
      */
-    public function updateId(): int
+    public function getUpdateId(): int
     {
         return self::$update_id;
     }
@@ -178,7 +178,7 @@ class GetEvent
      */
     public function isCallbackQuery(): bool
     {
-        return self::getInstance()->name() === GetEvent::TYPE_CALLBACK_QUERY;
+        return self::getInstance()->getName() === GetEvent::TYPE_CALLBACK_QUERY;
     }
 
 
@@ -188,7 +188,7 @@ class GetEvent
      */
     public function isEditedMessage(): bool
     {
-        return self::getInstance()->name() === GetEvent::TYPE_EDITED_MESSAGE;
+        return self::getInstance()->getName() === GetEvent::TYPE_EDITED_MESSAGE;
     }
 
 
@@ -198,7 +198,7 @@ class GetEvent
      */
     public function isEditedChannelPost(): bool
     {
-        return self::getInstance()->name() === GetEvent::TYPE_EDITED_CHANNEL_POST;
+        return self::getInstance()->getName() === GetEvent::TYPE_EDITED_CHANNEL_POST;
     }
 
     /**
@@ -208,7 +208,7 @@ class GetEvent
      */
     public function isMessage(): bool
     {
-        return self::getInstance()->name() === GetEvent::TYPE_MESSAGE;
+        return self::getInstance()->getName() === GetEvent::TYPE_MESSAGE;
     }
 
 
@@ -218,7 +218,7 @@ class GetEvent
      */
     public function isChannelPost(): bool
     {
-        return self::getInstance()->name() === GetEvent::TYPE_CHANNEL_POST;
+        return self::getInstance()->getName() === GetEvent::TYPE_CHANNEL_POST;
     }
 
 
@@ -228,7 +228,7 @@ class GetEvent
      */
     public function isBusinessMessage(): bool
     {
-        return self::getInstance()->name() === GetEvent::TYPE_BUSINESS_MESSAGE;
+        return self::getInstance()->getName() === GetEvent::TYPE_BUSINESS_MESSAGE;
     }
 
 
@@ -238,7 +238,7 @@ class GetEvent
      */
     public function isEditedBusinessMessage(): bool
     {
-        return self::getInstance()->name() === GetEvent::TYPE_EDITED_BUSINESS_MESSAGE;
+        return self::getInstance()->getName() === GetEvent::TYPE_EDITED_BUSINESS_MESSAGE;
     }
 
 
@@ -249,7 +249,7 @@ class GetEvent
      */
     public function hasFrom(): bool
     {
-        return isset($this->body()['from']);
+        return isset($this->getBody()['from']);
     }
 
 
@@ -258,9 +258,9 @@ class GetEvent
      * This is the user who sent the message or initiated the event.
      * @return User
      */
-    public function from()
+    public function getFrom()
     {
-        return new User($this->body()['from'] ?? []);
+        return new User($this->getBody()['from'] ?? []);
     }
 
 
