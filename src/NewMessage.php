@@ -266,36 +266,20 @@ class NewMessage
 
 
     /**
+     * 
      * @param string|int $chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      */
     public function send(string|int $chat_id = null)
     {
 
         if (empty($this->sendParams['chat_id'])) {
-            $getMessage = Bot::getMessage();
-            if($getMessage->isValid()){
-                $this->sendParams['chat_id'] = $getMessage->from()->getId();
+
+            if(Bot::getEvent()->hasFrom()){
+                $this->sendParams['chat_id'] = Bot::getEvent()->from()->getId();
             }
         }
 
         return Bot::request($this->makeMethodName($this->sendMethod), $this->sendParams);
     }
-
-
-    // public function edit($message_id = null)
-    // {
-    //     $params = $this->sendParams;
-    //     $params['chat_id'] = $this->chat()->id();
-    //     $params['message_id'] = $message_id ?? $this->messageId();
-    //     return Bot::getParser()->request('editMessageText', $params);
-    // }
-
-
-
-    // public function replyMarkup($keyboard)
-    // {
-    //     $this->sendParams['reply_markup'] = $keyboard->toArray();
-    //     return $this;
-    // }
 }
 
