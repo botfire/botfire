@@ -6,7 +6,6 @@ use Botfire\Models\CopyMessage;
 use Botfire\Models\CopyMessages;
 use Botfire\Models\Document;
 use Botfire\Models\EditCaption;
-use Botfire\Models\EditMessage;
 use Botfire\Models\EditReplyMarkup;
 use Botfire\Models\EditText;
 use Botfire\Models\Message;
@@ -17,7 +16,6 @@ use Botfire\Models\Voice;
 use Botfire\MessageParser;
 use Botfire\GetMessage;
 use Botfire\GetCallback;
-use Webrium\Event;
 
 class Bot
 {
