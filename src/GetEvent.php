@@ -1,6 +1,8 @@
 <?php
 namespace Botfire;
 
+use Botfire\Models\User;
+
 
 class GetEvent
 {
@@ -163,6 +165,27 @@ class GetEvent
         return self::$update_id;
     }
 
+
+    /**
+     * Check if the event has a 'from' user.
+     * This is true if the event is a message or a callback query.
+     * @return bool
+     */
+    public function hasFrom(): bool
+    {
+        return isset($this->body()['from']);
+    }
+
+
+    /**
+     * Get the 'from' user of the event.
+     * This is the user who sent the message or initiated the event.
+     * @return User
+     */
+    public function from()
+    {
+        return new User($this->body()['from'] ?? []);
+    }
 
 
 }
