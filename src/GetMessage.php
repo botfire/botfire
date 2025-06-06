@@ -57,7 +57,7 @@ class GetMessage
      * - 'poll'
      * @return string|null
      */
-    public function contentType()
+    public function getContentType()
     {
         foreach ([self::TYPE_TEXT, self::TYPE_PHOTO, self::TYPE_VIDEO, self::TYPE_AUDIO, self::TYPE_VOICE, self::TYPE_STICKER, self::TYPE_ANIMATION, self::TYPE_LOCATION, self::TYPE_CONTACT, self::TYPE_POLL, self::TYPE_DOCUMENT] as $type) {
             if (isset($this->data[$type])) {
@@ -81,7 +81,7 @@ class GetMessage
     /**
      * Returns the unique identifier for this message.
      */
-    public function messageId()
+    public function getMessageId()
     {
         return $this->data['message_id'] ?? null;
     }
@@ -90,17 +90,17 @@ class GetMessage
      * Returns the date the message was sent in Unix time.
      * @return int|null
      */
-    public function date()
+    public function getDate()
     {
         return $this->data['date'] ?? null;
     }
 
-    public function from()
+    public function getFrom()
     {
         return new User($this->data['from'] ?? []);
     }
 
-    public function chat()
+    public function getChat()
     {
         return new Chat($this->data['chat'] ?? []);
     }
@@ -110,7 +110,7 @@ class GetMessage
      * Returns the message that this message is replying to, if any.
      * @return GetMessage|null
      */
-    public function replyToMessage(): GetMessage|null
+    public function getReplyToMessage(): GetMessage|null
     {
         if ($this->isReply()) {
             return new GetMessage($this->data['reply_to_message']);
@@ -125,7 +125,7 @@ class GetMessage
      * If the message is not a text message, it returns null.
      * @return string|null
      */
-    public function text(): string|null
+    public function getText(): string|null
     {
 
         return $this->data['text'] ?? null;
@@ -138,7 +138,7 @@ class GetMessage
      * If the message is not a media message with a caption, it returns null.
      * @return string|null
      */
-    public function caption()
+    public function getCaption()
     {
         return $this->data['caption'] ?? null;
     }
@@ -161,7 +161,7 @@ class GetMessage
      * If the message does not have a quote, it returns null.
      * @return TextQuote|null
      */
-    public function quote()
+    public function getQuote()
     {
         return new TextQuote($this->data['quote']) ?? null;
     }
@@ -176,8 +176,8 @@ class GetMessage
      */
     public function deleteThisMessage()
     {
-        $message_id = $this->messageId();
-        $chat_id = $this->chat()->getId();
+        $message_id = $this->getMessageId();
+        $chat_id = $this->getChat()->getId();
         return Bot::deleteMessage($message_id, $chat_id);
     }
 
