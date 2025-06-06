@@ -1,17 +1,7 @@
 <?php
 namespace Botfire;
-
-use Botfire\Models\Audio;
-use Botfire\Models\AudioOption;
-use Botfire\Models\AudioResult;
-use Botfire\Models\Document;
 use Botfire\Models\User;
 use Botfire\Models\Chat;
-use Botfire\Models\PhotoArray;
-use Botfire\Models\Video;
-use Botfire\Models\Voice;
-
-
 
 class GetMessage
 {
@@ -23,13 +13,6 @@ class GetMessage
         $this->data = $data;
     }
 
-    const TYPE_MESSAGE = 'message';
-    const TYPE_EDITED_MESSAGE = 'edited_message';
-    const TYPE_CHANNEL_POST = 'channel_post';
-    const TYPE_EDITED_CHANNEL_POST = 'edited_channel_post';
-    const TYPE_CALLBACK_QUERY = 'callback_query';
-    const TYPE_BUSINESS_MESSAGE = 'business_message';
-    const TYPE_EDITED_BUSINESS_MESSAGE = 'edited_business_message';
 
 
 
@@ -47,52 +30,134 @@ class GetMessage
 
 
 
+    public function isValid(): bool
+    {
+        return isset($this->data['message_id']) && isset($this->data['chat']);
+    }
 
+
+    /**
+     * Returns the type of the message.
+     * Possible values are:
+     * - 'text'
+     * - 'photo'
+     * - 'video'
+     * - 'audio'
+     * - 'voice'
+     * - 'sticker'
+     * - 'animation'
+     * - 'document'
+     * - 'location'
+     * - 'contact'
+     * - 'poll'
+     * @return string|null
+     */
     public function contentType()
     {
-        $parse = Bot::getParser();
-
-        if ($parse->hasMessage()) {
-            foreach (['text', 'photo', 'video', 'audio', 'voice', 'sticker', 'animation', 'location', 'contact', 'poll', 'document'] as $type) {
-                if (isset($parse->getMessageBody()['message'][$type])) {
-                    return $type;
-                }
+        foreach (['text', 'photo', 'video', 'audio', 'voice', 'sticker', 'animation', 'location', 'contact', 'poll', 'document'] as $type) {
+            if (isset($this->data[$type])) {
+                return $type;
             }
         }
+        
         return null;
     }
 
 
+    /**
+     * Check if the event is a callback query.
+     * @return bool
+     */
+    public function isCallbackQuery(): bool
+    {
+        return Bot::getEvent()->name() === GetEvent::TYPE_CALLBACK_QUERY;
+    }
 
+
+    /**
+     * Check if the event is an edited message.
+     * @return bool
+     */
+    public function isEditedMessage(): bool
+    {
+        return Bot::getEvent()->name() === GetEvent::TYPE_EDITED_MESSAGE;
+    }
+
+
+    /**
+     * Check if the event is an edited channel post.
+     * @return bool
+     */
+    public function isEditedChannelPost(): bool
+    {
+        return Bot::getEvent()->name() === GetEvent::TYPE_EDITED_CHANNEL_POST;
+    }
+   
+    /**
+     * Check if the event is a message.
+     * This method checks if the event is a message type and if the message is valid.
+     * @return bool
+     */
+    public function isMessage(): bool
+    {
+        return Bot::getEvent()->name() === GetEvent::TYPE_MESSAGE && $this->isValid();
+    }
+
+
+    /**
+     * Check if the event is a channel post.
+     * @return bool
+     */
+    public function isChannelPost(): bool
+    {
+        return Bot::getEvent()->name() === GetEvent::TYPE_CHANNEL_POST;
+    }
+
+
+    /**
+     * Check if the event is a business message.
+     * @return bool
+     */
+    public function isBusinessMessage(): bool
+    {
+        return Bot::getEvent()->name() === GetEvent::TYPE_BUSINESS_MESSAGE;
+    }
+
+
+    /**
+     * Check if the event is an edited business message.
+     * @return bool
+     */
+    public function isEditedBusinessMessage(): bool
+    {
+        return Bot::getEvent()->name() === GetEvent::TYPE_EDITED_BUSINESS_MESSAGE;
+    }
 
 
     public function messageId()
     {
-        return $this->data['message']['message_id'] ?? null;
+        return $this->data['message_id'] ?? null;
     }
 
     public function date()
     {
-        return $this->data['message']['date'] ?? null;
+        return $this->data['date'] ?? null;
     }
 
     public function from()
     {
-        return new User($this->data['message']['from'] ?? []);
+        return new User($this->data['from'] ?? []);
     }
 
     public function chat()
     {
-        return new Chat($this->data['message']['chat'] ?? []);
+        return new Chat($this->data['chat'] ?? []);
     }
-
-
-
 
 
     public function isReply(): bool
     {
-        return isset($this->data['message']['reply_to_message']);
+        return isset($this->data['reply_to_message']);
     }
 
 
@@ -103,7 +168,7 @@ class GetMessage
     public function replyToMessage(): GetMessage|null
     {
         if ($this->isReply()) {
-            return new GetMessage(['message'=>$this->data['message']['reply_to_message']]);
+            return new GetMessage($this->data['reply_to_message']);
         }
         return null;
     }
@@ -111,13 +176,13 @@ class GetMessage
     public function text(): string|null
     {
 
-        return $this->data['message']['text'] ?? null;
+        return $this->data['text'] ?? null;
     }
 
 
     public function caption()
     {
-        return $this->data['message']['caption'] ?? null;
+        return $this->data['caption'] ?? null;
     }
 
 
