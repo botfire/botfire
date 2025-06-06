@@ -53,10 +53,6 @@ class NewMessage
         }
     }
 
-    // public function messageId()
-    // {
-    //     return $this->data['message']['message_id'] ?? null;
-    // }
 
 
     public function chat()
@@ -278,7 +274,7 @@ class NewMessage
         if (empty($this->sendParams['chat_id'])) {
             $getMessage = Bot::getMessage();
             if($getMessage->isValid()){
-                $this->sendParams['chat_id'] = $getMessage->chat()->getId();
+                $this->sendParams['chat_id'] = $getMessage->from()->getId();
             }
         }
 
