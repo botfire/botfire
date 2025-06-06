@@ -30,6 +30,10 @@ class GetMessage
 
 
 
+    /**
+     * Check if the message is valid.
+     * @return bool
+     */
     public function isValid(): bool
     {
         return isset($this->data['message_id']) && isset($this->data['chat']);
@@ -54,7 +58,18 @@ class GetMessage
      */
     public function contentType()
     {
-        foreach (['text', 'photo', 'video', 'audio', 'voice', 'sticker', 'animation', 'location', 'contact', 'poll', 'document'] as $type) {
+        foreach ([    self::CONTENT_TEXT,
+        self::CONTENT_PHOTO,
+        self::CONTENT_VIDEO,
+        self::CONTENT_AUDIO,
+        self::CONTENT_VOICE,
+        self::CONTENT_STICKER,
+        self::CONTENT_ANIMATION,
+        self::CONTENT_LOCATION,
+        self::CONTENT_CONTACT,
+        self::CONTENT_POLL,
+        self::CONTENT_DOCUMENT
+        ] as $type) {
             if (isset($this->data[$type])) {
                 return $type;
             }
@@ -134,11 +149,18 @@ class GetMessage
     }
 
 
+    /**
+     * Returns the unique identifier for this message.
+     */
     public function messageId()
     {
         return $this->data['message_id'] ?? null;
     }
 
+    /**
+     * Returns the date the message was sent in Unix time.
+     * @return int|null
+     */
     public function date()
     {
         return $this->data['date'] ?? null;
@@ -155,6 +177,10 @@ class GetMessage
     }
 
 
+    /**
+     * Check if the message is a reply to another message.
+     * @return bool
+     */
     public function isReply(): bool
     {
         return isset($this->data['reply_to_message']);
@@ -173,6 +199,13 @@ class GetMessage
         return null;
     }
 
+
+    /**
+     * Returns the text content of the message, if any.
+     * This method returns the text content of the message.
+     * If the message is not a text message, it returns null.
+     * @return string|null
+     */
     public function text(): string|null
     {
 
@@ -180,12 +213,24 @@ class GetMessage
     }
 
 
+    /**
+     * Returns the caption of the message, if any.
+     * This method returns the caption of the message.
+     * If the message is not a media message with a caption, it returns null.
+     * @return string|null
+     */
     public function caption()
     {
         return $this->data['caption'] ?? null;
     }
 
 
+
+    /**
+     * Deletes the message.
+     * This method deletes the message from the chat.
+     * @return bool
+     */
     public function deleteThisMessage()
     {
         $message_id = $this->messageId();
