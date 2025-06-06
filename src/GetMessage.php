@@ -1,5 +1,6 @@
 <?php
 namespace Botfire;
+use Botfire\Models\TextQuote;
 use Botfire\Models\User;
 use Botfire\Models\Chat;
 
@@ -223,6 +224,30 @@ class GetMessage
     {
         return $this->data['caption'] ?? null;
     }
+
+
+
+    /**
+     * Check if the message has a quote.
+     * A quote is a text that is quoted in the message.
+     * @return bool
+     */
+    public function hasQuote(): bool
+    {
+        return isset($this->data['quote']);
+    }
+
+    /**
+     * Returns the quote of the message, if any.
+     * This method returns an instance of TextQuote if the message has a quote.
+     * If the message does not have a quote, it returns null.
+     * @return TextQuote|null
+     */
+    public function quote()
+    {
+        return new TextQuote($this->data['quote']) ?? null;
+    }
+
 
 
 
