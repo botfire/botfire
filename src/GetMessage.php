@@ -37,7 +37,7 @@ class GetMessage
      */
     public function isValid(): bool
     {
-        return isset($this->data['message_id']) && isset($this->data['chat']);
+        return isset($this->data['message_id']) && isset($this->data['from']);
     }
 
 
