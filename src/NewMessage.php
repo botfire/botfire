@@ -276,7 +276,10 @@ class NewMessage
     {
 
         if (empty($this->sendParams['chat_id'])) {
-            $this->sendParams['chat_id'] = $chat_id ?? $this->chat()->getId();
+            $getMessage = Bot::getMessage();
+            if($getMessage->isValid()){
+                $this->sendParams['chat_id'] = $getMessage->chat()->getId();
+            }
         }
 
         return Bot::request($this->makeMethodName($this->sendMethod), $this->sendParams);
