@@ -17,6 +17,7 @@ use Botfire\Models\Voice;
 use Botfire\MessageParser;
 use Botfire\GetMessage;
 use Botfire\GetCallback;
+use Webrium\Event;
 
 class Bot
 {
@@ -25,7 +26,7 @@ class Bot
 
 
     private static $instance = null;
-    private static $token = '';
+    private static string $token = '';
 
 
 
@@ -42,52 +43,69 @@ class Bot
 
 
 
-    public static function getParser()
-    {
-        if (self::$parser === null && self::getInput() != null) {
-            self::$parser = new MessageParser(self::getInput());
 
-        }
 
-        return self::$parser;
-    }
-
-    public static function setToken($token)
+    /**
+     * Set the token for the bot.
+     * This method should be called before any other method.
+     * @param string $token
+     * @return void
+     */
+    public static function setToken( string $token): void
     {
         self::$token = $token;
-        return self::getParser();
     }
 
-    public static function getToken()
+
+    /**
+     * Get the token for the bot.
+     * @return string
+     */
+    public static function getToken(): string
     {
         return self::$token;
     }
-
-    public static function getInput()
-    {
-        return json_decode(file_get_contents('php://input'), true);
-    }
-
-    public static function isCallbackQuery()
-    {
-        $bot = self::getParser();
-        return $bot->hasCallback();
+    
+    /**
+     * 
+     * @return bool|string
+     */
+    public static function getInputTextContent(){
+        return file_get_contents('php://input');
     }
 
 
-    public static function getMessage()
+    /**
+     * 
+     * @return array
+     */
+    public static function getInput():array
     {
-        $bot = self::getParser();
-        return new GetMessage($bot->getMessageBody());
+        return json_decode(Bot::getInputTextContent(), true);
+    }
+
+
+    // public static function isCallbackQueryMessage()
+    // {
+        
+    //     return Bot::getEvent()->name() === GetEvent::TYPE_CALLBACK_QUERY;
+    // }
+
+
+    public static function getMessage(): GetMessage
+    {
+        return new GetMessage(Bot::getEvent()->body());
+    }
+
+    public static function getEvent()
+    {
+        return GetEvent::getInstance();
     }
 
 
     public static function new()
     {
-        $parse = self::getParser();
-        $message = $parse->getMessageBody();
-        $chat = $message['message']['chat'] ?? [];
-        return new NewMessage(['message' => ['chat' => $chat]]);
+        return new NewMessage([]);
     }
 
 
@@ -298,9 +316,9 @@ class Bot
 
     public static function getCallback(): GetCallback
     {
-        $parser = self::getParser();
-        return new GetCallback($parser->getCallbackBody());
+        return new GetCallback(Bot::getEvent()->body());
     }
+
 
     public static function request($method, $params = [])
     {
