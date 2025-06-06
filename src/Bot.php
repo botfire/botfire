@@ -67,42 +67,55 @@ class Bot
     }
     
     /**
-     * 
+     * Get the input stream from the bot.
+     * This method reads the raw input data from the request body.
+     * It is useful for getting the raw JSON data sent by Telegram.
+     * This method returns the input data as a string.
+     * If the input stream is empty, it returns false.
      * @return bool|string
      */
-    public static function getInputTextContent(){
+    public static function getInputStream(){
         return file_get_contents('php://input');
     }
 
 
     /**
-     * 
+     * Get the input data from the bot.
+     * This method returns the input data as an associative array.
      * @return array
      */
     public static function getInput():array
     {
-        return json_decode(Bot::getInputTextContent(), true);
+        return json_decode(Bot::getInputStream(), true);
     }
 
 
-    // public static function isCallbackQueryMessage()
-    // {
-        
-    //     return Bot::getEvent()->name() === GetEvent::TYPE_CALLBACK_QUERY;
-    // }
 
-
+    /**
+     * Get the message from the event.
+     * @return GetMessage
+     */
     public static function getMessage(): GetMessage
     {
-        return new GetMessage(Bot::getEvent()->body());
+        return new GetMessage(self::getEvent()->body());
     }
 
+
+    /**
+     * Get the event from the bot.
+     * @return GetEvent
+     */
     public static function getEvent()
     {
         return GetEvent::getInstance();
     }
 
 
+    /**
+     * Create a new instance of NewMessage.
+     * This method is used to create a new message to send.
+     * @return NewMessage
+     */
     public static function new()
     {
         return new NewMessage([]);
@@ -111,10 +124,14 @@ class Bot
 
 
 
-    public static function sendVideoNote(VideoNote|string $videoNote)
+    /**
+     * 
+     * @param VideoNote|string $video_note
+     */
+    public static function sendVideoNote(VideoNote|string $video_note)
     {
         $bot = self::new();
-        return $bot->videoNote($videoNote)->send();
+        return $bot->videoNote($video_note)->send();
     }
 
 
