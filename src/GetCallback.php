@@ -65,4 +65,27 @@ class GetCallback
         return $this->data['data'] ?? '';
     }
 
+    /**
+     * Check if the callback query has a message.
+     * @return bool
+     */
+    public function hasMessage(): bool
+    {
+        return isset($this->data['message']);
+    }
+
+
+
+    /**
+     * Optional.
+     * Message sent by the bot with the callback button that originated the query
+     * @return GetMessage|null
+     */
+    public function message(){
+        if ($this->hasMessage()) {
+            return new GetMessage($this->data['message']);
+        }
+        return null;
+    }
+
 }
