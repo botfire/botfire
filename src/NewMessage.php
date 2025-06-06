@@ -55,10 +55,6 @@ class NewMessage
 
 
 
-    public function chat()
-    {
-        return new Chat($this->data['message']['chat'] ?? []);
-    }
 
 
     /**
