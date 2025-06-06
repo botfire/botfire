@@ -15,9 +15,8 @@ class Route
 
     public static function text($path, $controllerString)
     {
-        $parser = Bot::getParser();
 
-        if ($parser->hasCallback() == false && Bot::getMessage()->type() == GetMessage::TYPE_TEXT && $path == Bot::getMessage()->text()) {
+        if (Bot::getEvent()->isCallbackQuery() == false && Bot::getMessage()->getContentType() == GetMessage::TYPE_TEXT && $path == Bot::getMessage()->getText()) {
             self::$find = true;
             self::run($controllerString);
         }
@@ -26,8 +25,9 @@ class Route
 
     public static function callback($path, $controllerString)
     {
-        if (Bot::isCallbackQuery()) {
-            $callback_data = Bot::getCallback()->data();
+        if (Bot::getEvent()->isCallbackQuery()) {
+
+            $callback_data = Bot::getCallback()->getData();
 
             $data = self::findVar($callback_data, $path);
 
