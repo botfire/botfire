@@ -6,7 +6,7 @@ use Botfire\TraitMethods\MessageThreadIdTrait;
 use Botfire\TraitMethods\ProtectContentTrait;
 
 
-class CopyMessages
+class CopyMessages extends Option
 {
 
     use MessageThreadIdTrait, DisableNotificationTrait, ProtectContentTrait;
