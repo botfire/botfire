@@ -59,23 +59,12 @@ class GetMessage
      */
     public function contentType()
     {
-        foreach ([    self::CONTENT_TEXT,
-        self::CONTENT_PHOTO,
-        self::CONTENT_VIDEO,
-        self::CONTENT_AUDIO,
-        self::CONTENT_VOICE,
-        self::CONTENT_STICKER,
-        self::CONTENT_ANIMATION,
-        self::CONTENT_LOCATION,
-        self::CONTENT_CONTACT,
-        self::CONTENT_POLL,
-        self::CONTENT_DOCUMENT
-        ] as $type) {
+        foreach ([self::CONTENT_TEXT, self::CONTENT_PHOTO, self::CONTENT_VIDEO, self::CONTENT_AUDIO, self::CONTENT_VOICE, self::CONTENT_STICKER, self::CONTENT_ANIMATION, self::CONTENT_LOCATION, self::CONTENT_CONTACT, self::CONTENT_POLL, self::CONTENT_DOCUMENT] as $type) {
             if (isset($this->data[$type])) {
                 return $type;
             }
         }
-        
+
         return null;
     }
 
@@ -108,7 +97,7 @@ class GetMessage
     {
         return Bot::getEvent()->name() === GetEvent::TYPE_EDITED_CHANNEL_POST;
     }
-   
+
     /**
      * Check if the event is a message.
      * This method checks if the event is a message type and if the message is valid.
@@ -149,6 +138,14 @@ class GetMessage
         return Bot::getEvent()->name() === GetEvent::TYPE_EDITED_BUSINESS_MESSAGE;
     }
 
+    /**
+     * Check if the message is a reply to another message.
+     * @return bool
+     */
+    public function isReply(): bool
+    {
+        return isset($this->data['reply_to_message']);
+    }
 
     /**
      * Returns the unique identifier for this message.
@@ -175,16 +172,6 @@ class GetMessage
     public function chat()
     {
         return new Chat($this->data['chat'] ?? []);
-    }
-
-
-    /**
-     * Check if the message is a reply to another message.
-     * @return bool
-     */
-    public function isReply(): bool
-    {
-        return isset($this->data['reply_to_message']);
     }
 
 
