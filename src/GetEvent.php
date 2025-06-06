@@ -17,7 +17,6 @@ class GetEvent
     const TYPE_EDITED_MESSAGE = 'edited_message';
     const TYPE_CHANNEL_POST = 'channel_post';
     const TYPE_EDITED_CHANNEL_POST = 'edited_channel_post';
-    const TYPE_CALLBACK_QUERY = 'callback_query';
     const TYPE_BUSINESS_CONNECTION = 'business_connection';
     const TYPE_BUSINESS_MESSAGE = 'business_message';
     const TYPE_EDITED_BUSINESS_MESSAGE = 'edited_business_message';
@@ -26,6 +25,7 @@ class GetEvent
     const TYPE_MESSAGE_REACTION_COUNT = 'message_reaction_count';
     const TYPE_INLINE_QUERY = 'inline_query';
     const TYPE_CHOSEN_INLINE_RESULT = 'chosen_inline_result';
+    const TYPE_CALLBACK_QUERY = 'callback_query';
     const TYPE_SHIPPING_QUERY = 'shipping_query';
     const TYPE_PRE_CHECKOUT_QUERY = 'pre_checkout_query';
     const TYPE_PURCHASED_PAID_MEDIA = 'purchased_paid_media';
@@ -132,18 +132,32 @@ class GetEvent
     }
 
 
+    /**
+     * Get the body of the event.
+     * This is the raw data of the event.
+     * @return array|null
+     */
     public function body(): ?array
     {
         return self::$body;
     }
 
 
-    public function isSupportType(): bool
+    /**
+     * Check if this event is a supported message type in this library.
+     * @return bool
+     */
+    public function isSupportedMessageType(): bool
     {
         return self::$support_type;
     }
 
 
+    /**
+     * Get the update ID of the event.
+     * This is useful for tracking updates and ensuring that you are processing the latest updates.
+     * @return int
+     */
     public function updateId(): int
     {
         return self::$update_id;
