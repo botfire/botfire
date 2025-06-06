@@ -17,17 +17,17 @@ class GetMessage
 
 
 
-    const CONTENT_TEXT = 'text';
-    const CONTENT_PHOTO = 'photo';
-    const CONTENT_VIDEO = 'video';
-    const CONTENT_AUDIO = 'audio';
-    const CONTENT_DOCUMENT = 'document';
-    const CONTENT_STICKER = 'sticker';
-    const CONTENT_ANIMATION = 'animation';
-    const CONTENT_LOCATION = 'location';
-    const CONTENT_CONTACT = 'contact';
-    const CONTENT_VOICE = 'voice';
-    const CONTENT_POLL = 'poll';
+    const TYPE_TEXT = 'text';
+    const TYPE_PHOTO = 'photo';
+    const TYPE_VIDEO = 'video';
+    const TYPE_AUDIO = 'audio';
+    const TYPE_DOCUMENT = 'document';
+    const TYPE_STICKER = 'sticker';
+    const TYPE_ANIMATION = 'animation';
+    const TYPE_LOCATION = 'location';
+    const TYPE_CONTACT = 'contact';
+    const TYPE_VOICE = 'voice';
+    const TYPE_POLL = 'poll';
 
 
 
@@ -59,7 +59,7 @@ class GetMessage
      */
     public function contentType()
     {
-        foreach ([self::CONTENT_TEXT, self::CONTENT_PHOTO, self::CONTENT_VIDEO, self::CONTENT_AUDIO, self::CONTENT_VOICE, self::CONTENT_STICKER, self::CONTENT_ANIMATION, self::CONTENT_LOCATION, self::CONTENT_CONTACT, self::CONTENT_POLL, self::CONTENT_DOCUMENT] as $type) {
+        foreach ([self::TYPE_TEXT, self::TYPE_PHOTO, self::TYPE_VIDEO, self::TYPE_AUDIO, self::TYPE_VOICE, self::TYPE_STICKER, self::TYPE_ANIMATION, self::TYPE_LOCATION, self::TYPE_CONTACT, self::TYPE_POLL, self::TYPE_DOCUMENT] as $type) {
             if (isset($this->data[$type])) {
                 return $type;
             }
@@ -68,75 +68,6 @@ class GetMessage
         return null;
     }
 
-
-    /**
-     * Check if the event is a callback query.
-     * @return bool
-     */
-    public function isCallbackQuery(): bool
-    {
-        return Bot::getEvent()->name() === GetEvent::TYPE_CALLBACK_QUERY;
-    }
-
-
-    /**
-     * Check if the event is an edited message.
-     * @return bool
-     */
-    public function isEditedMessage(): bool
-    {
-        return Bot::getEvent()->name() === GetEvent::TYPE_EDITED_MESSAGE;
-    }
-
-
-    /**
-     * Check if the event is an edited channel post.
-     * @return bool
-     */
-    public function isEditedChannelPost(): bool
-    {
-        return Bot::getEvent()->name() === GetEvent::TYPE_EDITED_CHANNEL_POST;
-    }
-
-    /**
-     * Check if the event is a message.
-     * This method checks if the event is a message type and if the message is valid.
-     * @return bool
-     */
-    public function isMessage(): bool
-    {
-        return Bot::getEvent()->name() === GetEvent::TYPE_MESSAGE && $this->isValid();
-    }
-
-
-    /**
-     * Check if the event is a channel post.
-     * @return bool
-     */
-    public function isChannelPost(): bool
-    {
-        return Bot::getEvent()->name() === GetEvent::TYPE_CHANNEL_POST;
-    }
-
-
-    /**
-     * Check if the event is a business message.
-     * @return bool
-     */
-    public function isBusinessMessage(): bool
-    {
-        return Bot::getEvent()->name() === GetEvent::TYPE_BUSINESS_MESSAGE;
-    }
-
-
-    /**
-     * Check if the event is an edited business message.
-     * @return bool
-     */
-    public function isEditedBusinessMessage(): bool
-    {
-        return Bot::getEvent()->name() === GetEvent::TYPE_EDITED_BUSINESS_MESSAGE;
-    }
 
     /**
      * Check if the message is a reply to another message.

@@ -81,12 +81,14 @@ class GetEvent
         return self::$body;
     }
 
+
     public static function getInstance()
     {
         if (self::$body === null) {
             self::parse();
         }
-        return new self();
+
+        return new static();
     }
 
 
@@ -122,6 +124,9 @@ class GetEvent
         }
         return null;
     }
+
+
+
     /**
      * Get the body of the event.
      * If the event is a message, it returns an instance of GetMessage.
@@ -163,6 +168,77 @@ class GetEvent
     public function updateId(): int
     {
         return self::$update_id;
+    }
+
+
+
+    /**
+     * Check if the event is a callback query.
+     * @return bool
+     */
+    public function isCallbackQuery(): bool
+    {
+        return self::getInstance()->name() === GetEvent::TYPE_CALLBACK_QUERY;
+    }
+
+
+    /**
+     * Check if the event is an edited message.
+     * @return bool
+     */
+    public function isEditedMessage(): bool
+    {
+        return self::getInstance()->name() === GetEvent::TYPE_EDITED_MESSAGE;
+    }
+
+
+    /**
+     * Check if the event is an edited channel post.
+     * @return bool
+     */
+    public function isEditedChannelPost(): bool
+    {
+        return self::getInstance()->name() === GetEvent::TYPE_EDITED_CHANNEL_POST;
+    }
+
+    /**
+     * Check if the event is a message.
+     * This method checks if the event is a message type and if the message is valid.
+     * @return bool
+     */
+    public function isMessage(): bool
+    {
+        return self::getInstance()->name() === GetEvent::TYPE_MESSAGE;
+    }
+
+
+    /**
+     * Check if the event is a channel post.
+     * @return bool
+     */
+    public function isChannelPost(): bool
+    {
+        return self::getInstance()->name() === GetEvent::TYPE_CHANNEL_POST;
+    }
+
+
+    /**
+     * Check if the event is a business message.
+     * @return bool
+     */
+    public function isBusinessMessage(): bool
+    {
+        return self::getInstance()->name() === GetEvent::TYPE_BUSINESS_MESSAGE;
+    }
+
+
+    /**
+     * Check if the event is an edited business message.
+     * @return bool
+     */
+    public function isEditedBusinessMessage(): bool
+    {
+        return self::getInstance()->name() === GetEvent::TYPE_EDITED_BUSINESS_MESSAGE;
     }
 
 
