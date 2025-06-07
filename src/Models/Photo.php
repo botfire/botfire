@@ -1,5 +1,6 @@
 <?php
 namespace Botfire\Models;
+use Botfire\Helper\MarkdownBuilder;
 use Botfire\TraitMethods\AllowPaidBroadcastTrait;
 use Botfire\TraitMethods\BusinessConnectionIdTrait;
 use Botfire\TraitMethods\CaptionEntitiesTrait;
@@ -12,9 +13,11 @@ use Botfire\TraitMethods\ProtectContentTrait;
 use Botfire\TraitMethods\ReplyMarkupTrait;
 use Botfire\TraitMethods\ReplyParametersTrait;
 use Botfire\TraitMethods\ShowCaptionAboveMediaTrait;
+use CURLFile;
 
 
-class Photo extends Option{
+class Photo extends Option
+{
 
 
     use BusinessConnectionIdTrait, MessageThreadIdTrait;
@@ -36,9 +39,20 @@ class Photo extends Option{
      * Width and height ratio must be at most 20
      * @param mixed $photo
      */
-    public function __construct($photo){
+    public function __construct(string|MarkdownBuilder|CURLFile $photo)
+    {
         $this->data['photo'] = $photo;
     }
 
+
+    /**
+     * Create a new Photo instance
+     * @param string|MarkdownBuilder $photo
+     * @return static
+     */
+    public static function create(string|MarkdownBuilder|CURLFile $photo): static
+    {
+        return new static($photo);
+    }
 
 }
