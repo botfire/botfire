@@ -34,11 +34,11 @@ class Message extends Option
      */
     public function __construct(string|MarkdownBuilder $text)
     {
-        if($text instanceof MarkdownBuilder){
+        if ($text instanceof MarkdownBuilder) {
             $text = $text->build();
             $this->parseMode(ParseMode::MarkdownV2);
         }
-        
+
         $this->data['text'] = $text;
     }
 
@@ -49,9 +49,9 @@ class Message extends Option
      * @param string $text The text of the message to be sent
      * @return Message
      */
-    public static function create(string|MarkdownBuilder $text)
+    public static function create(string|MarkdownBuilder $text): static
     {
-        return new self($text);
+        return new static($text);
     }
 
 }
