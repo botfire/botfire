@@ -13,15 +13,11 @@ use Botfire\Models\Photo;
 use Botfire\Models\Video;
 use Botfire\Models\VideoNote;
 use Botfire\Models\Voice;
-use Botfire\MessageParser;
 use Botfire\GetMessage;
 use Botfire\GetCallback;
 
 class Bot
 {
-
-    private static ?MessageParser $parser = null;
-
 
     private static $instance = null;
     private static string $token = '';
