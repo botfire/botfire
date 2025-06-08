@@ -39,7 +39,7 @@ class Photo extends Option
      * Width and height ratio must be at most 20
      * @param mixed $photo
      */
-    public function __construct(string|MarkdownBuilder|CURLFile $photo)
+    public function __construct(MarkdownBuilder|CURLFile|string $photo)
     {
         $this->data['photo'] = $photo;
     }
@@ -50,7 +50,7 @@ class Photo extends Option
      * @param string|MarkdownBuilder $photo
      * @return static
      */
-    public static function create(string|MarkdownBuilder|CURLFile $photo): static
+    public static function create(MarkdownBuilder|CURLFile|string $photo): static
     {
         return new static($photo);
     }
