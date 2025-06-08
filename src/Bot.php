@@ -15,6 +15,7 @@ use Botfire\Models\VideoNote;
 use Botfire\Models\Voice;
 use Botfire\GetMessage;
 use Botfire\GetCallback;
+use CURLFile;
 
 class Bot
 {
@@ -122,7 +123,7 @@ class Bot
      * 
      * @param VideoNote|string $video_note
      */
-    public static function sendVideoNote(VideoNote|string $video_note)
+    public static function sendVideoNote(VideoNote|CURLFile|string $video_note)
     {
         $bot = self::new();
         return $bot->videoNote($video_note)->send();
@@ -137,7 +138,7 @@ class Bot
      * 
      * @param \Botfire\Models\Video|string $video
      */
-    public static function sendVideo(Video|string $video)
+    public static function sendVideo(Video|CURLFile|string $video)
     {
         $bot = self::new();
         return $bot->video($video)->send();
@@ -148,7 +149,7 @@ class Bot
      * Use this method to send photos.
      * @param \Botfire\Models\Photo|string $photo
      */
-    public static function sendPhoto(Photo|string $photo)
+    public static function sendPhoto(Photo|CURLFile|string $photo)
     {
         $bot = self::new();
         return $bot->photo($photo)->send();
@@ -164,7 +165,7 @@ class Bot
      *
      * @param Voice|string $voice
      */
-    public static function sendVoice(Voice|string $voice)
+    public static function sendVoice(Voice|CURLFile|string $voice)
     {
         $bot = self::new();
         return $bot->voice($voice)->send();
@@ -179,7 +180,7 @@ class Bot
      * 
      * @param Audio|string $audio
      */
-    public static function sendAudio(Audio|string $audio)
+    public static function sendAudio(Audio|CURLFile|string $audio)
     {
         $bot = self::new();
         return $bot->audio($audio)->send();
@@ -193,7 +194,7 @@ class Bot
      * 
      * @param Document|string $document
      */
-    public static function sendDocument(Document|string $document)
+    public static function sendDocument(Document|CURLFile|string $document)
     {
         $bot = self::new();
         return $bot->document($document)->send();
