@@ -1,6 +1,7 @@
 <?php
 namespace Botfire\Models;
 
+use Botfire\Helper\MarkdownBuilder;
 use Botfire\TraitMethods\AllowPaidBroadcastTrait;
 use Botfire\TraitMethods\BusinessConnectionIdTrait;
 use Botfire\TraitMethods\CaptionEntitiesTrait;
@@ -20,6 +21,7 @@ use Botfire\TraitMethods\StartTimestampTrait;
 use Botfire\TraitMethods\SupportsStreamingTrait;
 use Botfire\TraitMethods\ThumbnailTrait;
 use Botfire\TraitMethods\WidthTrait;
+use CURLFile;
 
 class Video extends Option{
 
@@ -34,10 +36,32 @@ class Video extends Option{
 
 
     /**
-     * Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound). On success, the sent Message is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future
-     * @param mixed $audio
+     * Video to send.
+     * Pass a file_id as String to send a video that exists on the Telegram servers (recommended),
+     * pass an HTTP URL as a String for Telegram to get a video from the Internet, or upload a new video using multipart/form-data.
+     * The video must be at most 50 MB in size.
+     * The video’s width and height must not exceed 10000 in total.
+     * Width and height ratio must be at most 20.
+     * @param mixed $video
      */
-    public function __construct($audio){
-        $this->data['video'] = $audio;
+    public function __construct(MarkdownBuilder|CURLFile|string $video){
+        $this->data['video'] = $video;
+    }
+
+
+
+    /**
+     * Video to send.
+     * Pass a file_id as String to send a video that exists on the Telegram servers (recommended),
+     * pass an HTTP URL as a String for Telegram to get a video from the Internet, or upload a new video using multipart/form-data.
+     * The video must be at most 50 MB in size.
+     * The video’s width and height must not exceed 10000 in total.
+     * Width and height ratio must be at most 20.
+     * @param MarkdownBuilder|\CURLFile|string $video
+     * @return Video
+     */
+    public static function create(MarkdownBuilder|CURLFile|string $video): static
+    {
+        return new static($video);
     }
 }
