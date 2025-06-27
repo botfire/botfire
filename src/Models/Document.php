@@ -1,6 +1,7 @@
 <?php
 namespace Botfire\Models;
 
+use Botfire\Helper\MarkdownBuilder;
 use Botfire\TraitMethods\AllowPaidBroadcastTrait;
 use Botfire\TraitMethods\BusinessConnectionIdTrait;
 use Botfire\TraitMethods\CaptionEntitiesTrait;
@@ -12,6 +13,7 @@ use Botfire\TraitMethods\ProtectContentTrait;
 use Botfire\TraitMethods\ReplyMarkupTrait;
 use Botfire\TraitMethods\ReplyParametersTrait;
 use Botfire\TraitMethods\ThumbnailTrait;
+use CURLFile;
 
 
 class Document extends Option
@@ -28,15 +30,24 @@ class Document extends Option
 
     /**
      * 	File to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data.
-     * @param mixed $document
+     * @param MarkdownBuilder|CURLFile|string $document
      * @return void
      */
-    public function __construct($document)
+    public function __construct(MarkdownBuilder|CURLFile|string $document)
     {
         $this->data['document'] = $document;
     }
 
 
+    /**
+     * 	File to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data.
+     * @param MarkdownBuilder|CURLFile|string $document
+     * @return static
+     */
+    public static function create(MarkdownBuilder|CURLFile|string $document)
+    {
+        return new static($document);
+    }
 
 
 }

@@ -2,7 +2,7 @@
 namespace Botfire\Models;
 use Botfire\Models\File;
 
-class Photo extends File{
+class PhotoResult extends File{
     protected $data;
 
     public function __construct($data) {

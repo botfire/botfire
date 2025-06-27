@@ -42,7 +42,7 @@ class Video extends Option{
      * The video must be at most 50 MB in size.
      * The video’s width and height must not exceed 10000 in total.
      * Width and height ratio must be at most 20.
-     * @param mixed $video
+     * @param MarkdownBuilder|\CURLFile|string $video
      */
     public function __construct(MarkdownBuilder|CURLFile|string $video){
         $this->data['video'] = $video;
