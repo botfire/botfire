@@ -2,6 +2,7 @@
 namespace Botfire;
 
 use Botfire\Models\Audio;
+use Botfire\Models\ChatAction;
 use Botfire\Models\CopyMessage;
 use Botfire\Models\CopyMessages;
 use Botfire\Models\Document;
@@ -46,7 +47,7 @@ class Bot
      * @param string $token
      * @return void
      */
-    public static function setToken( string $token): void
+    public static function setToken(string $token): void
     {
         self::$token = $token;
     }
@@ -60,7 +61,7 @@ class Bot
     {
         return self::$token;
     }
-    
+
     /**
      * Get the input stream from the bot.
      * This method reads the raw input data from the request body.
@@ -69,7 +70,8 @@ class Bot
      * If the input stream is empty, it returns false.
      * @return bool|string
      */
-    public static function getInputStream(){
+    public static function getInputStream()
+    {
         return file_get_contents('php://input');
     }
 
@@ -79,7 +81,7 @@ class Bot
      * This method returns the input data as an associative array.
      * @return array
      */
-    public static function getInput():array
+    public static function getInput(): array
     {
         return json_decode(Bot::getInputStream(), true);
     }
@@ -209,6 +211,13 @@ class Bot
     {
         $bot = self::new();
         return $bot->text($text)->send();
+    }
+
+
+    public static function sendChatAction(ChatAction|string $action)
+    {
+        $bot = self::new();
+        return $bot->chatAction($action)->send();
     }
 
 
