@@ -2,6 +2,7 @@
 namespace Botfire;
 
 use Botfire\Models\Audio;
+use Botfire\Models\ChatAction;
 use Botfire\Models\CopyMessage;
 use Botfire\Models\CopyMessages;
 use Botfire\Models\Document;
@@ -55,6 +56,18 @@ class NewMessage
 
 
 
+    public function chatAction(ChatAction|string $action){
+        
+        if($action instanceof ChatAction){
+            $action->appendToSendParams($this->sendParams);
+        }
+        else{
+            $this->sendParams['action'] = $action;
+        }
+
+        $this->sendMethod = '@sendChatAction';
+        return $this;
+    }
 
 
     /**
@@ -72,7 +85,6 @@ class NewMessage
         $this->sendMethod = 'message';
 
         return $this;
-
     }
 
 
