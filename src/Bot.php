@@ -94,7 +94,7 @@ class Bot
      */
     public static function getMessage(): GetMessage
     {
-        return new GetMessage(self::getEvent()->body());
+        return new GetMessage(self::getEvent()->getBody());
     }
 
 
@@ -337,7 +337,7 @@ class Bot
 
     public static function getCallback(): GetCallback
     {
-        return new GetCallback(Bot::getEvent()->body());
+        return new GetCallback(Bot::getEvent()->getBody());
     }
 
 
