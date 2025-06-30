@@ -2,6 +2,7 @@
 namespace Botfire;
 
 use Botfire\Models\Audio;
+use Botfire\Models\ChatAction;
 use Botfire\Models\CopyMessage;
 use Botfire\Models\CopyMessages;
 use Botfire\Models\Document;
@@ -15,6 +16,7 @@ use Botfire\Models\VideoNote;
 use Botfire\Models\Voice;
 use Botfire\GetMessage;
 use Botfire\GetCallback;
+use CURLFile;
 
 class Bot
 {
@@ -45,7 +47,7 @@ class Bot
      * @param string $token
      * @return void
      */
-    public static function setToken( string $token): void
+    public static function setToken(string $token): void
     {
         self::$token = $token;
     }
@@ -59,7 +61,7 @@ class Bot
     {
         return self::$token;
     }
-    
+
     /**
      * Get the input stream from the bot.
      * This method reads the raw input data from the request body.
@@ -68,7 +70,8 @@ class Bot
      * If the input stream is empty, it returns false.
      * @return bool|string
      */
-    public static function getInputStream(){
+    public static function getInputStream()
+    {
         return file_get_contents('php://input');
     }
 
@@ -78,7 +81,7 @@ class Bot
      * This method returns the input data as an associative array.
      * @return array
      */
-    public static function getInput():array
+    public static function getInput(): array
     {
         return json_decode(Bot::getInputStream(), true);
     }
@@ -122,7 +125,7 @@ class Bot
      * 
      * @param VideoNote|string $video_note
      */
-    public static function sendVideoNote(VideoNote|string $video_note)
+    public static function sendVideoNote(VideoNote|CURLFile|string $video_note)
     {
         $bot = self::new();
         return $bot->videoNote($video_note)->send();
@@ -137,7 +140,7 @@ class Bot
      * 
      * @param \Botfire\Models\Video|string $video
      */
-    public static function sendVideo(Video|string $video)
+    public static function sendVideo(Video|CURLFile|string $video)
     {
         $bot = self::new();
         return $bot->video($video)->send();
@@ -148,7 +151,7 @@ class Bot
      * Use this method to send photos.
      * @param \Botfire\Models\Photo|string $photo
      */
-    public static function sendPhoto(Photo|string $photo)
+    public static function sendPhoto(Photo|CURLFile|string $photo)
     {
         $bot = self::new();
         return $bot->photo($photo)->send();
@@ -164,7 +167,7 @@ class Bot
      *
      * @param Voice|string $voice
      */
-    public static function sendVoice(Voice|string $voice)
+    public static function sendVoice(Voice|CURLFile|string $voice)
     {
         $bot = self::new();
         return $bot->voice($voice)->send();
@@ -179,7 +182,7 @@ class Bot
      * 
      * @param Audio|string $audio
      */
-    public static function sendAudio(Audio|string $audio)
+    public static function sendAudio(Audio|CURLFile|string $audio)
     {
         $bot = self::new();
         return $bot->audio($audio)->send();
@@ -193,7 +196,7 @@ class Bot
      * 
      * @param Document|string $document
      */
-    public static function sendDocument(Document|string $document)
+    public static function sendDocument(Document|CURLFile|string $document)
     {
         $bot = self::new();
         return $bot->document($document)->send();
@@ -208,6 +211,13 @@ class Bot
     {
         $bot = self::new();
         return $bot->text($text)->send();
+    }
+
+
+    public static function sendChatAction(ChatAction|string $action)
+    {
+        $bot = self::new();
+        return $bot->chatAction($action)->send();
     }
 
 
