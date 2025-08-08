@@ -1,4 +1,5 @@
 <?php
+
 namespace Botfire;
 
 use Botfire\Models\Audio;
@@ -16,6 +17,7 @@ use Botfire\Models\VideoNote;
 use Botfire\Models\Voice;
 use Botfire\GetMessage;
 use Botfire\GetCallback;
+use Botfire\Models\AnswerCallback;
 use CURLFile;
 
 class Bot
@@ -307,6 +309,11 @@ class Bot
         return $bot->editMessageText($message)->send();
     }
 
+    public static function answerCallback(AnswerCallback $answer)
+    {
+        $bot = self::new();
+        return $bot->answerCallback($answer)->sendForCallback();
+    }
 
     /**
      * Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
@@ -356,5 +363,4 @@ class Bot
     {
         return new \CURLFile(realpath($path));
     }
-
 }
