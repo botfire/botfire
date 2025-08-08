@@ -1,6 +1,7 @@
 <?php
 namespace Botfire;
 
+use Botfire\Models\AnswerCallback;
 use Botfire\Models\Audio;
 use Botfire\Models\ChatAction;
 use Botfire\Models\CopyMessage;
@@ -231,6 +232,13 @@ class NewMessage
     }
 
 
+    public function answerCallback(AnswerCallback $answer)
+    {
+        $answer->appendToSendParams($this->sendParams);
+        $this->sendMethod = '@answerCallbackQuery';
+        return $this;
+    }
+
     /**
      * Use this method to edit text and game messages.
      * On success, if edited message is sent by the bot, the edited Message is returned, otherwise True is returned.
@@ -284,6 +292,21 @@ class NewMessage
 
             if(Bot::getEvent()->hasFrom()){
                 $this->sendParams['chat_id'] = Bot::getEvent()->getFrom()->getId();
+            }
+        }
+
+        return Bot::request($this->makeMethodName($this->sendMethod), $this->sendParams);
+    }
+
+
+
+    public function sendForCallback(string|int $chat_id = null)
+    {
+
+        if (empty($this->sendParams['callback_query_id'])) {
+
+            if(Bot::getEvent()->isCallbackQuery()){
+                $this->sendParams['callback_query_id'] = Bot::getCallback()->getId();
             }
         }
 
