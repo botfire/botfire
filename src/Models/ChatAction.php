@@ -1,6 +1,7 @@
 <?php
 namespace Botfire\Models;
 
+use Botfire\Bot;
 use Botfire\TraitMethods\ActionTrait;
 use Botfire\TraitMethods\BusinessConnectionIdTrait;
 use Botfire\TraitMethods\MessageThreadIdTrait;
@@ -47,5 +48,10 @@ class ChatAction extends Option{
     public static function create(string $video): static
     {
         return new static($video);
+    }
+
+    
+    public function send(){
+        return Bot::sendChatAction($this);
     }
 }
