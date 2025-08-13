@@ -1,6 +1,8 @@
 <?php
+
 namespace Botfire\Models;
 
+use Botfire\Bot;
 use Botfire\Helper\MarkdownBuilder;
 use Botfire\Helper\ParseMode;
 use Botfire\TraitMethods\AllowPaidBroadcastTrait;
@@ -54,4 +56,12 @@ class Message extends Option
         return new static($text);
     }
 
+
+    /**
+     * Use this method to send text messages.
+     */
+    public function send()
+    {
+        return Bot::sendMessage($this);
+    }
 }
