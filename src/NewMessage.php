@@ -247,7 +247,6 @@ class NewMessage
     public function editMessageText(EditText $messages)
     {
         $messages->appendToSendParams($this->sendParams);
-        Bot::sendMessage(json_encode($this->sendParams, JSON_PRETTY_PRINT));
         $this->sendMethod = '@editMessageText';
         return $this;
     }
