@@ -1,4 +1,5 @@
 <?php
+
 namespace Botfire\Models;
 
 use Botfire\Bot;
@@ -7,7 +8,8 @@ use Botfire\TraitMethods\BusinessConnectionIdTrait;
 use Botfire\TraitMethods\MessageThreadIdTrait;
 
 
-class ChatAction extends Option{
+class ChatAction extends Option
+{
 
     use BusinessConnectionIdTrait, MessageThreadIdTrait, ActionTrait;
 
@@ -24,7 +26,7 @@ class ChatAction extends Option{
     const FIND_LOCATION = 'find_location';
     const RECORD_VIDEO_NOTE = 'record_video_note';
     const UPLOAD_VIDEO_NOTE = 'upload_video_note';
-    
+
 
 
     /**
@@ -33,7 +35,8 @@ class ChatAction extends Option{
      * Returns True on success.
      * @param string $action
      */
-    public function __construct(string $action){
+    public function __construct(string $action)
+    {
         $this->data['action'] = $action;
     }
 
@@ -45,13 +48,18 @@ class ChatAction extends Option{
      * Returns True on success.
      * @param string $action
      */
-    public static function create(string $video): static
+    public static function create(string $action): static
     {
-        return new static($video);
+        return new static($action);
     }
 
-    
-    public function send(){
+
+    /**
+     * Send the Chat Action
+     * @return mixed
+     */
+    public function send()
+    {
         return Bot::sendChatAction($this);
     }
 }

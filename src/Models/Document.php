@@ -1,6 +1,8 @@
 <?php
+
 namespace Botfire\Models;
 
+use Botfire\Bot;
 use Botfire\Helper\MarkdownBuilder;
 use Botfire\TraitMethods\AllowPaidBroadcastTrait;
 use Botfire\TraitMethods\BusinessConnectionIdTrait;
@@ -50,4 +52,12 @@ class Document extends Option
     }
 
 
+    /**
+     * Send the Document message
+     * @return mixed
+     */
+    public function send()
+    {
+        return Bot::sendDocument($this);
+    }
 }

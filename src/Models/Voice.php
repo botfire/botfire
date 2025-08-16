@@ -1,5 +1,8 @@
 <?php
+
 namespace Botfire\Models;
+
+use Botfire\Bot;
 use Botfire\Helper\MarkdownBuilder;
 use Botfire\TraitMethods\AllowPaidBroadcastTrait;
 use Botfire\TraitMethods\BusinessConnectionIdTrait;
@@ -44,5 +47,12 @@ class Voice extends Option
         return new static($voice);
     }
 
-
+    /**
+     * Send the voice message
+     * @return mixed
+     */
+    public function send()
+    {
+        return Bot::sendVoice($this);
+    }
 }

@@ -1,6 +1,8 @@
 <?php
+
 namespace Botfire\Models;
 
+use Botfire\Bot;
 use Botfire\Helper\MarkdownBuilder;
 use Botfire\TraitMethods\AllowPaidBroadcastTrait;
 use Botfire\TraitMethods\BusinessConnectionIdTrait;
@@ -23,7 +25,8 @@ use Botfire\TraitMethods\ThumbnailTrait;
 use Botfire\TraitMethods\WidthTrait;
 use CURLFile;
 
-class Video extends Option{
+class Video extends Option
+{
 
     use BusinessConnectionIdTrait, MessageThreadIdTrait, ThumbnailTrait;
     use CaptionAndParseModeTrait, CaptionEntitiesTrait;
@@ -44,7 +47,8 @@ class Video extends Option{
      * Width and height ratio must be at most 20.
      * @param MarkdownBuilder|\CURLFile|string $video
      */
-    public function __construct(MarkdownBuilder|CURLFile|string $video){
+    public function __construct(MarkdownBuilder|CURLFile|string $video)
+    {
         $this->data['video'] = $video;
     }
 
@@ -63,5 +67,15 @@ class Video extends Option{
     public static function create(MarkdownBuilder|CURLFile|string $video): static
     {
         return new static($video);
+    }
+
+
+    /**
+     * Send the Video message
+     * @return mixed
+     */
+    public function send()
+    {
+        return Bot::sendVideo($this);
     }
 }
