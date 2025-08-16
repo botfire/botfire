@@ -1,6 +1,8 @@
 <?php
+
 namespace Botfire;
 
+use Botfire\Models\Animation;
 use Botfire\Models\AnswerCallback;
 use Botfire\Models\Audio;
 use Botfire\Models\ChatAction;
@@ -57,12 +59,12 @@ class NewMessage
 
 
 
-    public function chatAction(ChatAction|string $action){
-        
-        if($action instanceof ChatAction){
+    public function chatAction(ChatAction|string $action)
+    {
+
+        if ($action instanceof ChatAction) {
             $action->appendToSendParams($this->sendParams);
-        }
-        else{
+        } else {
             $this->sendParams['action'] = $action;
         }
 
@@ -117,7 +119,7 @@ class NewMessage
      * On success, the sent Message is returned.
      * Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
      * 
-     * @param \Botfire\Models\Voice|string $voice
+     * @param Voice|string $voice
      * @return static
      */
     public function voice(Voice|string $voice)
@@ -142,7 +144,7 @@ class NewMessage
      * 
      * For sending voice messages, use the voice method instead.
      * 
-     * @param \Botfire\Models\Audio|string $audio
+     * @param Audio|string $audio
      * @return static
      */
     public function audio(Audio|string $audio)
@@ -164,7 +166,7 @@ class NewMessage
      * Use this method to send general files.
      * On success, the sent Message is returned.
      * Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
-     * @param \Botfire\Models\Document|string $document
+     * @param Document|string $document
      * @return static
      */
     public function document(Document|string $document)
@@ -187,7 +189,7 @@ class NewMessage
      * Telegram clients support MPEG4 videos (other formats may be sent as Document).
      * On success, the sent Message is returned.
      * Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
-     * @param \Botfire\Models\Video|string $video
+     * @param Video|string $video
      * @return static
      */
     public function video(Video|string $video)
@@ -203,6 +205,36 @@ class NewMessage
         return $this;
     }
 
+
+    /**
+     * Use this method to send animations (GIF or H.264/MPEG-4 AVC video without sound).
+     * On success, the sent Message is returned.
+     * Bots can currently send animations of up to 50 MB in size, this limit may be changed in the future.
+     * @param Animation|string $animation
+     * @return static
+     */
+    public function animation(Animation|string $animation)
+    {
+        if ($animation instanceof Animation) {
+            $animation->appendToSendParams($this->sendParams);
+        } else {
+            $this->sendParams['animation'] = $animation;
+        }
+
+        $this->sendMethod = 'animation';
+
+        return $this;
+    }
+
+
+    /**
+     * Use this method to send video messages.
+     * On success, the sent Message is returned.
+     * Bots can currently send video messages of up to 50 MB in size, this limit may be changed in the future.
+     * 
+     * @param VideoNote|string $video
+     * @return static
+     */
     public function videoNote(VideoNote|string $video)
     {
         if ($video instanceof VideoNote) {
@@ -289,7 +321,7 @@ class NewMessage
 
         if (empty($this->sendParams['chat_id'])) {
 
-            if(Bot::getEvent()->hasFrom()){
+            if (Bot::getEvent()->hasFrom()) {
                 $this->sendParams['chat_id'] = Bot::getEvent()->getFrom()->getId();
             }
         }
@@ -304,7 +336,7 @@ class NewMessage
 
         if (empty($this->sendParams['callback_query_id'])) {
 
-            if(Bot::getEvent()->isCallbackQuery()){
+            if (Bot::getEvent()->isCallbackQuery()) {
                 $this->sendParams['callback_query_id'] = Bot::getCallback()->getId();
             }
         }
@@ -312,4 +344,3 @@ class NewMessage
         return Bot::request($this->makeMethodName($this->sendMethod), $this->sendParams);
     }
 }
-
