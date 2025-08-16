@@ -1,5 +1,8 @@
 <?php
+
 namespace Botfire\Models;
+
+use Botfire\Bot;
 use Botfire\Helper\MarkdownBuilder;
 use Botfire\TraitMethods\AllowPaidBroadcastTrait;
 use Botfire\TraitMethods\BusinessConnectionIdTrait;
@@ -55,4 +58,14 @@ class Photo extends Option
         return new static($photo);
     }
 
+
+
+    /**
+     * Send the Photo message
+     * @return mixed
+     */
+    public function send()
+    {
+        return Bot::sendPhoto($this);
+    }
 }
