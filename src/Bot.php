@@ -17,6 +17,7 @@ use Botfire\Models\VideoNote;
 use Botfire\Models\Voice;
 use Botfire\GetMessage;
 use Botfire\GetCallback;
+use Botfire\Models\Animation;
 use Botfire\Models\AnswerCallback;
 use CURLFile;
 
@@ -143,6 +144,13 @@ class Bot
      * @param \Botfire\Models\Video|string $video
      */
     public static function sendVideo(Video|CURLFile|string $video)
+    {
+        $bot = self::new();
+        return $bot->video($video)->send();
+    }
+
+
+    public static function sendAnimation(Animation|CURLFile|string $video)
     {
         $bot = self::new();
         return $bot->video($video)->send();
