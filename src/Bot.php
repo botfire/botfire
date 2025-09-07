@@ -19,6 +19,7 @@ use Botfire\GetMessage;
 use Botfire\GetCallback;
 use Botfire\Models\Animation;
 use Botfire\Models\AnswerCallback;
+use Botfire\Responses\AudioMessageResponse;
 use Botfire\Responses\DocumentMessageResponse;
 use Botfire\Responses\PhotoMessageResponse;
 use Botfire\Responses\TextMessageResponse;
@@ -195,11 +196,12 @@ class Bot
      * Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
      * 
      * @param Audio|string $audio
+     * @return AudioMessageResponse
      */
-    public static function sendAudio(Audio|CURLFile|string $audio)
+    public static function sendAudio(Audio|CURLFile|string $audio):AudioMessageResponse
     {
         $bot = self::new();
-        return $bot->audio($audio)->send();
+        return new AudioMessageResponse($bot->audio($audio)->send());
     }
 
 
