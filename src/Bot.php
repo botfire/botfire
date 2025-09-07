@@ -19,6 +19,7 @@ use Botfire\GetMessage;
 use Botfire\GetCallback;
 use Botfire\Models\Animation;
 use Botfire\Models\AnswerCallback;
+use Botfire\Responses\PhotoMessageResponse;
 use Botfire\Responses\TextMessageResponse;
 use Botfire\Results\MessageResult;
 use CURLFile;
@@ -166,7 +167,7 @@ class Bot
     public static function sendPhoto(Photo|CURLFile|string $photo)
     {
         $bot = self::new();
-        return $bot->photo($photo)->send();
+        return new PhotoMessageResponse($bot->photo($photo)->send());
     }
 
 
