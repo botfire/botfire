@@ -1,5 +1,5 @@
-# Telegram Robot Library   ![PHP Composer](https://github.com/botfire/botfire/workflows/PHP%20Composer/badge.svg?branch=master)
-[![Latest Stable Version](https://poser.pugx.org/botfire/botfire/v)](//packagist.org/packages/botfire/botfire)  [![Total Downloads](https://poser.pugx.org/botfire/botfire/downloads)](//packagist.org/packages/botfire/botfire)
+# Telegram Robot Library   
+[![Latest Stable Version](https://poser.pugx.org/botfire/botfire/v)](//packagist.org/packages/botfire/botfire)  [![Total Downloads](https://poser.pugx.org/botfire/botfire/downloads)](//packagist.org/packages/botfire/botfire) [![PHP Composer](https://github.com/botfire/botfire/actions/workflows/php.yml/badge.svg)](https://github.com/botfire/botfire/actions/workflows/php.yml)
 
 <br>
 
