@@ -1,0 +1,27 @@
+{
+    "ok": true,
+    "result": {
+        "message_id": 4327,
+        "from": {
+            "id": 1222737593,
+            "is_bot": true,
+            "first_name": "Demo Test",
+            "username": "MyDemoOneBot"
+        },
+        "chat": {
+            "id": 90680000,
+            "first_name": "B\u039e\u039d",
+            "username": "BOTFIRE",
+            "type": "private"
+        },
+        "date": 1757247013,
+        "audio": {
+            "duration": 6,
+            "file_name": "sample-6s.mp3",
+            "mime_type": "audio\/mpeg",
+            "file_id": "CQACAgQAAxkDAAIQ52i9diUiZxQE3yUJ5BwywmxZaSiuAALxAgACHOCFUSER_n04M7UHNgQ",
+            "file_unique_id": "AgAD8QIAAhzghVE",
+            "file_size": 103070
+        }
+    }
+}
