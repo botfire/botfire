@@ -19,6 +19,7 @@ use Botfire\GetMessage;
 use Botfire\GetCallback;
 use Botfire\Models\Animation;
 use Botfire\Models\AnswerCallback;
+use Botfire\Responses\DocumentMessageResponse;
 use Botfire\Responses\PhotoMessageResponse;
 use Botfire\Responses\TextMessageResponse;
 use Botfire\Results\MessageResult;
@@ -212,7 +213,7 @@ class Bot
     public static function sendDocument(Document|CURLFile|string $document)
     {
         $bot = self::new();
-        return $bot->document($document)->send();
+        return new DocumentMessageResponse($bot->document($document)->send());
     }
 
 
