@@ -16,11 +16,6 @@ class DocumentMessageResult extends MessageResult
         $this->document = $result['document'];
     }
 
-    
-    public function getData(): object{
-        return $this->document;
-    }
-
 
     public function getDocument(): Document
     {

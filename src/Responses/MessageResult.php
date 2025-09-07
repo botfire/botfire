@@ -13,12 +13,16 @@ class MessageResult
     private Chat $chat;
     private int $date;
 
+    private array $array = [];
+    
+
     public function __construct(array $data)
     {
         $this->messageId = $data['message_id'];
         $this->from = new From($data['from']);
         $this->chat = new Chat($data['chat']);
         $this->date = $data['date'];
+        $this->array = $data;
     }
 
     public function getMessageId(): int
@@ -39,5 +43,10 @@ class MessageResult
     public function getDate(): int
     {
         return $this->date;
+    }
+
+
+    public function toArray(): array{
+        return $this->array;
     }
 }

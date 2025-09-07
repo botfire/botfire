@@ -23,4 +23,9 @@ trait OkResponseTrait
     public function getErrorMessage(): string{
         return $this->json_result['description'] ?? ($this->isOK() ? '' : 'Unknown error');
     }
+
+
+    public function toArray(): array{
+        return $this->json_result;
+    }
 }
