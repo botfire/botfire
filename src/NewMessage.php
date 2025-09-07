@@ -102,10 +102,10 @@ class NewMessage
         if ($photo instanceof Photo) {
             $photo->appendToSendParams($this->sendParams);
         } else {
-            $this->sendParams['voice'] = $photo;
+            $this->sendParams['photo'] = $photo;
         }
 
-        $this->sendMethod = 'voice';
+        $this->sendMethod = 'photo';
 
         return $this;
     }

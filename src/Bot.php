@@ -19,6 +19,8 @@ use Botfire\GetMessage;
 use Botfire\GetCallback;
 use Botfire\Models\Animation;
 use Botfire\Models\AnswerCallback;
+use Botfire\Responses\TextMessageResponse;
+use Botfire\Results\MessageResult;
 use CURLFile;
 
 class Bot
@@ -217,10 +219,10 @@ class Bot
      * Use this method to send text messages.
      * @param Message|string $text
      */
-    public static function sendMessage(Message|string $text)
+    public static function sendMessage(Message|string $text): TextMessageResponse
     {
         $bot = self::new();
-        return $bot->text($text)->send();
+        return new TextMessageResponse($bot->text($text)->send());
     }
 
 
